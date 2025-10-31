@@ -143,51 +143,6 @@ Or manually check:
 ```bash
 find .claude/skills -name "SKILL.md" -exec grep -A 2 "^name:" {} \;
 ```
-
----
-
-## 📋 Skill Details
-
-### create-skill-file
-
-**Directory:** `create-skill-file/` or `create-skill-file-EN/`
-
-**Contents:**
-```
-create-skill-file/
-├── SKILL.md                          # Main guide (476 lines)
-├── templates/
-│   ├── basic-skill-template.md      # Template for simple skills
-│   └── workflow-skill-template.md   # Template for complex workflows
-└── examples/
-    ├── good-example.md              # 3 excellent skill examples
-    └── bad-example.md               # Common mistakes to avoid
-```
-
-**Key Features:**
-- ✅ Comprehensive writing guidelines
-- ✅ Naming and description best practices
-- ✅ Two ready-to-use templates
-- ✅ Real-world examples with explanations
-- ✅ Quality checklist
-- ✅ Troubleshooting guide
-
-**Trigger Keywords:**
-- "create skill", "write skill"
-- "SKILL.md", "skill file"
-- "skill guidelines", "best practices"
-
----
-
-## 🎨 Choosing Between Versions
-
-| Version | Language | Use When |
-|---------|----------|----------|
-| `create-skill-file` | 中文 | Your team primarily works in Chinese |
-| `create-skill-file-EN` | English | Your team primarily works in English |
-
-**Note:** Both versions contain identical content, just in different languages. Pick the one that matches your team's primary language.
-
 ---
 
 ## 💡 Usage Examples
