@@ -57,14 +57,17 @@ cp -r create-skill-file-EN .claude/skills/
    ```
 
 3. **Copy the skill you want**
-
+   
    Example - Adding the skill creation guide:
    ```bash
+   # clone this repository if you haven't already
+   git clone https://github.com/YYH211/Claude-meta-skill.git
+   
    # For Chinese version
-   cp -r /path/to/Claude-meta-skill/create-skill-file .claude/skills/
+   cp -r /Claude-meta-skill/create-skill-file .claude/skills/
 
    # OR for English version
-   cp -r /path/to/Claude-meta-skill/create-skill-file-EN .claude/skills/
+   cp -r /Claude-meta-skill/create-skill-file-EN .claude/skills/
    ```
 
 4. **Verify installation**
