@@ -8,17 +8,18 @@ This repository provides ready-to-use skills that extend Claude Code's functiona
 
 ## 📦 Available Skills
 
-| Skill Name | Description | Languages | Installation |
-|------------|-------------|-----------|--------------|
-| **[create-skill-file](./create-skill-file)** | Guides Claude in creating well-structured SKILL.md files with templates, examples, and best practices | 🇨🇳 🇬🇧 | `cp -r create-skill-file .claude/skills/` |
+| Skill Name                                   | Description                                                                                           | Installation |
+|----------------------------------------------|-------------------------------------------------------------------------------------------------------|--------------|
+| **[create-skill-file](./create-skill-file)** | Guides Claude in creating well-structured SKILL.md files with templates, examples, and best practices |  `cp -r create-skill-file .claude/skills/` |
+| **[prompt-optimize](./prompt-optimize)**     | Optimize your prompt with Claude                                                                      |       `cp -r prompt-optimize .claude/skills/`              |
 
-**Total:** 1 skill available
+**Total:** 2 skills available
 
 ---
 
 ### Skill Details
 
-#### 📝 create-skill-file
+#### 🔧 create-skill-file
 **Versions:** [Chinese](./create-skill-file) / [English](./create-skill-file-EN)
 
 A meta-skill that teaches you how to create high-quality SKILL.md files for Claude.
@@ -38,6 +39,33 @@ cp -r create-skill-file .claude/skills/
 
 # English version
 cp -r create-skill-file-EN .claude/skills/
+```
+
+---
+
+#### 🔧 prompt-optimize
+**Version:** [Chinese](./prompt-optimize)
+
+An expert prompt engineering skill that transforms Claude into "Alpha-Prompt" - a master prompt engineer who collaboratively crafts high-quality prompts through flexible dialogue.
+
+**What's included:**
+- ✅ Expert prompt engineering consultation
+- ✅ Advanced cognitive architectures (CoT, ToT, Self-Consistency, ReAct)
+- ✅ Security guardrails and safety considerations
+- ✅ Architecture upgrade suggestions for simple requirements
+- ✅ Collaborative dialogue-based prompt optimization
+
+**Key Features:**
+- **Flexible Communication**: Genuine two-way dialogue, not rigid templated questions
+- **Proactive Architecture Upgrades**: Suggests advanced techniques like Tree of Thought for creative tasks
+- **Security Awareness**: Provides safety recommendations for public-facing AI roles
+- **Quality Standards**: Delivers production-ready prompts with clear role definitions and structured outputs
+
+**Trigger Keywords:** `"optimize prompt"`, `"improve prompt"`, `"enhance AI instruction"`, `"prompt engineering"`, `"system instruction"`
+
+**Installation:**
+```bash
+cp -r prompt-optimize .claude/skills/
 ```
 
 ---
