@@ -8,12 +8,13 @@ This repository provides ready-to-use skills that extend Claude Code's functiona
 
 ## 📦 Available Skills
 
-| Skill Name                                   | Description                                                                                           | Installation |
-|----------------------------------------------|-------------------------------------------------------------------------------------------------------|--------------|
-| **[create-skill-file](./create-skill-file)** | Guides Claude in creating well-structured SKILL.md files with templates, examples, and best practices |  `cp -r create-skill-file .claude/skills/` |
-| **[prompt-optimize](./prompt-optimize)**     | Optimize your prompt with Claude                                                                      |       `cp -r prompt-optimize .claude/skills/`              |
+| Skill Name                                         | Description                                                                                           | Source | Installation |
+|----------------------------------------------------|-------------------------------------------------------------------------------------------------------|--------|--------------|
+| **[create-skill-file](./create-skill-file)**       | Guides Claude in creating well-structured SKILL.md files with templates, examples, and best practices | - | `cp -r create-skill-file .claude/skills/` |
+| **[prompt-optimize](./prompt-optimize)**           | Optimize your prompt with Claude                                                                      | - | `cp -r prompt-optimize .claude/skills/` |
+| **[deep-reading-analyst](./deep-reading-analyst)** | Comprehensive framework for deep analysis using 10+ thinking models (SCQA, 5W2H, Critical Thinking, Mental Models, First Principles, etc.) | [🔗 GitHub](https://github.com/ginobefun/deep-reading-analyst-skill) | `cp -r deep-reading-analyst .claude/skills/` |
 
-**Total:** 2 skills available
+**Total:** 3 skills available
 
 ---
 
@@ -66,6 +67,21 @@ An expert prompt engineering skill that transforms Claude into "Alpha-Prompt" - 
 **Installation:**
 ```bash
 cp -r prompt-optimize .claude/skills/
+```
+
+---
+
+#### 🔧 deep-reading-analyst
+
+A professional skill that transforms surface-level reading into deep learning through systematic analysis using 10+ proven thinking frameworks.
+
+**For detailed documentation, see:** [Deep Reading Analyst Introduction](./skill-intro/depp-reading-analyst-intro.md)
+
+**🔗 GitHub Repository:** https://github.com/ginobefun/deep-reading-analyst-skill/tree/main
+
+**Installation:**
+```bash
+cp -r deep-reading-analyst .claude/skills/
 ```
 
 ---
