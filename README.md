@@ -264,6 +264,20 @@ This repository will grow with more useful skills:
 
 ---
 
+## ⭐ Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=YYH211/Claude-meta-skill&type=Date)](https://star-history.com/#YYH211/Claude-meta-skill&Date)
+
+---
+
+## 🤝 Partner Projects
+
+### FastGPT
+
+[FastGPT](https://github.com/labring/FastGPT) is a knowledge-based platform built on the LLM, offers out-of-the-box data processing and model invocation capabilities, allows for workflow orchestration through Flow visualization.
+
+---
+
 ## 🤝 Contributing
 
 Have a useful skill to share? We'd love to include it!
