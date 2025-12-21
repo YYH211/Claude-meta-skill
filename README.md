@@ -13,8 +13,11 @@ This repository provides ready-to-use skills that extend Claude Code's functiona
 | **[create-skill-file](./create-skill-file)**       | Guides Claude in creating well-structured SKILL.md files with templates, examples, and best practices | - | `cp -r create-skill-file .claude/skills/` |
 | **[prompt-optimize](./prompt-optimize)**           | Optimize your prompt with Claude                                                                      | - | `cp -r prompt-optimize .claude/skills/` |
 | **[deep-reading-analyst](./deep-reading-analyst)** | Comprehensive framework for deep analysis using 10+ thinking models (SCQA, 5W2H, Critical Thinking, Mental Models, First Principles, etc.) | [🔗 GitHub](https://github.com/ginobefun/deep-reading-analyst-skill) | `cp -r deep-reading-analyst .claude/skills/` |
+| **[dry-refactoring](./dry-refactoring)**           | Systematic code refactoring following DRY principle with 4-step workflow to eliminate code duplication | - | `cp -r dry-refactoring .claude/skills/` |
+| **[frontend-design](./frontend-design)**           | Creates unique, production-grade frontend interfaces with exceptional design quality and creative aesthetics | - | `cp -r frontend-design .claude/skills/` |
+| **[mcp-builder](./mcp-builder)**                   | Guide for creating high-quality MCP servers that enable LLMs to interact with external services through tools | - | `cp -r mcp-builder .claude/skills/` |
 
-**Total:** 3 skills available
+**Total:** 6 skills available
 
 ---
 
@@ -82,6 +85,90 @@ A professional skill that transforms surface-level reading into deep learning th
 **Installation:**
 ```bash
 cp -r deep-reading-analyst .claude/skills/
+```
+
+---
+
+#### 🔧 dry-refactoring
+**Version:** [Chinese](./dry-refactoring)
+
+A systematic skill that guides code refactoring following the DRY (Don't Repeat Yourself) principle through a proven 4-step workflow.
+
+**What's included:**
+- ✅ Step 1: Identify Repetition (obvious and semantic duplication)
+- ✅ Step 2: Abstract the Logic (functions, classes, constants)
+- ✅ Step 3: Replace Implementation (systematic replacement)
+- ✅ Step 4: Verify and Test (unit tests, integration tests, performance)
+
+**Key Features:**
+- **Comprehensive Coverage**: Handles copy-paste code, magic numbers, structural and logical repetition
+- **Step-by-Step Process**: Clear workflow from identification to verification
+- **Real-World Examples**: Complete e-commerce discount calculation refactoring case
+- **Best Practices**: Includes common pitfalls, testing strategies, and gradual refactoring approach
+
+**Trigger Keywords:** `"DRY"`, `"code duplication"`, `"refactor repetitive code"`, `"eliminate duplication"`, `"magic numbers"`, `"code smell"`, `"extract function"`
+
+**Installation:**
+```bash
+cp -r dry-refactoring .claude/skills/
+```
+
+---
+
+#### 🔧 frontend-design
+**Version:** [Chinese](./frontend-design)
+
+An expert skill for creating unique, production-grade frontend interfaces with exceptional design quality that avoids generic AI aesthetics.
+
+**What's included:**
+- ✅ Design thinking framework (Purpose, Style, Constraints, Differentiation)
+- ✅ Typography guide (unique font selection, avoid common fonts)
+- ✅ Color & theme systems (CSS variables, accessibility)
+- ✅ Animation best practices (CSS animations, Framer Motion)
+- ✅ Spatial composition techniques (asymmetric layouts, overlapping elements)
+- ✅ Background & visual details (gradients, noise textures, glass morphism)
+
+**Key Features:**
+- **Bold Aesthetic Choices**: Guides selection of extreme, intentional design styles
+- **Anti-Generic AI Design**: Explicitly avoids overused fonts (Inter, Roboto) and cliché color schemes
+- **Implementation Complexity Matching**: Complex designs get complex code, minimal designs get precise code
+- **Production-Ready Code**: Semantic HTML, accessibility, responsive design, performance optimization
+
+**Trigger Keywords:** `"web component"`, `"landing page"`, `"dashboard"`, `"React component"`, `"UI design"`, `"beautify"`, `"frontend"`
+
+**Installation:**
+```bash
+cp -r frontend-design .claude/skills/
+```
+
+---
+
+#### 🔧 mcp-builder
+**Version:** [English](./mcp-builder)
+
+A comprehensive guide for creating high-quality MCP (Model Context Protocol) servers that enable LLMs to interact with external services through well-designed tools.
+
+**What's included:**
+- ✅ Phase 1: Deep Research and Planning (MCP design patterns, API coverage)
+- ✅ Phase 2: Tool Design (naming conventions, parameter schemas, error handling)
+- ✅ Phase 3: Implementation (FastMCP/Python, MCP SDK/TypeScript)
+- ✅ Phase 4: Testing and Publishing (integration tests, documentation)
+
+**Key Features:**
+- **Modern MCP Design Patterns**: Balances comprehensive API coverage with specialized workflow tools
+- **Framework-Specific Guidance**: Detailed examples for both FastMCP (Python) and MCP SDK (TypeScript)
+- **Quality Standards**: Emphasizes clear naming, actionable error messages, and proper context management
+- **Complete Workflow**: From initial research through testing and publishing
+
+**Supported Frameworks:**
+- FastMCP (Python) - Recommended for rapid development
+- MCP SDK (TypeScript/Node.js) - For JavaScript ecosystem integration
+
+**Trigger Keywords:** `"MCP server"`, `"Model Context Protocol"`, `"build MCP"`, `"FastMCP"`, `"MCP SDK"`, `"tool integration"`
+
+**Installation:**
+```bash
+cp -r mcp-builder .claude/skills/
 ```
 
 ---
