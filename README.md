@@ -16,8 +16,9 @@ This repository provides ready-to-use skills that extend Claude Code's functiona
 | **[dry-refactoring](./dry-refactoring)**           | Systematic code refactoring following DRY principle with 4-step workflow to eliminate code duplication | - | `cp -r dry-refactoring .claude/skills/` |
 | **[frontend-design](./frontend-design)**           | Creates unique, production-grade frontend interfaces with exceptional design quality and creative aesthetics | - | `cp -r frontend-design .claude/skills/` |
 | **[mcp-builder](./mcp-builder)**                   | Guide for creating high-quality MCP servers that enable LLMs to interact with external services through tools | - | `cp -r mcp-builder .claude/skills/` |
+| **[daily-ai-news](./daily-ai-news)**               | Aggregates and summarizes the latest AI news from multiple sources with concise briefs and direct links | - | `cp -r daily-ai-news .claude/skills/` |
 
-**Total:** 6 skills available
+**Total:** 7 skills available
 
 ---
 
@@ -169,6 +170,37 @@ A comprehensive guide for creating high-quality MCP (Model Context Protocol) ser
 **Installation:**
 ```bash
 cp -r mcp-builder .claude/skills/
+```
+
+---
+
+#### 🔧 daily-ai-news
+**Version:** [Chinese & English](./daily-ai-news)
+
+An intelligent skill that aggregates and summarizes the latest AI news from multiple sources (AI news websites and web search) with concise briefs and direct links to original articles.
+
+**What's included:**
+- ✅ Phase 1: Information Gathering (WebSearch + mcp__web_reader__webReader)
+- ✅ Phase 2: Content Filtering (last 24-48 hours, deduplication)
+- ✅ Phase 3: Categorization (Major Announcements, Research, Industry, Tools, Policy)
+- ✅ Phase 4: Output Formatting (structured template with links)
+- ✅ Comprehensive news sources database (20+ sources)
+- ✅ Search query templates by category
+- ✅ Multiple output format templates
+
+**Key Features:**
+- **Multi-Source Aggregation**: Fetches from 3-5 major AI news sites plus web search
+- **Smart Filtering**: Keeps only recent news (24-48 hours) with major significance
+- **Structured Categorization**: 5 categories - Major Announcements, Research & Papers, Industry & Business, Tools & Applications, Policy & Ethics
+- **Direct Links**: Every news item includes a direct link to the original article
+- **Customization Options**: Focus areas, depth levels, time ranges, and format preferences
+- **Bilingual Support**: Works with both Chinese and English news sources
+
+**Trigger Keywords:** `"给我今天的AI资讯"`, `"today's AI news"`, `"AI updates"`, `"latest AI developments"`, `"daily AI briefing"`, `"AI industry news"`, `"artificial intelligence news"`
+
+**Installation:**
+```bash
+cp -r daily-ai-news .claude/skills/
 ```
 
 ---
@@ -338,7 +370,6 @@ This repository will grow with more useful skills:
 - [ ] **testing-strategy** - Guide for writing comprehensive tests
 - [ ] **deployment-checklist** - Pre-deployment verification
 - [ ] **refactoring-guide** - Code refactoring best practices
-- [ ] **Daily AI News** - Summarize latest AI news
 
 **Want to contribute?** Create a skill following the guidelines in `create-skill-file` and submit it!
 
