@@ -338,6 +338,7 @@ This repository will grow with more useful skills:
 - [ ] **testing-strategy** - Guide for writing comprehensive tests
 - [ ] **deployment-checklist** - Pre-deployment verification
 - [ ] **refactoring-guide** - Code refactoring best practices
+- [ ] **Daily AI News** - Summarize latest AI news
 
 **Want to contribute?** Create a skill following the guidelines in `create-skill-file` and submit it!
 
