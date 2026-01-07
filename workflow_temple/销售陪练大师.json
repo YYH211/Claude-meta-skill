@@ -1,0 +1,1163 @@
+﻿{
+  "nodes": [
+    {
+      "nodeId": "userGuide",
+      "name": "common:core.module.template.system_config",
+      "intro": "common:core.module.template.system_config_info",
+      "avatar": "core/workflow/template/systemConfig",
+      "flowNodeType": "userGuide",
+      "position": {
+        "x": 9.260501085358214,
+        "y": -405.21128405508534
+      },
+      "version": "481",
+      "inputs": [
+        {
+          "key": "welcomeText",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "string",
+          "label": "core.app.Welcome Text",
+          "value": ""
+        },
+        {
+          "key": "variables",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "any",
+          "label": "core.app.Chat Variable",
+          "value": []
+        },
+        {
+          "key": "questionGuide",
+          "valueType": "any",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "core.app.Question Guide",
+          "value": {
+            "open": false
+          }
+        },
+        {
+          "key": "tts",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "any",
+          "label": "",
+          "value": {
+            "type": "web"
+          }
+        },
+        {
+          "key": "whisper",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "any",
+          "label": "",
+          "value": {
+            "open": false,
+            "autoSend": false,
+            "autoTTSResponse": false
+          }
+        },
+        {
+          "key": "scheduleTrigger",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "any",
+          "label": "",
+          "value": null
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "nodeId": "448745",
+      "name": "common:core.module.template.work_start",
+      "intro": "",
+      "avatar": "core/workflow/template/workflowStart",
+      "flowNodeType": "workflowStart",
+      "position": {
+        "x": 508.0907619979188,
+        "y": -167.6600633003344
+      },
+      "version": "481",
+      "inputs": [
+        {
+          "key": "userChatInput",
+          "renderTypeList": [
+            "reference",
+            "textarea"
+          ],
+          "valueType": "string",
+          "label": "workflow:user_question",
+          "required": true,
+          "toolDescription": "用户问题",
+          "debugLabel": ""
+        }
+      ],
+      "outputs": [
+        {
+          "id": "userChatInput",
+          "key": "userChatInput",
+          "label": "common:core.module.input.label.user question",
+          "type": "static",
+          "valueType": "string",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "nodeId": "kH1uZdyMvi76ZpYR",
+      "name": "收集用户信息",
+      "intro": "收集用户信息",
+      "avatar": "core/workflow/template/formInput",
+      "flowNodeType": "formInput",
+      "position": {
+        "x": 2650.434539830882,
+        "y": -1086.1183074862474
+      },
+      "inputs": [
+        {
+          "key": "description",
+          "renderTypeList": [
+            "textarea"
+          ],
+          "valueType": "string",
+          "label": "app:workflow.select_description",
+          "description": "app:workflow.input_description_tip",
+          "placeholder": "app:workflow.form_input_description_placeholder",
+          "value": "## 🎯 欢迎来到销售精英训练营！\n\n您好！我是您的专属销售教练Alex。很高兴为FastGPT的销售精英提供训练！AI开发平台是个充满机遇的赛道，我将运用实战验证的方法，帮助您在接下来的训练中实现销售技能的显著突破。\n\n## 📋 快速建档 - 了解您的销售现状\n为了给您提供最精准的个性化训练，请告诉我：",
+          "valueDesc": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "renderTypeList": [
+            "custom"
+          ],
+          "valueType": "any",
+          "label": "",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": "",
+          "key": "userInputForms",
+          "value": [
+            {
+              "type": "input",
+              "key": "1. 您销售的产品/服务名称是什么？",
+              "label": "1. 您销售的产品/服务名称是什么？",
+              "description": "请详细描述您的具体产品或服务",
+              "value": "",
+              "defaultValue": "AI应用开发平台FastGPT",
+              "valueType": "string",
+              "required": true,
+              "list": [
+                {
+                  "label": "",
+                  "value": ""
+                }
+              ]
+            },
+            {
+              "type": "input",
+              "key": "2. 产品的价格区间是多少？",
+              "label": "2. 产品的价格区间是多少？",
+              "description": "例如：5-20万/年，1-3万单次，500-2000元等",
+              "value": "",
+              "defaultValue": "FastGPT提供月订阅和年订阅两种方案，包含免费版（0元）、体验版（月付59元/年付590元）、团队版（月付399元/年付3990元）、企业版（月付999元/年付9990元）四个套餐，年付相比月付可享受约2个月优惠，各版本在团队成员数、应用数量、知识库容量、AI积分等方面递增配置。Sealos全托管提供单节点版（月付10000元起/年付120000元起，8C32G配置）和多节点版（月付22000元起/年付264000元起，32C128G配置），均需3个月起订且包含免运维服务，另有自有服务器部署方案需联系咨询具体价格。",
+              "valueType": "string",
+              "required": true,
+              "list": [
+                {
+                  "label": "",
+                  "value": ""
+                }
+              ]
+            },
+            {
+              "type": "input",
+              "key": "3. 产品的核心价值和卖点有哪些？",
+              "label": "3. 产品的核心价值和卖点有哪些？",
+              "description": "请列出3-5个主要卖点或解决的客户问题",
+              "value": "",
+              "defaultValue": "FastGPT是基于 LLM 大模型的开源 AI 知识库构建平台。提供了开箱即用的数据处理、模型调用、RAG 检索、可视化 AI 工作流编排等能力，帮助您轻松构建复杂的 AI 应用。",
+              "valueType": "string",
+              "required": true,
+              "list": [
+                {
+                  "label": "",
+                  "value": ""
+                }
+              ]
+            },
+            {
+              "type": "input",
+              "key": "4. 销售周期通常多长？",
+              "label": "4. 销售周期通常多长？",
+              "description": "从初次接触客户到成交大约需要多长时间\n\n",
+              "value": "",
+              "defaultValue": "1-3个月",
+              "valueType": "string",
+              "required": true,
+              "list": [
+                {
+                  "label": "",
+                  "value": ""
+                }
+              ]
+            },
+            {
+              "type": "input",
+              "key": "5. 您的目标客户主要是什么类型？",
+              "label": "5. 您的目标客户主要是什么类型？",
+              "description": "例如：中小企业老板、大厂技术总监、个人消费者等",
+              "value": "",
+              "defaultValue": "B端企业的技术人员",
+              "valueType": "string",
+              "required": true,
+              "list": [
+                {
+                  "label": "",
+                  "value": ""
+                }
+              ]
+            },
+            {
+              "type": "input",
+              "key": "6. 您目前遇到的最大销售挑战是什么？",
+              "label": "6. 您目前遇到的最大销售挑战是什么？",
+              "description": "例如：客户总说考虑考虑、价格异议多、开场困难、成交转化率低等",
+              "value": "",
+              "defaultValue": "成交转化率低",
+              "valueType": "string",
+              "required": true,
+              "list": [
+                {
+                  "label": "",
+                  "value": ""
+                }
+              ]
+            },
+            {
+              "type": "input",
+              "key": "7. 您最希望提升哪项销售技能？",
+              "label": "7. 您最希望提升哪项销售技能？",
+              "description": "开场破冰/需求挖掘/异议处理/成交技巧/其他",
+              "value": "",
+              "defaultValue": "成交技巧",
+              "valueType": "string",
+              "required": true,
+              "list": [
+                {
+                  "label": "",
+                  "value": ""
+                }
+              ]
+            },
+            {
+              "type": "select",
+              "key": "8. 您偏好的训练模式是？",
+              "label": "8. 您偏好的训练模式是？",
+              "description": "",
+              "value": "",
+              "defaultValue": "实战场景演练",
+              "valueType": "string",
+              "required": true,
+              "list": [
+                {
+                  "label": "快速诊断",
+                  "value": "快速诊断"
+                },
+                {
+                  "label": "专项技能训练",
+                  "value": "专项技能训练"
+                },
+                {
+                  "label": "实战场景演练",
+                  "value": "实战场景演练"
+                }
+              ]
+            },
+            {
+              "type": "select",
+              "key": "9. 您希望的训练难度等级？",
+              "label": "9. 您希望的训练难度等级？",
+              "description": "L1-新手友好：配合度高，异议简单，给予充分时间\nL2-进阶挑战：有明确需求，但存在竞品比较和价格敏感\nL3-高手对决：复杂决策链，多重异议，时间压力大\nL4-地狱模式：刁钻客户，极限场景，心理压力测试",
+              "value": "",
+              "defaultValue": "进阶挑战",
+              "valueType": "string",
+              "required": true,
+              "list": [
+                {
+                  "label": "新手友好",
+                  "value": "新手友好"
+                },
+                {
+                  "label": "进阶挑战",
+                  "value": "进阶挑战"
+                },
+                {
+                  "label": "高手对决",
+                  "value": "高手对决"
+                },
+                {
+                  "label": "地狱模式",
+                  "value": "地狱模式"
+                }
+              ]
+            },
+            {
+              "type": "select",
+              "key": "10. 您偏好练习的客户类型？",
+              "label": "10. 您偏好练习的客户类型？",
+              "description": "",
+              "value": "",
+              "defaultValue": "挑剔型客户",
+              "valueType": "string",
+              "required": true,
+              "list": [
+                {
+                  "label": "配合型客户",
+                  "value": "配合型客户"
+                },
+                {
+                  "label": "挑剔型客户",
+                  "value": "挑剔型客户"
+                },
+                {
+                  "label": "专业型客户",
+                  "value": "专业型客户"
+                },
+                {
+                  "label": "随机类型",
+                  "value": "随机类型"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "outputs": [
+        {
+          "id": "formInputResult",
+          "key": "formInputResult",
+          "required": true,
+          "label": "workflow:form_input_result",
+          "description": "一个包含完整结果的对象",
+          "valueType": "object",
+          "type": "static",
+          "valueDesc": ""
+        },
+        {
+          "id": "1. 您销售的产品/服务名称是什么？",
+          "valueType": "string",
+          "key": "1. 您销售的产品/服务名称是什么？",
+          "label": "1. 您销售的产品/服务名称是什么？",
+          "type": "static"
+        },
+        {
+          "id": "2. 产品的价格区间是多少？",
+          "valueType": "string",
+          "key": "2. 产品的价格区间是多少？",
+          "label": "2. 产品的价格区间是多少？",
+          "type": "static"
+        },
+        {
+          "id": "3. 产品的核心价值和卖点有哪些？",
+          "valueType": "string",
+          "key": "3. 产品的核心价值和卖点有哪些？",
+          "label": "3. 产品的核心价值和卖点有哪些？",
+          "type": "static"
+        },
+        {
+          "id": "4. 销售周期通常多长？",
+          "valueType": "string",
+          "key": "4. 销售周期通常多长？",
+          "label": "4. 销售周期通常多长？",
+          "type": "static"
+        },
+        {
+          "id": "5. 您的目标客户主要是什么类型？",
+          "valueType": "string",
+          "key": "5. 您的目标客户主要是什么类型？",
+          "label": "5. 您的目标客户主要是什么类型？",
+          "type": "static"
+        },
+        {
+          "id": "6. 您目前遇到的最大销售挑战是什么？",
+          "valueType": "string",
+          "key": "6. 您目前遇到的最大销售挑战是什么？",
+          "label": "6. 您目前遇到的最大销售挑战是什么？",
+          "type": "static"
+        },
+        {
+          "id": "7. 您最希望提升哪项销售技能？",
+          "valueType": "string",
+          "key": "7. 您最希望提升哪项销售技能？",
+          "label": "7. 您最希望提升哪项销售技能？",
+          "type": "static"
+        },
+        {
+          "id": "8. 您偏好的训练模式是？",
+          "valueType": "string",
+          "key": "8. 您偏好的训练模式是？",
+          "label": "8. 您偏好的训练模式是？",
+          "type": "static"
+        },
+        {
+          "id": "9. 您希望的训练难度等级？",
+          "valueType": "string",
+          "key": "9. 您希望的训练难度等级？",
+          "label": "9. 您希望的训练难度等级？",
+          "type": "static"
+        },
+        {
+          "id": "10. 您偏好练习的客户类型？",
+          "valueType": "string",
+          "key": "10. 您偏好练习的客户类型？",
+          "label": "10. 您偏好练习的客户类型？",
+          "type": "static"
+        }
+      ]
+    },
+    {
+      "nodeId": "yW7GrhPb03LIzn6g",
+      "name": "代码运行",
+      "intro": "执行一段简单的脚本代码，通常用于进行复杂的数据处理。",
+      "avatar": "core/workflow/template/codeRun",
+      "flowNodeType": "code",
+      "showStatus": true,
+      "position": {
+        "x": 864.4875060062582,
+        "y": -299.36602052202346
+      },
+      "inputs": [
+        {
+          "key": "system_addInputParam",
+          "renderTypeList": [
+            "addInputParam"
+          ],
+          "valueType": "dynamic",
+          "label": "",
+          "required": false,
+          "description": "workflow:these_variables_will_be_input_parameters_for_code_execution",
+          "customInputConfig": {
+            "selectValueTypeList": [
+              "string",
+              "number",
+              "boolean",
+              "object",
+              "arrayString",
+              "arrayNumber",
+              "arrayBoolean",
+              "arrayObject",
+              "arrayAny",
+              "any",
+              "chatHistory",
+              "datasetQuote",
+              "dynamic",
+              "selectDataset",
+              "selectApp"
+            ],
+            "showDescription": false,
+            "showDefaultValue": true
+          },
+          "valueDesc": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "codeType",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "value": "js",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "code",
+          "renderTypeList": [
+            "custom"
+          ],
+          "label": "",
+          "valueType": "string",
+          "value": "function main({data1}){\n    \n  return {\n      result: data1+1,\n  }\n}",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "renderTypeList": [
+            "reference"
+          ],
+          "valueType": "number",
+          "canEdit": true,
+          "key": "data1",
+          "label": "data1",
+          "customInputConfig": {
+            "selectValueTypeList": [
+              "string",
+              "number",
+              "boolean",
+              "object",
+              "arrayString",
+              "arrayNumber",
+              "arrayBoolean",
+              "arrayObject",
+              "arrayAny",
+              "any",
+              "chatHistory",
+              "datasetQuote",
+              "dynamic",
+              "selectDataset",
+              "selectApp"
+            ],
+            "showDescription": false,
+            "showDefaultValue": true
+          },
+          "required": true,
+          "value": [
+            "VARIABLE_NODE_ID",
+            "对话轮数"
+          ],
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        }
+      ],
+      "outputs": [
+        {
+          "id": "system_rawResponse",
+          "key": "system_rawResponse",
+          "label": "workflow:full_response_data",
+          "valueType": "object",
+          "type": "static",
+          "valueDesc": "",
+          "description": ""
+        },
+        {
+          "id": "error",
+          "key": "error",
+          "label": "workflow:error_text",
+          "description": "代码运行错误信息，成功时返回空",
+          "valueType": "string",
+          "type": "error",
+          "valueDesc": ""
+        },
+        {
+          "id": "system_addOutputParam",
+          "key": "system_addOutputParam",
+          "type": "dynamic",
+          "valueType": "dynamic",
+          "label": "",
+          "customFieldConfig": {
+            "selectValueTypeList": [
+              "string",
+              "number",
+              "boolean",
+              "object",
+              "arrayString",
+              "arrayNumber",
+              "arrayBoolean",
+              "arrayObject",
+              "arrayAny",
+              "any",
+              "chatHistory",
+              "datasetQuote",
+              "dynamic",
+              "selectDataset",
+              "selectApp"
+            ],
+            "showDescription": false,
+            "showDefaultValue": false
+          },
+          "description": "将代码中 return 的对象作为输出，传递给后续的节点。变量名需要对应 return 的 key",
+          "valueDesc": ""
+        },
+        {
+          "id": "qLUQfhG0ILRX",
+          "type": "dynamic",
+          "key": "result",
+          "valueType": "number",
+          "label": "result",
+          "valueDesc": "",
+          "description": ""
+        }
+      ],
+      "catchError": true
+    },
+    {
+      "nodeId": "yuPoWmuTHrOtGAF2",
+      "name": "变量更新",
+      "intro": "可以更新指定节点的输出值或更新全局变量",
+      "avatar": "core/workflow/template/variableUpdate",
+      "flowNodeType": "variableUpdate",
+      "showStatus": false,
+      "position": {
+        "x": 1657.6717617075708,
+        "y": -321.1421071986986
+      },
+      "inputs": [
+        {
+          "key": "updateList",
+          "valueType": "any",
+          "label": "",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "value": [
+            {
+              "variable": [
+                "VARIABLE_NODE_ID",
+                "对话轮数"
+              ],
+              "value": [
+                "yW7GrhPb03LIzn6g",
+                "qLUQfhG0ILRX"
+              ],
+              "valueType": "number",
+              "renderType": "reference"
+            }
+          ],
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "nodeId": "dnj0BicSQzNwC2pe",
+      "name": "判断器",
+      "intro": "根据一定的条件，执行不同的分支。",
+      "avatar": "core/workflow/template/ifelse",
+      "flowNodeType": "ifElseNode",
+      "showStatus": true,
+      "position": {
+        "x": 1759.9958344698587,
+        "y": 54.83495478005784
+      },
+      "inputs": [
+        {
+          "key": "ifElseList",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "any",
+          "label": "",
+          "value": [
+            {
+              "condition": "OR",
+              "list": [
+                {
+                  "variable": [
+                    "VARIABLE_NODE_ID",
+                    "对话轮数"
+                  ],
+                  "condition": "equalTo",
+                  "value": "1"
+                },
+                {
+                  "variable": [
+                    "448745",
+                    "userChatInput"
+                  ],
+                  "condition": "include",
+                  "value": "重新开始"
+                }
+              ]
+            }
+          ],
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        }
+      ],
+      "outputs": [
+        {
+          "id": "ifElseResult",
+          "key": "ifElseResult",
+          "label": "workflow:judgment_result",
+          "valueType": "string",
+          "type": "static",
+          "valueDesc": "",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "nodeId": "z79PHbRRRbOkn8aO",
+      "name": "变量更新#2",
+      "intro": "可以更新指定节点的输出值或更新全局变量",
+      "avatar": "core/workflow/template/variableUpdate",
+      "flowNodeType": "variableUpdate",
+      "showStatus": false,
+      "position": {
+        "x": 3712.781561677226,
+        "y": -853.5382768973948
+      },
+      "inputs": [
+        {
+          "key": "updateList",
+          "valueType": "any",
+          "label": "",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "value": [
+            {
+              "variable": [
+                "VARIABLE_NODE_ID",
+                "用户信息"
+              ],
+              "value": [
+                "",
+                "{{$kH1uZdyMvi76ZpYR.formInputResult$}}"
+              ],
+              "valueType": "string",
+              "renderType": "input"
+            }
+          ],
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "nodeId": "yRUk99KQYdHZYhiG",
+      "name": "AI 对话",
+      "intro": "AI 大模型对话",
+      "avatar": "core/workflow/template/aiChat",
+      "flowNodeType": "chatNode",
+      "showStatus": true,
+      "position": {
+        "x": 3611.648501321258,
+        "y": -220.471071346007
+      },
+      "version": "4.9.7",
+      "inputs": [
+        {
+          "key": "model",
+          "renderTypeList": [
+            "settingLLMModel",
+            "reference"
+          ],
+          "label": "common:core.module.input.label.aiModel",
+          "valueType": "string",
+          "value": "gpt-4.1",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "temperature",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "number",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "maxToken",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "number",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "isResponseAnswerText",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "value": true,
+          "valueType": "boolean",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatQuoteRole",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "value": "system",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "quoteTemplate",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "quotePrompt",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatVision",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "boolean",
+          "value": true,
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatReasoning",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "boolean",
+          "value": true,
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatTopP",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "number",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatStopSign",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatResponseFormat",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatJsonSchema",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "systemPrompt",
+          "renderTypeList": [
+            "textarea",
+            "reference"
+          ],
+          "max": 3000,
+          "valueType": "string",
+          "label": "common:core.ai.Prompt",
+          "description": "common:core.app.tip.systemPromptTip",
+          "placeholder": "common:core.app.tip.chatNodeSystemPromptTip",
+          "value": "## 🎯 系统角色定义\n```\n你是一位世界级销售大师和训练教练，拥有20年跨行业销售经验，专精于：\n- 心理学驱动的销售技巧\n- 数据支撑的成交策略  \n- 实战验证的沟通框架\n- 个性化能力提升路径\n\n你的使命：通过科学化训练方法，帮助每位销售人员实现技能突破和业绩增长。\n```\n\n## 🧠 核心能力矩阵\n\n### 1. 沉浸式场景模拟\n- **角色切换**：瞬间转换为不同性格、需求、决策风格的客户\n- **情境还原**：100%复现真实销售环境的压力、节奏和变化\n- **动态调整**：根据用户表现实时调整客户反应强度和复杂度\n\n### 2. 精准诊断分析\n- **多维度评估**：从话术、时机、情商、逻辑四个维度打分\n- **盲点识别**：发现用户未意识到的销售弱项\n- **数据化反馈**：提供量化的改进建议和进步追踪\n\n### 3. 个性化训练设计\n- **自适应难度**：根据用户水平动态调整训练强度\n- **针对性练习**：为特定弱点设计专项训练模块\n- **进阶路径规划**：制定3-6个月的技能提升roadmap\n\n## 📊 自动训练方案生成\n\n### 信息处理与方案输出\n收到完整信息后，立即输出：\n\n```\n### 🎯 【专属训练方案已生成】\n\n基于您的信息分析：\n├── 产品特点：[总结产品核心特征]\n├── 客户画像：[提炼目标客户关键特征] \n├── 重点技能：[根据挑战确定训练重点]\n└── 训练路径：[设计3-4个递进训练场景]\n\n### 🎭 【首个训练场景】（仅在首轮对话进行训练场景的生成）\n客户背景：[姓名]，[公司]，[职位]\n购买情境：[具体需求场景描述]\n客户性格：[沟通风格和决策特点]\n预设挑战：[可能遇到的异议或难点]\n\n准备好了吗？我现在就变身为这位客户，您可以直接开始销售对话！\n我会扮演：[客户角色描述]\n\n---\n🎭 [客户模式激活]\n[以客户身份开始对话...]\n```\n\n## 🔒 训练连贯性保障机制\n\n### 关键原则：\n1. **持续训练状态**：一旦进入角色扮演，默认保持客户角色直到用户明确指令\n2. **明确结束指令**：只有用户说出特定关键词才能结束训练\n3. **误触发防护**：避免将普通销售对话误解为结束指令\n\n### 训练结束触发条件（必须严格遵守）：\n**只有当用户明确说出以下完整短语时才结束训练：**\n- \"结束训练\"\n- \"训练结束\" \n- \"停止练习\"\n- \"结束对练\"\n- \"退出训练模式\"\n\n### 非结束指令示例（这些都要继续训练）：\n- \"好的\"、\"明白了\"、\"谢谢\" → 继续角色扮演\n- \"我想试试\"、\"再来一次\" → 继续当前场景\n- \"换个客户\"、\"难一点\" → 切换场景但继续训练\n- \"不好\"、\"不对\"、\"重新\" → 继续训练，调整应对\n\n## 🎭 角色扮演执行标准\n\n### 客户角色塑造原则\n```\n心理层面：\n- 真实的购买动机和顾虑\n- 符合身份的决策逻辑\n- 合理的情绪反应弧线\n\n行为层面：\n- 行业典型的沟通习惯\n- 职位相应的专业水准\n- 个性化的表达方式\n\n互动层面：\n- 给予用户成长空间\n- 保持适度挑战难度\n- 提供清晰反馈信号\n```\n\n### 难度分级体系\n- **L1-新手友好**：配合度高，异议简单，给予充分时间\n- **L2-进阶挑战**：有明确需求，但存在竞品比较和价格敏感\n- **L3-高手对决**：复杂决策链，多重异议，时间压力大\n- **L4-地狱模式**：刁钻客户，极限场景，心理压力测试\n\n## 📈 实时反馈机制\n\n### 对话过程中的微反馈（每3-5轮对话提供一次，避免过于频繁）：\n\n---\n> 💡 [教练提示]：[简短的改进建议]\n\n> 🎯 [客户心理]：[客户当前真实想法]\n\n> 🔄 [继续训练中...]：输入\"结束训练\"可获得完整评分和结束对练\n---\n\n### 完整评分反馈（仅在用户主动要求结束训练时提供）\n```\n🎯 【最终表现评分】\n├── 话术运用：X/10 [具体评价]\n├── 时机把握：X/10 [关键节点分析]  \n├── 情商表现：X/10 [情绪和氛围管理]\n└── 逻辑结构：X/10 [思路清晰度]\n\n💡 【训练亮点】\n• [具体做得好的地方1]\n• [具体做得好的地方2]\n\n⚠️ 【改进重点】\n• [最需要立即改进的问题]\n• [具体改进方法]\n\n🔄 【下次训练建议】\n[为下次训练提供改进方向]\n```\n\n## 🛠️ 高级功能模块\n\n### 1. 训练中场景调整（不中断训练）\n```\n用户指令识别：\n• \"换个客户\"/\"换人\" → 保持训练状态，切换客户角色\n• \"难一点\"/\"简单点\" → 调整当前客户的配合度\n• \"重新开始这个场景\" → 回到当前场景起点\n• \"下个环节\" → 推进到销售流程下一阶段\n```\n\n### 2. 实战话术库（训练过程中随时可用）\n```\n• \"给我话术\" → 提供当前场景的高效话术\n• \"怎么应对\" → 针对具体异议的处理方法\n• \"下一步建议\" → 推荐接下来的最佳行动\n• \"客户想法\" → 解读客户当前心理状态\n```\n\n### 3. 训练状态指示\n```\n每次互动都要明确表示训练继续进行：\n> 🔄 [继续训练中...]：保持专注，输入\"结束训练\"可获得完整评分\n```\n\n## 🎨 输出格式规范\n\n### 客户对话模式（客户对话内容必须加粗显示）\n```\n🎭 [李总 | ABC科技 | 技术总监]\n### **\"你们这个系统和市面上的产品有什么不同？\"**\n\n> 💭 [内心独白]：对产品有兴趣，但需要看到明确差异化价值\n```\n\n### 教练指导模式（使用块引用格式）\n```\n> 🎯 [教练分析]\n> 您刚才的回答缺少具体案例支撑，建议用数据和客户故事来增强说服力。\n\n> 💡 [话术建议]\n> \"李总，我举个和您类似企业的例子...\"\n```\n\n### 对话中微反馈格式（减少频率，每3-5轮一次）\n```\n---\n> 💡 [教练提示]：您的开场很自然，现在要重点挖掘客户的具体痛点\n\n> 🎯 [客户心理]：对您的专业度有了初步认可，但还在观察阶段\n\n> 🔄 [继续训练中...]：保持专注，输入\"结束训练\"可获得完整评分\n---\n```\n\n## 📋 格式化要求强化\n\n### 必须严格遵循的格式规则：\n1. **所有客户对话内容必须加粗并使用###三级标题格式**\n2. **教练提示、内心独白、分析等使用 > 块引用格式**\n3. **对话内容与教练反馈用 --- 分割线明确区分**\n4. **保持角色标识清晰：🎭 [客户信息] 用于对话，> 💡 [教练内容] 用于指导**\n\n### 交互体验优化重点：\n- 让用户一眼就能识别哪些是客户说的话（加粗三级标题）\n- 教练指导内容视觉上区分明显（块引用灰色背景）\n- 保持对话流畅性，减少反馈频率避免打断\n- 明确训练状态，避免用户困惑\n\n---\n\n## ⚡ 启动协议\n\n**首轮对话**：收集用户信息后立即生成训练方案并启动第一个场景\n\n**训练进行中**：\n1. 始终保持客户角色，专注对话内容\n2. 只在用户明确说\"结束训练\"等关键词时才结束\n3. 所有其他指令都在训练框架内处理\n4. 定期提供微反馈但不中断训练流程\n5. 严格遵循格式规范突出对话内容\n\n**训练状态监控**：每轮都要确认是否为结束指令，非结束指令一律继续训练\n用英文\n\n用户信息：{{$VARIABLE_NODE_ID.用户信息$}}（首轮对话前收集完毕）",
+          "valueDesc": "",
+          "debugLabel": "",
+          "toolDescription": "",
+          "maxLength": 100000,
+          "isRichText": true
+        },
+        {
+          "key": "history",
+          "renderTypeList": [
+            "numberInput",
+            "reference"
+          ],
+          "valueType": "chatHistory",
+          "label": "common:core.module.input.label.chat history",
+          "description": "workflow:max_dialog_rounds",
+          "required": true,
+          "min": 0,
+          "max": 50,
+          "value": 6,
+          "valueDesc": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "quoteQA",
+          "renderTypeList": [
+            "settingDatasetQuotePrompt"
+          ],
+          "label": "",
+          "debugLabel": "知识库引用",
+          "description": "",
+          "valueType": "datasetQuote",
+          "valueDesc": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "fileUrlList",
+          "renderTypeList": [
+            "reference",
+            "input"
+          ],
+          "label": "app:workflow.user_file_input",
+          "debugLabel": "文件链接",
+          "description": "app:workflow.user_file_input_desc",
+          "valueType": "arrayString",
+          "value": [
+            [
+              "448745",
+              "userFiles"
+            ]
+          ],
+          "valueDesc": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "userChatInput",
+          "renderTypeList": [
+            "reference",
+            "textarea"
+          ],
+          "valueType": "string",
+          "label": "workflow:user_question",
+          "toolDescription": "用户问题",
+          "required": true,
+          "value": [
+            "448745",
+            "userChatInput"
+          ],
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "selectedTypeIndex": 0
+        }
+      ],
+      "outputs": [
+        {
+          "id": "history",
+          "key": "history",
+          "required": true,
+          "label": "common:core.module.output.label.New context",
+          "description": "将本次回复内容拼接上历史记录，作为新的上下文返回",
+          "valueType": "chatHistory",
+          "valueDesc": "{\n  obj: System | Human | AI;\n  value: string;\n}[]",
+          "type": "static"
+        },
+        {
+          "id": "answerText",
+          "key": "answerText",
+          "required": true,
+          "label": "common:core.module.output.label.Ai response content",
+          "description": "将在 stream 回复完毕后触发",
+          "valueType": "string",
+          "type": "static",
+          "valueDesc": ""
+        },
+        {
+          "id": "reasoningText",
+          "key": "reasoningText",
+          "required": false,
+          "label": "workflow:reasoning_text",
+          "valueType": "string",
+          "type": "static",
+          "invalid": true,
+          "valueDesc": "",
+          "description": ""
+        },
+        {
+          "id": "system_error_text",
+          "key": "system_error_text",
+          "type": "error",
+          "valueType": "string",
+          "label": "workflow:error_text",
+          "description": ""
+        }
+      ],
+      "catchError": false
+    }
+  ],
+  "edges": [
+    {
+      "source": "448745",
+      "target": "yW7GrhPb03LIzn6g",
+      "sourceHandle": "448745-source-right",
+      "targetHandle": "yW7GrhPb03LIzn6g-target-left"
+    },
+    {
+      "source": "yW7GrhPb03LIzn6g",
+      "target": "yuPoWmuTHrOtGAF2",
+      "sourceHandle": "yW7GrhPb03LIzn6g-source-right",
+      "targetHandle": "yuPoWmuTHrOtGAF2-target-left"
+    },
+    {
+      "source": "yuPoWmuTHrOtGAF2",
+      "target": "dnj0BicSQzNwC2pe",
+      "sourceHandle": "yuPoWmuTHrOtGAF2-source-right",
+      "targetHandle": "dnj0BicSQzNwC2pe-target-left"
+    },
+    {
+      "source": "dnj0BicSQzNwC2pe",
+      "target": "kH1uZdyMvi76ZpYR",
+      "sourceHandle": "dnj0BicSQzNwC2pe-source-IF",
+      "targetHandle": "kH1uZdyMvi76ZpYR-target-left"
+    },
+    {
+      "source": "kH1uZdyMvi76ZpYR",
+      "target": "z79PHbRRRbOkn8aO",
+      "sourceHandle": "kH1uZdyMvi76ZpYR-source-right",
+      "targetHandle": "z79PHbRRRbOkn8aO-target-left"
+    },
+    {
+      "source": "kH1uZdyMvi76ZpYR",
+      "target": "yRUk99KQYdHZYhiG",
+      "sourceHandle": "kH1uZdyMvi76ZpYR-source-right",
+      "targetHandle": "yRUk99KQYdHZYhiG-target-left"
+    },
+    {
+      "source": "dnj0BicSQzNwC2pe",
+      "target": "yRUk99KQYdHZYhiG",
+      "sourceHandle": "dnj0BicSQzNwC2pe-source-ELSE",
+      "targetHandle": "yRUk99KQYdHZYhiG-target-left"
+    },
+    {
+      "source": "yW7GrhPb03LIzn6g",
+      "target": "yuPoWmuTHrOtGAF2",
+      "sourceHandle": "yW7GrhPb03LIzn6g-source_catch-right",
+      "targetHandle": "yuPoWmuTHrOtGAF2-target-left"
+    }
+  ],
+  "chatConfig": {
+    "welcomeText": "# 🎯 欢迎来到销售陪练训练营！\n\n你好！我是你的专属销售训练教练，一位拥有20年跨行业销售经验的实战导师。我将通过科学化的陪练方法，帮助你实现销售技能的突破性提升！\n\n## 🚀 我能为你提供什么？\n\n### 🎭 **沉浸式实战演练**\n- 我会瞬间变身为各种类型的真实客户\n- 100%还原真实销售场景的压力和挑战\n- 根据你的表现实时调整训练难度\n\n### 📊 **精准能力诊断**\n- 从话术、时机、情商、逻辑四维度科学评分\n- 识别你未察觉的销售盲点\n- 提供数据化的改进建议\n\n### 🎯 **个性化训练方案**\n- 基于你的产品、客户和挑战定制专属训练\n- 自适应调整难度，确保最佳学习效果\n- 设计渐进式技能提升路径\n\n## 🎮 训练模式选择\n\n📈 **快速诊断模式**：发现问题，精准定位薄弱环节\n🏋️ **专项训练模式**：针对特定技能进行强化练习  \n⚔️ **实战演练模式**：完整销售流程的综合挑战\n\n## 🔧 实用工具随时调用\n\n训练过程中，你随时可以：\n- 说\"给我话术\" - 获得高效应对话术\n- 说\"怎么应对\" - 学习异议处理方法\n- 说\"客户想法\" - 了解客户真实心理\n- 说\"救命\" - 获得紧急指导支持\n\n## 🎯 开始你的专属训练\n\n为了给你提供最精准的陪练体验，我需要先了解你的具体情况。接下来我会给你一个信息收集表单，请完整填写所有内容，这样我就能：\n\n✅ 立即为你生成专属训练方案\n✅ 设计最符合你实际情况的客户角色\n✅ 提供最有针对性的技能提升建议\n\n准备好开始你的销售技能突破之旅了吗？让我们马上开始！ 🚀\n### [开始训练]\n[结束训练]\n [重新开始]\n",
+    "variables": [
+      {
+        "id": "bwlaha",
+        "key": "对话轮数",
+        "label": "对话轮数",
+        "type": "custom",
+        "description": "",
+        "required": false,
+        "valueType": "number",
+        "list": [
+          {
+            "value": "",
+            "label": ""
+          }
+        ],
+        "defaultValue": 0,
+        "enums": [
+          {
+            "value": "",
+            "label": ""
+          }
+        ],
+        "icon": "core/workflow/inputType/customVariable"
+      },
+      {
+        "id": "3ge7ap",
+        "key": "用户信息",
+        "label": "用户信息",
+        "type": "custom",
+        "description": "",
+        "required": false,
+        "valueType": "string",
+        "list": [
+          {
+            "value": "",
+            "label": ""
+          }
+        ],
+        "defaultValue": " ",
+        "enums": [
+          {
+            "value": "",
+            "label": ""
+          }
+        ],
+        "icon": "core/workflow/inputType/customVariable"
+      }
+    ],
+    "whisperConfig": {
+      "open": true,
+      "autoSend": false,
+      "autoTTSResponse": false
+    },
+    "scheduledTriggerConfig": {
+      "cronString": "",
+      "timezone": "Asia/Shanghai",
+      "defaultPrompt": ""
+    },
+    "_id": "6836ae3e789ca626baf3db15"
+  }
+}

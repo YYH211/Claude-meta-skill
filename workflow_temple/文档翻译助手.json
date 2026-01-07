@@ -1,0 +1,1208 @@
+﻿{
+  "nodes": [
+    {
+      "nodeId": "userGuide",
+      "name": "common:core.module.template.system_config",
+      "intro": "common:core.module.template.system_config_info",
+      "avatar": "core/workflow/template/systemConfig",
+      "flowNodeType": "userGuide",
+      "position": {
+        "x": -482.9892494293721,
+        "y": -527.7567504848066
+      },
+      "version": "481",
+      "inputs": [
+        {
+          "key": "welcomeText",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "string",
+          "label": "core.app.Welcome Text",
+          "value": ""
+        },
+        {
+          "key": "variables",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "any",
+          "label": "core.app.Chat Variable",
+          "value": []
+        },
+        {
+          "key": "questionGuide",
+          "valueType": "any",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "core.app.Question Guide",
+          "value": {
+            "open": false
+          }
+        },
+        {
+          "key": "tts",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "any",
+          "label": "",
+          "value": {
+            "type": "web"
+          }
+        },
+        {
+          "key": "whisper",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "any",
+          "label": "",
+          "value": {
+            "open": false,
+            "autoSend": false,
+            "autoTTSResponse": false
+          }
+        },
+        {
+          "key": "scheduleTrigger",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "any",
+          "label": "",
+          "value": null
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "nodeId": "448745",
+      "name": "common:core.module.template.work_start",
+      "intro": "",
+      "avatar": "core/workflow/template/workflowStart",
+      "flowNodeType": "workflowStart",
+      "position": {
+        "x": -412.4892494293721,
+        "y": -1199.7567504848066
+      },
+      "version": "481",
+      "inputs": [
+        {
+          "key": "userChatInput",
+          "renderTypeList": [
+            "reference",
+            "textarea"
+          ],
+          "valueType": "string",
+          "label": "workflow:user_question",
+          "required": true,
+          "toolDescription": "用户问题",
+          "debugLabel": ""
+        }
+      ],
+      "outputs": [
+        {
+          "id": "userChatInput",
+          "key": "userChatInput",
+          "label": "common:core.module.input.label.user question",
+          "type": "static",
+          "valueType": "string",
+          "description": ""
+        },
+        {
+          "id": "userFiles",
+          "key": "userFiles",
+          "label": "app:workflow.user_file_input",
+          "description": "app:workflow.user_file_input_desc",
+          "type": "static",
+          "valueType": "arrayString"
+        }
+      ]
+    },
+    {
+      "nodeId": "s33LKY1XHiHJ0CEe",
+      "name": "判断器",
+      "intro": "根据一定的条件，执行不同的分支。",
+      "avatar": "core/workflow/template/ifelse",
+      "flowNodeType": "ifElseNode",
+      "showStatus": true,
+      "position": {
+        "x": 78.01075057062792,
+        "y": -1092.7567504848066
+      },
+      "inputs": [
+        {
+          "key": "ifElseList",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "any",
+          "label": "",
+          "value": [
+            {
+              "condition": "AND",
+              "list": [
+                {
+                  "variable": [
+                    "448745",
+                    "userFiles"
+                  ],
+                  "condition": "isNotEmpty",
+                  "valueType": "input"
+                }
+              ]
+            }
+          ],
+          "debugLabel": "",
+          "toolDescription": ""
+        }
+      ],
+      "outputs": [
+        {
+          "id": "ifElseResult",
+          "key": "ifElseResult",
+          "label": "workflow:judgment_result",
+          "valueType": "string",
+          "type": "static",
+          "valueDesc": "",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "nodeId": "lmKNUIo6zF0gJlyN",
+      "name": "指定回复#2",
+      "intro": "该模块可以直接回复一段指定的内容。常用于引导、提示。非字符串内容传入时，会转成字符串进行输出。",
+      "avatar": "core/workflow/template/reply",
+      "flowNodeType": "answerNode",
+      "position": {
+        "x": 2952.510750570628,
+        "y": -1567.7567504848066
+      },
+      "inputs": [
+        {
+          "key": "text",
+          "renderTypeList": [
+            "textarea",
+            "reference"
+          ],
+          "valueType": "any",
+          "required": true,
+          "label": "common:core.module.input.label.Response content",
+          "description": "common:core.module.input.description.Response content",
+          "placeholder": "common:core.module.input.description.Response content",
+          "value": "##请上传需要翻译的文档！",
+          "debugLabel": "",
+          "toolDescription": "",
+          "isRichText": false,
+          "maxLength": 100000
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "nodeId": "gtphPVdtyu10g8tm",
+      "parentNodeId": "h7T3qwb6jiIAKCFS",
+      "name": "文档解析#2",
+      "intro": "解析本轮对话上传的文档，并返回对应文档内容",
+      "avatar": "core/workflow/template/readFiles",
+      "flowNodeType": "readFiles",
+      "showStatus": true,
+      "position": {
+        "x": 1523.7329265299518,
+        "y": -479.42370184659285
+      },
+      "version": "4.9.2",
+      "inputs": [
+        {
+          "key": "fileUrlList",
+          "renderTypeList": [
+            "reference"
+          ],
+          "valueType": "arrayString",
+          "label": "app:workflow.file_url",
+          "required": true,
+          "value": [
+            [
+              "dTW2pEC5eL0PakRo",
+              "loopStartInput"
+            ]
+          ],
+          "debugLabel": "",
+          "toolDescription": ""
+        }
+      ],
+      "outputs": [
+        {
+          "id": "system_text",
+          "key": "system_text",
+          "label": "app:workflow.read_files_result",
+          "description": "文档原文，由文件名和文档内容组成，多个文件之间通过横线隔开。",
+          "valueType": "string",
+          "type": "static",
+          "valueDesc": ""
+        },
+        {
+          "id": "system_rawResponse",
+          "key": "system_rawResponse",
+          "label": "workflow:raw_response",
+          "description": "工具的原始响应",
+          "valueType": "arrayObject",
+          "type": "static"
+        },
+        {
+          "id": "system_error_text",
+          "key": "system_error_text",
+          "type": "error",
+          "valueType": "string",
+          "label": "workflow:error_text",
+          "valueDesc": "",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "nodeId": "he20inUxDWAKiJTm",
+      "parentNodeId": "h7T3qwb6jiIAKCFS",
+      "name": "翻译#3",
+      "intro": "AI 大模型对话",
+      "avatar": "core/workflow/template/aiChat",
+      "flowNodeType": "chatNode",
+      "showStatus": true,
+      "position": {
+        "x": 2167.732926529952,
+        "y": -880.4237018465928
+      },
+      "version": "4.9.7",
+      "inputs": [
+        {
+          "key": "model",
+          "renderTypeList": [
+            "settingLLMModel",
+            "reference"
+          ],
+          "label": "common:core.module.input.label.aiModel",
+          "valueType": "string",
+          "value": "gpt-4.1",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "temperature",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "number",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "maxToken",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "number",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "isResponseAnswerText",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "value": false,
+          "valueType": "boolean",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatQuoteRole",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "value": "system",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "quoteTemplate",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "quotePrompt",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatVision",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "boolean",
+          "value": true,
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatReasoning",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "boolean",
+          "value": true,
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatTopP",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "number",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatStopSign",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatResponseFormat",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatJsonSchema",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "systemPrompt",
+          "renderTypeList": [
+            "textarea",
+            "reference"
+          ],
+          "max": 3000,
+          "valueType": "string",
+          "label": "common:core.ai.Prompt",
+          "description": "common:core.app.tip.systemPromptTip",
+          "placeholder": "common:core.app.tip.chatNodeSystemPromptTip",
+          "value": "Role  \n文档内容翻译专家\n如果有图片链接存在，图片链接以Markdown格式返回，并且补全链接，使用根地址https://cloud.fastgpt.io补全链接缺失的根地址\n\nBackground  \n具备丰富的多语言翻译经验，精通文档内容的精准转换，能够根据指定目标语言高效完成翻译任务。熟悉各类文档结构和语境，确保译文准确、流畅且符合目标语言习惯。\n\nAttention  \n- 仅输出翻译后的译文，不包含任何解释或原文内容\n- 严格按照指定目标语言进行翻译\n- 保证译文语法、用词和表达符合目标语言标准\n- 不添加任何多余信息或格式\n- 保持原文内容的完整性和准确性\n\nProfile  \n- 专注于文档内容的高质量翻译\n- 熟悉多种语言的语法和表达习惯\n- 能够处理各类文档结构和专业术语\n- 具备快速理解和转换复杂内容的能力\n- 注重细节，确保译文无误\n\nSkills  \n1. 精通多语言文档翻译，能够准确转换各种内容\n2. 熟练掌握目标语言的语法、词汇和表达方式\n3. 能够识别并处理文档中的专业术语和特殊表达\n4. 具备高效处理大段文本的能力，保证翻译速度与质量\n5. 善于保持原文逻辑和结构，确保译文连贯一致\n\nGoals  \n1. 将文档内容准确无误地翻译为指定目标语言\n2. 保证译文语法和表达符合目标语言标准\n3. 保持原文信息的完整性和准确性\n4. 输出仅包含翻译后的内容，无任何附加说明\n5. 提升翻译效率，缩短处理时间\n\nConstrains  \n1. 仅输出翻译后的译文，不包含原文或解释\n2. 严格按照{{$VARIABLE_NODE_ID.meyXbw2h$}}目标语言进行翻译\n3. 不允许添加、删减或修改原文信息\n4. 保证译文无语法错误和表达不当\n5. 不输出任何格式化或多余内容\n\nWorkflow  \n1. 接收并识别待翻译的文档内容\n2. 分析原文结构和语境，理解核心信息\n3. 按照{{$VARIABLE_NODE_ID.meyXbw2h$}}目标语言标准进行翻译\n4. 检查译文的语法、用词和表达准确性\n5. 输出仅包含翻译后的完整译文\n\nOutputFormat  \n1. 仅输出翻译后的内容，无任何原文或说明\n2. 保持译文段落结构与原文一致\n3. 保证译文内容清晰、连贯、无格式化符号\n\nSuggestions  \n1. 持续学习目标语言的最新表达和用法，提升翻译质量\n2. 定期复盘翻译案例，优化处理复杂语境和专业术语的方法\n3. 建立高效的译文校对流程，确保输出内容无误\n4. 深入研究文档结构，提升对不同类型文档的适应能力\n5. 优化翻译工具和资源的使用，提高处理速度和准确性\n\nInitialization  \n在接收到文档内容后，立即识别目标语言{{$VARIABLE_NODE_ID.meyXbw2h$}}，分析原文结构，确保翻译过程高效、准确，仅输出翻译后的完整译文。",
+          "debugLabel": "",
+          "toolDescription": "",
+          "maxLength": 100000,
+          "isRichText": true
+        },
+        {
+          "key": "history",
+          "renderTypeList": [
+            "numberInput",
+            "reference"
+          ],
+          "valueType": "chatHistory",
+          "label": "common:core.module.input.label.chat history",
+          "description": "workflow:max_dialog_rounds",
+          "required": true,
+          "min": 0,
+          "max": 50,
+          "value": 6,
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "quoteQA",
+          "renderTypeList": [
+            "settingDatasetQuotePrompt"
+          ],
+          "label": "",
+          "debugLabel": "知识库引用",
+          "valueType": "datasetQuote",
+          "description": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "fileUrlList",
+          "renderTypeList": [
+            "reference",
+            "input"
+          ],
+          "label": "app:workflow.user_file_input",
+          "debugLabel": "文件链接",
+          "description": "app:workflow.user_file_input_desc",
+          "valueType": "arrayString",
+          "value": [],
+          "toolDescription": ""
+        },
+        {
+          "key": "userChatInput",
+          "renderTypeList": [
+            "reference",
+            "textarea"
+          ],
+          "valueType": "string",
+          "label": "workflow:user_question",
+          "toolDescription": "用户问题",
+          "required": true,
+          "value": "## 原文\n{{$gtphPVdtyu10g8tm.system_text$}}",
+          "debugLabel": "",
+          "selectedTypeIndex": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "history",
+          "key": "history",
+          "required": true,
+          "label": "common:core.module.output.label.New context",
+          "description": "将本次回复内容拼接上历史记录，作为新的上下文返回",
+          "valueType": "chatHistory",
+          "valueDesc": "{\n  obj: System | Human | AI;\n  value: string;\n}[]",
+          "type": "static"
+        },
+        {
+          "id": "answerText",
+          "key": "answerText",
+          "required": true,
+          "label": "common:core.module.output.label.Ai response content",
+          "description": "将在 stream 回复完毕后触发",
+          "valueType": "string",
+          "type": "static",
+          "valueDesc": ""
+        },
+        {
+          "id": "reasoningText",
+          "key": "reasoningText",
+          "required": false,
+          "label": "workflow:reasoning_text",
+          "valueType": "string",
+          "type": "static",
+          "invalid": true,
+          "valueDesc": "",
+          "description": ""
+        },
+        {
+          "id": "system_error_text",
+          "key": "system_error_text",
+          "type": "error",
+          "valueType": "string",
+          "label": "workflow:error_text",
+          "valueDesc": "",
+          "description": ""
+        }
+      ],
+      "catchError": false
+    },
+    {
+      "nodeId": "mOGN8DHK2QEb4rPj",
+      "parentNodeId": "h7T3qwb6jiIAKCFS",
+      "name": "Markdown 转翻译#3",
+      "intro": "将 Markdown 转成指定格式文件，返回的文件链接请及时下载。",
+      "avatar": "/api/system/plugin/tools/markdownTransform.svg",
+      "flowNodeType": "tool",
+      "showStatus": true,
+      "position": {
+        "x": 3739.732926529952,
+        "y": -505.92370184659285
+      },
+      "version": "",
+      "inputs": [
+        {
+          "key": "markdown",
+          "label": "Markdown 内容",
+          "renderTypeList": [
+            "input",
+            "reference"
+          ],
+          "valueType": "string",
+          "description": "要转换的 Markdown 内容",
+          "required": true,
+          "toolDescription": "要转换的 Markdown 内容",
+          "value": [
+            "mTrw2OE7BEC9q2wN",
+            "answerText"
+          ],
+          "selectedTypeIndex": 1
+        },
+        {
+          "key": "format",
+          "label": "转换格式",
+          "renderTypeList": [
+            "select",
+            "reference"
+          ],
+          "valueType": "string",
+          "description": "需要转换的格式，支持 xlsx 和 docx 和 pptx",
+          "required": true,
+          "toolDescription": "需要转换的格式，支持 xlsx 和 docx 和 pptx",
+          "list": [
+            {
+              "label": "xlsx",
+              "value": "xlsx"
+            },
+            {
+              "label": "docx",
+              "value": "docx"
+            },
+            {
+              "label": "pptx",
+              "value": "pptx"
+            }
+          ],
+          "value": "docx",
+          "selectedTypeIndex": 0
+        },
+        {
+          "key": "filename",
+          "label": "文件名",
+          "renderTypeList": [
+            "input",
+            "reference"
+          ],
+          "valueType": "string",
+          "description": "自定义文件名（不包含扩展名）",
+          "required": false,
+          "toolDescription": "自定义文件名（不包含扩展名）"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "url",
+          "type": "static",
+          "key": "url",
+          "valueType": "string",
+          "label": "文件链接"
+        },
+        {
+          "id": "system_error_text",
+          "key": "system_error_text",
+          "type": "error",
+          "valueType": "string",
+          "label": "workflow:error_text"
+        }
+      ],
+      "pluginId": "systemTool-markdownTransform",
+      "toolConfig": {
+        "systemTool": {
+          "toolId": "systemTool-markdownTransform"
+        }
+      },
+      "catchError": false
+    },
+    {
+      "nodeId": "f8psUrxo7X2cEqPi",
+      "parentNodeId": "h7T3qwb6jiIAKCFS",
+      "name": "指定回复#4",
+      "intro": "该模块可以直接回复一段指定的内容。常用于引导、提示。非字符串内容传入时，会转成字符串进行输出。",
+      "avatar": "core/workflow/template/reply",
+      "flowNodeType": "answerNode",
+      "position": {
+        "x": 4383.732926529952,
+        "y": -448.92370184659285
+      },
+      "inputs": [
+        {
+          "key": "text",
+          "renderTypeList": [
+            "textarea",
+            "reference"
+          ],
+          "valueType": "any",
+          "required": true,
+          "label": "common:core.module.input.label.Response content",
+          "description": "common:core.module.input.description.Response content",
+          "placeholder": "common:core.module.input.description.Response content",
+          "value": "#### 第{{$dTW2pEC5eL0PakRo.loopStartIndex$}}篇文档翻译完成~\n[点击此处下载翻译后的文档]({{$mOGN8DHK2QEb4rPj.url$}})\n***\n\n\n",
+          "debugLabel": "",
+          "toolDescription": "",
+          "isRichText": false,
+          "maxLength": 100000
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "nodeId": "h7T3qwb6jiIAKCFS",
+      "name": "批量执行",
+      "intro": "输入一个数组，遍历数组并将每一个数组元素作为输入元素，执行工作流。",
+      "avatar": "core/workflow/template/loop",
+      "flowNodeType": "loop",
+      "showStatus": true,
+      "position": {
+        "x": 914,
+        "y": -1207
+      },
+      "inputs": [
+        {
+          "key": "loopInputArray",
+          "renderTypeList": [
+            "reference"
+          ],
+          "valueType": "arrayString",
+          "required": true,
+          "label": "workflow:loop_input_array",
+          "value": [
+            [
+              "448745",
+              "userFiles"
+            ]
+          ],
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "childrenNodeIdList",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "arrayString",
+          "label": "",
+          "value": [
+            "gtphPVdtyu10g8tm",
+            "he20inUxDWAKiJTm",
+            "mOGN8DHK2QEb4rPj",
+            "f8psUrxo7X2cEqPi",
+            "dTW2pEC5eL0PakRo",
+            "bh7UHcWfZY9oSdbG",
+            "mTrw2OE7BEC9q2wN"
+          ]
+        },
+        {
+          "key": "nodeWidth",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "number",
+          "label": "",
+          "value": 4686
+        },
+        {
+          "key": "nodeHeight",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "number",
+          "label": "",
+          "value": 1284
+        },
+        {
+          "key": "loopNodeInputHeight",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "number",
+          "label": "",
+          "value": 83,
+          "debugLabel": "",
+          "toolDescription": ""
+        }
+      ],
+      "outputs": [
+        {
+          "id": "loopArray",
+          "key": "loopArray",
+          "label": "workflow:loop_result",
+          "type": "static",
+          "valueType": "arrayNumber",
+          "valueDesc": "",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "nodeId": "dTW2pEC5eL0PakRo",
+      "parentNodeId": "h7T3qwb6jiIAKCFS",
+      "name": "开始",
+      "avatar": "core/workflow/template/loopStart",
+      "flowNodeType": "loopStart",
+      "showStatus": false,
+      "position": {
+        "x": 983.7329265299519,
+        "y": -406.42370184659285
+      },
+      "inputs": [
+        {
+          "key": "loopStartInput",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "any",
+          "label": "",
+          "required": true,
+          "value": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "loopStartIndex",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "number",
+          "label": "workflow:Array_element_index",
+          "debugLabel": "",
+          "toolDescription": ""
+        }
+      ],
+      "outputs": [
+        {
+          "id": "loopStartIndex",
+          "key": "loopStartIndex",
+          "label": "workflow:Array_element_index",
+          "type": "static",
+          "valueType": "number",
+          "description": ""
+        },
+        {
+          "id": "loopStartInput",
+          "key": "loopStartInput",
+          "label": "数组元素",
+          "type": "static",
+          "valueType": "string"
+        }
+      ]
+    },
+    {
+      "nodeId": "bh7UHcWfZY9oSdbG",
+      "parentNodeId": "h7T3qwb6jiIAKCFS",
+      "name": "结束",
+      "avatar": "core/workflow/template/loopEnd",
+      "flowNodeType": "loopEnd",
+      "showStatus": false,
+      "position": {
+        "x": 5169.732926529952,
+        "y": -361.42370184659285
+      },
+      "inputs": [
+        {
+          "key": "loopEndInput",
+          "renderTypeList": [
+            "reference"
+          ],
+          "valueType": "any",
+          "label": "",
+          "required": true,
+          "value": [
+            "dTW2pEC5eL0PakRo",
+            "loopStartIndex"
+          ],
+          "debugLabel": "",
+          "toolDescription": ""
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "nodeId": "mTrw2OE7BEC9q2wN",
+      "parentNodeId": "h7T3qwb6jiIAKCFS",
+      "name": "Markdown排版",
+      "intro": "AI 大模型对话",
+      "avatar": "core/workflow/template/aiChat",
+      "flowNodeType": "chatNode",
+      "showStatus": true,
+      "position": {
+        "x": 2953.732926529952,
+        "y": -883.9237018465928
+      },
+      "version": "4.9.7",
+      "inputs": [
+        {
+          "key": "model",
+          "renderTypeList": [
+            "settingLLMModel",
+            "reference"
+          ],
+          "label": "common:core.module.input.label.aiModel",
+          "valueType": "string",
+          "value": "gpt-4.1",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "temperature",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "number",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "maxToken",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "number",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "isResponseAnswerText",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "value": false,
+          "valueType": "boolean",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatQuoteRole",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "value": "system",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "quoteTemplate",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "quotePrompt",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatVision",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "boolean",
+          "value": true,
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatReasoning",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "boolean",
+          "value": true,
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatTopP",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "number",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatStopSign",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatResponseFormat",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatJsonSchema",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "systemPrompt",
+          "renderTypeList": [
+            "textarea",
+            "reference"
+          ],
+          "max": 3000,
+          "valueType": "string",
+          "label": "common:core.ai.Prompt",
+          "description": "common:core.app.tip.systemPromptTip",
+          "placeholder": "common:core.app.tip.chatNodeSystemPromptTip",
+          "value": "Role  \nMarkdown文档排版专家\n\nBackground  \n你是一名精通Markdown语法的文档排版专家，具备丰富的文档整理和格式优化经验，能够将各类文档内容高效、准确地转化为结构化的Markdown格式，确保内容完整且排版美观。\n\nAttention  \n- 严格遵循Markdown语法规范，避免语法错误  \n- 保证文档内容的完整性，不遗漏任何信息  \n- 优化排版结构，提升可读性和美观性  \n- 针对不同类型内容选择合适的Markdown元素  \n- 保持输出内容的专业性和一致性  \n\nProfile  \n- 精通Markdown语法及其高级用法  \n- 具备多类型文档结构化排版经验  \n- 能快速识别并优化文档中的结构问题  \n- 注重细节，确保格式与内容高度一致  \n- 熟悉主流Markdown渲染环境的兼容性要求  \n\nSkills  \n1. 熟练掌握Markdown所有基础及扩展语法，包括标题、列表、表格、引用、代码块等  \n2. 能根据内容类型灵活选择最优Markdown排版方式  \n3. 具备文档结构分析与重组能力，提升内容条理性  \n4. 能识别并修正文档中的格式错误和排版瑕疵  \n5. 熟悉多平台Markdown渲染效果，确保输出兼容性  \n\nGoals  \n1. 将原始文档内容完整转化为标准Markdown格式  \n2. 优化文档结构，使内容层次分明、逻辑清晰  \n3. 保证所有信息无遗漏，内容准确传达  \n4. 提升文档的可读性和视觉美观度  \n5. 输出可直接用于各类Markdown编辑器和平台的高质量文档  \n\nConstrains  \n1. 不得遗漏或篡改原始文档中的任何内容  \n2. 严格遵循Markdown语法规范，避免格式错误  \n3. 不添加主观解释或无关内容  \n4. 保持内容结构与原文一致，合理分段与排版  \n5. 输出内容需兼容主流Markdown渲染环境，且严禁使用代码块包裹整个文档内容  \n\nWorkflow  \n1. 仔细阅读并分析原始文档内容，识别各类信息结构  \n2. 按照内容类型选择合适的Markdown语法元素进行排版  \n3. 逐段转化，确保每一部分内容完整且格式正确  \n4. 检查并优化整体结构，提升条理性和美观度  \n5. 最终复核，确保无遗漏、无语法错误，输出高质量Markdown文档  \n\nOutputFormat  \n1. 标题、段落、列表、表格、引用等均采用标准Markdown语法，且不得用代码块包裹整个文档  \n2. 保持内容原貌，合理分段，结构清晰  \n3. 若文档中存在图片链接，使用Markdown语法渲染图片，确保图片正常显示  \n\nSuggestions  \n1. 持续学习Markdown语法的最新扩展和最佳实践，提升排版能力  \n2. 定期复盘已完成文档，发现并改进排版细节  \n3. 针对不同内容类型建立标准化排版模板，提高效率和一致性  \n4. 关注主流Markdown渲染环境的兼容性变化，优化输出适配性  \n5. 深入研究图片、表格等复杂元素的Markdown渲染方式，提升文档表现力  \n\nInitialization  \n在接收到原始文档内容后，立即启动结构化分析流程，识别内容类型与层次，按标准Markdown语法逐步排版，确保内容完整、结构清晰、美观易读，图片链接使用Markdown语法渲染，严禁用代码块包裹整个文档，最终输出高质量Markdown文档。",
+          "debugLabel": "",
+          "toolDescription": "",
+          "maxLength": 100000,
+          "isRichText": true
+        },
+        {
+          "key": "history",
+          "renderTypeList": [
+            "numberInput",
+            "reference"
+          ],
+          "valueType": "chatHistory",
+          "label": "common:core.module.input.label.chat history",
+          "description": "workflow:max_dialog_rounds",
+          "required": true,
+          "min": 0,
+          "max": 50,
+          "value": 6,
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "quoteQA",
+          "renderTypeList": [
+            "settingDatasetQuotePrompt"
+          ],
+          "label": "",
+          "debugLabel": "知识库引用",
+          "valueType": "datasetQuote",
+          "description": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "fileUrlList",
+          "renderTypeList": [
+            "reference",
+            "input"
+          ],
+          "label": "app:workflow.user_file_input",
+          "debugLabel": "文件链接",
+          "description": "app:workflow.user_file_input_desc",
+          "valueType": "arrayString",
+          "value": [],
+          "toolDescription": ""
+        },
+        {
+          "key": "userChatInput",
+          "renderTypeList": [
+            "reference",
+            "textarea"
+          ],
+          "valueType": "string",
+          "label": "workflow:user_question",
+          "toolDescription": "用户问题",
+          "required": true,
+          "value": "需要转成Markdown语法的文档内容：{{$he20inUxDWAKiJTm.answerText$}}\n\n不需要转成Markdown语法的文档内容，但是可以参考里面的排版格式：{{$gtphPVdtyu10g8tm.system_text$}}",
+          "selectedTypeIndex": 1,
+          "debugLabel": ""
+        }
+      ],
+      "outputs": [
+        {
+          "id": "history",
+          "key": "history",
+          "required": true,
+          "label": "common:core.module.output.label.New context",
+          "description": "将本次回复内容拼接上历史记录，作为新的上下文返回",
+          "valueType": "chatHistory",
+          "valueDesc": "{\n  obj: System | Human | AI;\n  value: string;\n}[]",
+          "type": "static"
+        },
+        {
+          "id": "answerText",
+          "key": "answerText",
+          "required": true,
+          "label": "common:core.module.output.label.Ai response content",
+          "description": "将在 stream 回复完毕后触发",
+          "valueType": "string",
+          "type": "static",
+          "valueDesc": ""
+        },
+        {
+          "id": "reasoningText",
+          "key": "reasoningText",
+          "required": false,
+          "label": "workflow:reasoning_text",
+          "valueType": "string",
+          "type": "static",
+          "invalid": true,
+          "valueDesc": "",
+          "description": ""
+        },
+        {
+          "id": "system_error_text",
+          "key": "system_error_text",
+          "type": "error",
+          "valueType": "string",
+          "label": "workflow:error_text",
+          "valueDesc": "",
+          "description": ""
+        }
+      ],
+      "catchError": false
+    }
+  ],
+  "edges": [
+    {
+      "source": "448745",
+      "target": "s33LKY1XHiHJ0CEe",
+      "sourceHandle": "448745-source-right",
+      "targetHandle": "s33LKY1XHiHJ0CEe-target-left"
+    },
+    {
+      "source": "s33LKY1XHiHJ0CEe",
+      "target": "lmKNUIo6zF0gJlyN",
+      "sourceHandle": "s33LKY1XHiHJ0CEe-source-ELSE",
+      "targetHandle": "lmKNUIo6zF0gJlyN-target-left"
+    },
+    {
+      "source": "s33LKY1XHiHJ0CEe",
+      "target": "h7T3qwb6jiIAKCFS",
+      "sourceHandle": "s33LKY1XHiHJ0CEe-source-IF",
+      "targetHandle": "h7T3qwb6jiIAKCFS-target-left"
+    },
+    {
+      "source": "gtphPVdtyu10g8tm",
+      "target": "he20inUxDWAKiJTm",
+      "sourceHandle": "gtphPVdtyu10g8tm-source-right",
+      "targetHandle": "he20inUxDWAKiJTm-target-left"
+    },
+    {
+      "source": "mOGN8DHK2QEb4rPj",
+      "target": "f8psUrxo7X2cEqPi",
+      "sourceHandle": "mOGN8DHK2QEb4rPj-source-right",
+      "targetHandle": "f8psUrxo7X2cEqPi-target-left"
+    },
+    {
+      "source": "dTW2pEC5eL0PakRo",
+      "target": "gtphPVdtyu10g8tm",
+      "sourceHandle": "dTW2pEC5eL0PakRo-source-right",
+      "targetHandle": "gtphPVdtyu10g8tm-target-left"
+    },
+    {
+      "source": "f8psUrxo7X2cEqPi",
+      "target": "bh7UHcWfZY9oSdbG",
+      "sourceHandle": "f8psUrxo7X2cEqPi-source-right",
+      "targetHandle": "bh7UHcWfZY9oSdbG-target-left"
+    },
+    {
+      "source": "he20inUxDWAKiJTm",
+      "target": "mTrw2OE7BEC9q2wN",
+      "sourceHandle": "he20inUxDWAKiJTm-source-right",
+      "targetHandle": "mTrw2OE7BEC9q2wN-target-left"
+    },
+    {
+      "source": "mTrw2OE7BEC9q2wN",
+      "target": "mOGN8DHK2QEb4rPj",
+      "sourceHandle": "mTrw2OE7BEC9q2wN-source-right",
+      "targetHandle": "mOGN8DHK2QEb4rPj-target-left"
+    }
+  ],
+  "chatConfig": {
+    "welcomeText": "您好！请上传您需要翻译的文档，并指定目标语言。我将为您提供准确、标准、无多余内容的高质量译文，同时保留图片内容，确保翻译结果符合您的需求。\n******\n#### 📎 **请上传待翻译的文件**\n> 💡 支持格式：PDF、Word\n>  📄 最大文件数量：15份\n> ⚡ 上传后即可开启翻译并提供译文的下载链接\n> 注意：不支持文档中复杂的排版格式",
+    "variables": [
+      {
+        "key": "meyXbw2h",
+        "label": "译文语言",
+        "type": "select",
+        "description": "",
+        "required": true,
+        "valueType": "string",
+        "timeType": "point",
+        "list": [
+          {
+            "value": "中文",
+            "label": "中文"
+          },
+          {
+            "label": "英文",
+            "value": "英文"
+          },
+          {
+            "label": "日文",
+            "value": "日文"
+          },
+          {
+            "label": "法文",
+            "value": "法文"
+          },
+          {
+            "label": "德文",
+            "value": "德文"
+          },
+          {
+            "label": "朝鲜文",
+            "value": "朝鲜文"
+          }
+        ],
+        "defaultValue": "英文",
+        "icon": "core/workflow/inputType/option"
+      }
+    ],
+    "scheduledTriggerConfig": {
+      "cronString": "",
+      "timezone": "Asia/Shanghai",
+      "defaultPrompt": ""
+    },
+    "fileSelectConfig": {
+      "canSelectFile": true,
+      "canSelectImg": false,
+      "maxFiles": 10,
+      "customPdfParse": true
+    },
+    "_id": "68d39f6c2cf5407b3066eb81"
+  }
+}

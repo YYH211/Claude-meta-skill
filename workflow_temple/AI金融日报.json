@@ -1,0 +1,3053 @@
+﻿{
+  "nodes": [
+    {
+      "nodeId": "userGuide",
+      "name": "系统配置",
+      "intro": "",
+      "avatar": "core/workflow/template/systemConfig",
+      "flowNodeType": "userGuide",
+      "position": {
+        "x": -609.1478200664367,
+        "y": -255.28040221964125
+      },
+      "version": "481",
+      "inputs": [],
+      "outputs": []
+    },
+    {
+      "nodeId": "workflowStartNodeId",
+      "name": "流程开始",
+      "intro": "",
+      "avatar": "core/workflow/template/workflowStart",
+      "flowNodeType": "workflowStart",
+      "position": {
+        "x": -134.30944270708278,
+        "y": -214.63254695707496
+      },
+      "version": "481",
+      "inputs": [
+        {
+          "key": "userChatInput",
+          "renderTypeList": [
+            "reference",
+            "textarea"
+          ],
+          "valueType": "string",
+          "label": "workflow:user_question",
+          "toolDescription": "用户问题",
+          "required": true,
+          "debugLabel": ""
+        }
+      ],
+      "outputs": [
+        {
+          "id": "userChatInput",
+          "key": "userChatInput",
+          "label": "common:core.module.input.label.user question",
+          "type": "static",
+          "valueType": "string",
+          "description": ""
+        },
+        {
+          "id": "userFiles",
+          "key": "userFiles",
+          "label": "app:workflow.user_file_input",
+          "description": "app:workflow.user_file_input_desc",
+          "type": "static",
+          "valueType": "arrayString"
+        }
+      ]
+    },
+    {
+      "nodeId": "csrosJmtqq3U",
+      "name": "时间过滤1",
+      "intro": "workflow:template.ai_chat_intro",
+      "avatar": "core/workflow/template/aiChat",
+      "flowNodeType": "chatNode",
+      "showStatus": true,
+      "position": {
+        "x": 333.88463128601927,
+        "y": -255.28040221964125
+      },
+      "version": "4.9.7",
+      "inputs": [
+        {
+          "key": "model",
+          "renderTypeList": [
+            "settingLLMModel",
+            "reference"
+          ],
+          "label": "common:core.module.input.label.aiModel",
+          "valueType": "string",
+          "value": "deepseek-chat",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "temperature",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "number",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "maxToken",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "number",
+          "value": 8000,
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "isResponseAnswerText",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "value": false,
+          "valueType": "boolean",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatQuoteRole",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "value": "system",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "quoteTemplate",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "quotePrompt",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatVision",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "boolean",
+          "value": true,
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatReasoning",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "boolean",
+          "value": false,
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatTopP",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "number",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatStopSign",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatResponseFormat",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatJsonSchema",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "systemPrompt",
+          "renderTypeList": [
+            "textarea",
+            "reference"
+          ],
+          "max": 3000,
+          "valueType": "string",
+          "label": "common:core.ai.Prompt",
+          "description": "common:core.app.tip.systemPromptTip",
+          "placeholder": "common:core.app.tip.chatNodeSystemPromptTip",
+          "value": "# 角色\n你是全面精准的投资新闻数据处理专家，你擅长确保所有符合条件的新闻内容无一遗漏地完整输出，你能够系统性地处理并分析大量投资新闻数据，即使面对超过20条的符合条件内容，也能保证全部呈现。新闻内容的时间范围严格控制在：{{$utE8TlbcSIICH2i8.qLUQfhG0ILRX$}}，避免输出不在改范围内的新闻，必须输出所有在此范围内的新闻内容\n\n## 背景\n在投资决策过程中，完整的信息至关重要，缺失任何一条符合筛选条件的新闻都可能导致决策偏差或错失机会，因此需要一个能够保证数据完整性的解决方案。\n\n## 技能\n### 技能 1: 全量数据处理与完整性保障\n对所有输入的新闻数据进行彻底扫描和处理，确保每一条符合时间条件(前24小时内)的新闻都被识别并输出，不论总量多少。采用分批处理机制，即使面对大量数据也能保持完整性，绝不因数量限制而截断或省略任何符合条件的内容。\n\n### 技能 2: 结构化新闻内容输出\n将每条符合条件的新闻按照\"时间-主要内容-链接-分析\"的固定结构清晰呈现，使用编号系统(1、2、3...)确保用户能够清楚掌握新闻总量。对于超过10条的新闻集合，采用持续性输出策略，确保所有内容都能完整展示而不受系统限制。\n\n### 技能 3: 专业金融角度解析与全面性验证\n从专业金融视角对每条新闻进行简明扼要的分析，同时在完成所有内容输出后，执行完整性验证程序，检查是否有遗漏的符合条件新闻。如发现遗漏，立即补充输出。\n\n## 限制\n- 必须输出所有符合时间条件(前24小时内)的投资新闻，无论数量多少，绝不省略任何符合条件的内容\n- 严格按照\"时间-主要内容-链接-分析\"的格式要求进行输出，新闻的时间精准到分\n- 避免使用任何markdown语法格式及符号，保持纯文本输出\n- 仅输出新闻内容，避免输出其他任何无关内容",
+          "debugLabel": "",
+          "toolDescription": "",
+          "maxLength": 100000,
+          "isRichText": true
+        },
+        {
+          "key": "history",
+          "renderTypeList": [
+            "numberInput",
+            "reference"
+          ],
+          "valueType": "chatHistory",
+          "label": "common:core.module.input.label.chat history",
+          "description": "workflow:max_dialog_rounds",
+          "required": true,
+          "min": 0,
+          "max": 50,
+          "value": 0,
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "quoteQA",
+          "renderTypeList": [
+            "settingDatasetQuotePrompt"
+          ],
+          "label": "",
+          "debugLabel": "知识库引用",
+          "description": "",
+          "valueType": "datasetQuote",
+          "toolDescription": ""
+        },
+        {
+          "key": "fileUrlList",
+          "renderTypeList": [
+            "reference",
+            "input"
+          ],
+          "label": "app:workflow.user_file_input",
+          "debugLabel": "文件链接",
+          "description": "app:workflow.user_file_input_desc",
+          "valueType": "arrayString",
+          "value": [],
+          "toolDescription": ""
+        },
+        {
+          "key": "userChatInput",
+          "renderTypeList": [
+            "reference",
+            "textarea"
+          ],
+          "valueType": "string",
+          "label": "workflow:user_question",
+          "toolDescription": "用户问题",
+          "required": true,
+          "value": "新闻内容的时间范围严格控制在：{{$utE8TlbcSIICH2i8.qLUQfhG0ILRX$}}\n并确保输出的新闻与投资融资相关，不相关的新闻请不要输出\n用户提供的新闻内容：{{$rHOdX8BvPif1BIGp.result$}}\n",
+          "debugLabel": "",
+          "selectedTypeIndex": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "history",
+          "key": "history",
+          "required": true,
+          "label": "common:core.module.output.label.New context",
+          "description": "将本次回复内容拼接上历史记录，作为新的上下文返回",
+          "valueType": "chatHistory",
+          "valueDesc": "{\n  obj: System | Human | AI;\n  value: string;\n}[]",
+          "type": "static"
+        },
+        {
+          "id": "answerText",
+          "key": "answerText",
+          "required": true,
+          "label": "common:core.module.output.label.Ai response content",
+          "description": "将在 stream 回复完毕后触发",
+          "valueType": "string",
+          "type": "static"
+        },
+        {
+          "id": "reasoningText",
+          "key": "reasoningText",
+          "required": false,
+          "label": "workflow:reasoning_text",
+          "valueType": "string",
+          "type": "static",
+          "invalid": true,
+          "description": ""
+        },
+        {
+          "id": "system_error_text",
+          "key": "system_error_text",
+          "type": "error",
+          "valueType": "string",
+          "label": "workflow:error_text",
+          "description": ""
+        }
+      ],
+      "isFolded": false,
+      "catchError": false
+    },
+    {
+      "nodeId": "rHOdX8BvPif1BIGp",
+      "name": "投资界",
+      "intro": "可获取一个网页链接内容，并以 Markdown 格式输出，仅支持获取静态网站。",
+      "avatar": "core/workflow/template/fetchUrl",
+      "flowNodeType": "pluginModule",
+      "showStatus": true,
+      "position": {
+        "x": 342.69130040338405,
+        "y": -359.09560423966417
+      },
+      "version": "0.1.0",
+      "inputs": [
+        {
+          "key": "system_forbid_stream",
+          "renderTypeList": [
+            "switch"
+          ],
+          "valueType": "boolean",
+          "label": "禁用流输出",
+          "description": "强制设置嵌套运行的应用，均以非流模式运行",
+          "value": false,
+          "valueDesc": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "renderTypeList": [
+            "input",
+            "reference"
+          ],
+          "selectedTypeIndex": 0,
+          "valueType": "string",
+          "key": "url",
+          "label": "url",
+          "description": "需要读取的网页链接",
+          "required": true,
+          "toolDescription": "需要读取的网页链接",
+          "list": [],
+          "defaultValue": "",
+          "value": "https://www.pedaily.cn/vcpeevent/",
+          "canEdit": false,
+          "valueDesc": "",
+          "debugLabel": ""
+        }
+      ],
+      "outputs": [
+        {
+          "id": "result",
+          "type": "static",
+          "key": "result",
+          "valueType": "string",
+          "label": "result",
+          "description": "",
+          "valueDesc": ""
+        }
+      ],
+      "isFolded": true,
+      "pluginId": "community-fetchUrl",
+      "toolConfig": {
+        "systemTool": {
+          "toolId": "systemTool-fetchUrl"
+        }
+      },
+      "catchError": false
+    },
+    {
+      "nodeId": "w8n7ftUHFhKT6z0N",
+      "name": "新浪财经",
+      "intro": "可获取一个网页链接内容，并以 Markdown 格式输出，仅支持获取静态网站。",
+      "avatar": "core/workflow/template/fetchUrl",
+      "flowNodeType": "pluginModule",
+      "showStatus": true,
+      "position": {
+        "x": 1097.3868594308756,
+        "y": -359.09560423966417
+      },
+      "version": "0.1.0",
+      "inputs": [
+        {
+          "key": "system_forbid_stream",
+          "renderTypeList": [
+            "switch"
+          ],
+          "valueType": "boolean",
+          "label": "禁用流输出",
+          "description": "强制设置嵌套运行的应用，均以非流模式运行",
+          "value": false,
+          "valueDesc": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "renderTypeList": [
+            "input",
+            "reference"
+          ],
+          "selectedTypeIndex": 0,
+          "valueType": "string",
+          "key": "url",
+          "label": "url",
+          "description": "需要读取的网页链接",
+          "required": true,
+          "toolDescription": "需要读取的网页链接",
+          "list": [],
+          "defaultValue": "",
+          "value": "https://tech.sina.com.cn/chuangshiji/",
+          "canEdit": false,
+          "valueDesc": "",
+          "debugLabel": ""
+        }
+      ],
+      "outputs": [
+        {
+          "id": "result",
+          "type": "static",
+          "key": "result",
+          "valueType": "string",
+          "label": "result",
+          "description": "",
+          "valueDesc": ""
+        }
+      ],
+      "isFolded": true,
+      "pluginId": "community-fetchUrl",
+      "toolConfig": {
+        "systemTool": {
+          "toolId": "systemTool-fetchUrl"
+        }
+      },
+      "catchError": false
+    },
+    {
+      "nodeId": "v2WSaR5baSWYJgh9",
+      "name": "博查全网搜索——种子轮融资",
+      "intro": "可以发出一个 HTTP 请求，实现更为复杂的操作（联网搜索、数据库查询等）",
+      "avatar": "core/workflow/template/httpRequest",
+      "flowNodeType": "httpRequest468",
+      "showStatus": true,
+      "position": {
+        "x": 2593.4934668144447,
+        "y": -350.6738215033106
+      },
+      "version": "481",
+      "inputs": [
+        {
+          "key": "system_addInputParam",
+          "renderTypeList": [
+            "addInputParam"
+          ],
+          "valueType": "dynamic",
+          "label": "",
+          "required": false,
+          "description": "common:core.module.input.description.HTTP Dynamic Input",
+          "customInputConfig": {
+            "selectValueTypeList": [
+              "string",
+              "number",
+              "boolean",
+              "object",
+              "arrayString",
+              "arrayNumber",
+              "arrayBoolean",
+              "arrayObject",
+              "arrayAny",
+              "any",
+              "chatHistory",
+              "datasetQuote",
+              "dynamic",
+              "selectDataset",
+              "selectApp"
+            ],
+            "showDescription": false,
+            "showDefaultValue": true
+          },
+          "valueDesc": "",
+          "debugLabel": "",
+          "toolDescription": "",
+          "deprecated": false
+        },
+        {
+          "key": "system_httpMethod",
+          "renderTypeList": [
+            "custom"
+          ],
+          "valueType": "string",
+          "label": "",
+          "value": "POST",
+          "required": true,
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "system_httpTimeout",
+          "renderTypeList": [
+            "custom"
+          ],
+          "valueType": "number",
+          "label": "",
+          "value": 30,
+          "min": 5,
+          "max": 600,
+          "required": true,
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "system_httpReqUrl",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "string",
+          "label": "",
+          "description": "common:core.module.input.description.Http Request Url",
+          "placeholder": "https://api.ai.com/getInventory",
+          "required": false,
+          "value": "https://api.bochaai.com/v1/web-search",
+          "valueDesc": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "system_header_secret",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "object",
+          "label": "",
+          "required": false,
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "system_httpHeader",
+          "renderTypeList": [
+            "custom"
+          ],
+          "valueType": "any",
+          "value": [
+            {
+              "key": "Authorization",
+              "type": "string",
+              "value": "Bearer sk-6e6bab4f37054c7abf097430e1e0eaae"
+            },
+            {
+              "key": "Content-Type",
+              "type": "string",
+              "value": "application/json"
+            }
+          ],
+          "label": "",
+          "description": "common:core.module.input.description.Http Request Header",
+          "placeholder": "common:core.module.input.description.Http Request Header",
+          "required": false,
+          "valueDesc": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "system_httpParams",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "any",
+          "value": [],
+          "label": "",
+          "required": false,
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "system_httpJsonBody",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "any",
+          "value": "",
+          "label": "",
+          "required": false,
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "system_httpFormBody",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "any",
+          "value": [
+            {
+              "key": "count",
+              "type": "string",
+              "value": "10"
+            },
+            {
+              "key": "freshness",
+              "type": "string",
+              "value": "{{$utE8TlbcSIICH2i8.qLUQfhG0ILRX$}}"
+            },
+            {
+              "key": "query",
+              "type": "string",
+              "value": "种子轮融资"
+            },
+            {
+              "key": "summary",
+              "type": "string",
+              "value": "true"
+            }
+          ],
+          "label": "",
+          "required": false,
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "system_httpContentType",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "string",
+          "value": "form-data",
+          "label": "",
+          "required": false,
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "renderTypeList": [
+            "reference"
+          ],
+          "valueType": "string",
+          "canEdit": true,
+          "key": "query",
+          "label": "query",
+          "customInputConfig": {
+            "selectValueTypeList": [
+              "string",
+              "number",
+              "boolean",
+              "object",
+              "arrayString",
+              "arrayNumber",
+              "arrayBoolean",
+              "arrayObject",
+              "arrayAny",
+              "any",
+              "chatHistory",
+              "datasetQuote",
+              "dynamic",
+              "selectDataset",
+              "selectApp"
+            ],
+            "showDescription": false,
+            "showDefaultValue": true
+          },
+          "required": true,
+          "value": [
+            "workflowStartNodeId",
+            "userChatInput"
+          ]
+        }
+      ],
+      "outputs": [
+        {
+          "id": "httpRawResponse",
+          "key": "httpRawResponse",
+          "required": true,
+          "label": "workflow:raw_response",
+          "description": "HTTP请求的原始响应。只能接受字符串或JSON类型响应数据。",
+          "valueType": "any",
+          "type": "static"
+        },
+        {
+          "id": "error",
+          "key": "error",
+          "label": "workflow:error_text",
+          "description": "HTTP请求错误信息，成功时返回空",
+          "valueType": "string",
+          "type": "error"
+        },
+        {
+          "id": "system_addOutputParam",
+          "key": "system_addOutputParam",
+          "type": "dynamic",
+          "valueType": "dynamic",
+          "label": "输出字段提取",
+          "customFieldConfig": {
+            "selectValueTypeList": [
+              "string",
+              "number",
+              "boolean",
+              "object",
+              "arrayString",
+              "arrayNumber",
+              "arrayBoolean",
+              "arrayObject",
+              "arrayAny",
+              "any",
+              "chatHistory",
+              "datasetQuote",
+              "dynamic",
+              "selectDataset",
+              "selectApp"
+            ],
+            "showDescription": false,
+            "showDefaultValue": false
+          },
+          "description": "可以通过 JSONPath 语法来提取响应值中的指定字段",
+          "valueDesc": ""
+        },
+        {
+          "id": "ryAiKXjjZsUYRPqF",
+          "valueType": "string",
+          "type": "dynamic",
+          "key": "$.data.webPages.value",
+          "label": "$.data.webPages.value"
+        }
+      ],
+      "isFolded": true,
+      "catchError": true
+    },
+    {
+      "nodeId": "sSPAFWISo8ghVNb2",
+      "name": "36kr",
+      "intro": "可获取一个网页链接内容，并以 Markdown 格式输出，仅支持获取静态网站。",
+      "avatar": "core/workflow/template/fetchUrl",
+      "flowNodeType": "pluginModule",
+      "showStatus": true,
+      "position": {
+        "x": 1858.7833363294146,
+        "y": -359.09560423966417
+      },
+      "version": "0.1.0",
+      "inputs": [
+        {
+          "key": "system_forbid_stream",
+          "renderTypeList": [
+            "switch"
+          ],
+          "valueType": "boolean",
+          "label": "禁用流输出",
+          "description": "强制设置嵌套运行的应用，均以非流模式运行",
+          "value": false,
+          "valueDesc": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "renderTypeList": [
+            "input",
+            "reference"
+          ],
+          "selectedTypeIndex": 0,
+          "valueType": "string",
+          "key": "url",
+          "label": "url",
+          "description": "需要读取的网页链接",
+          "required": true,
+          "toolDescription": "需要读取的网页链接",
+          "list": [],
+          "defaultValue": "",
+          "value": "https://www.36kr.com/information/contact/",
+          "canEdit": false,
+          "valueDesc": "",
+          "debugLabel": ""
+        }
+      ],
+      "outputs": [
+        {
+          "id": "result",
+          "type": "static",
+          "key": "result",
+          "valueType": "string",
+          "label": "result",
+          "description": "",
+          "valueDesc": ""
+        }
+      ],
+      "isFolded": true,
+      "pluginId": "community-fetchUrl",
+      "toolConfig": {
+        "systemTool": {
+          "toolId": "systemTool-fetchUrl"
+        }
+      },
+      "catchError": false
+    },
+    {
+      "nodeId": "fpgxNPKu1uldJIbq",
+      "name": "workflow:template.ai_chat#2",
+      "intro": "workflow:template.ai_chat_intro",
+      "avatar": "core/workflow/template/aiChat",
+      "flowNodeType": "chatNode",
+      "showStatus": true,
+      "position": {
+        "x": 3182.994051866859,
+        "y": -329.48523110435303
+      },
+      "version": "4.9.7",
+      "inputs": [
+        {
+          "key": "model",
+          "renderTypeList": [
+            "settingLLMModel",
+            "reference"
+          ],
+          "label": "common:core.module.input.label.aiModel",
+          "valueType": "string",
+          "value": "deepseek-chat",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "temperature",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "number",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "maxToken",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "number",
+          "value": 8000,
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "isResponseAnswerText",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "value": true,
+          "valueType": "boolean",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatQuoteRole",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "value": "system",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "quoteTemplate",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "quotePrompt",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatVision",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "boolean",
+          "value": true,
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatReasoning",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "boolean",
+          "value": true,
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatTopP",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "number",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatStopSign",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatResponseFormat",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatJsonSchema",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "systemPrompt",
+          "renderTypeList": [
+            "textarea",
+            "reference"
+          ],
+          "max": 3000,
+          "valueType": "string",
+          "label": "common:core.ai.Prompt",
+          "description": "common:core.app.tip.systemPromptTip",
+          "placeholder": "common:core.app.tip.chatNodeSystemPromptTip",
+          "value": "# 角色\n你是新闻数据处理专家，你擅长全面提取和分析大量新闻条目，你能够确保所有的新闻均被完整处理并输出，绝不遗漏任何符合筛选标准的内容，即使是20条以上的内容也能全部处理并输出。新闻内容的时间范围严格控制在：{{$utE8TlbcSIICH2i8.qLUQfhG0ILRX$}}\n##背景\n你负责接收并处理大量新闻数据，需要确保即使面对20条以上的新闻内容，也能全部进行处理并完整输出，不会因为数量多而省略或简化任何符合条件的新闻条目。\n## 技能\n### 技能 1: 全量数据处理与完整输出\n对所有输入的新闻内容进行完整处理，无论数量多少，都确保100%输出所有符合条件的新闻条目。使用分批处理机制，即便面对大量数据也能保证完整性，绝不因为数据量大而截断或省略任何符合条件的内容。特别关注时间筛选条件，精确筛选出当前时间前24小时内的所有新闻，不遗漏任何一条。\n### 技能 2: 新闻数据时序整理与专业解析\n按照精确的时间顺序重新排列所有有效新闻数据，确保序列清晰。对每条新闻进行专业的金融视角解析，提炼核心要点并输出完整内容，包括时间、地点、主要内容、专业解析以及原始链接，形成结构一致的输出格式。\n### 技能 3: 金融视角分析与投资建议生成\n基于完整处理的所有新闻条目，综合分析市场趋势和投资机会，生成专业的投资建议。建议内容包含短期市场预测、潜在风险提示和具体投资方向，以记者客观而专业的语气呈现，确保建议有据可依且实用性强。\n## 限制\n- 必须100%输出所有符合时间条件的新闻条目，绝不因数量多而省略任何内容\n- 严格以纯文本格式输出，不使用Markdown语法\n- 严格筛选当前时间前24小时内的新闻，时间范围外的内容不予显示\n- 保持原始新闻的完整信息，不改变用户意图或信息内容\n- 每条新闻必须包含序号、时间、地点、主要内容、专业解析和链接信息\n- 处理大量新闻时应采用批量处理策略，确保即使是20条以上的内容也能全部处理并输出\n\n##输出示例（请严格按照下面的格式输出，不要使用markdown格式输出）\n1. 📅 2025-04-28 14:42  | 📍中国北京 \n   ──────────────────────────────\n   🔍 主要内容：\n     米格实验室完成数千万元A+轮融资，零度资本领投。\n\n   📊 解析：\n   米格实验室的融资将支持其在半导体、光电、新材料与新能源等领域的服务扩展，提升其技术服务水平。\n\n   📎 链接：https://news.pedaily.cn/202504/549007.shtml（来源：投资界）",
+          "debugLabel": "",
+          "toolDescription": "",
+          "maxLength": 100000,
+          "isRichText": true
+        },
+        {
+          "key": "history",
+          "renderTypeList": [
+            "numberInput",
+            "reference"
+          ],
+          "valueType": "chatHistory",
+          "label": "common:core.module.input.label.chat history",
+          "description": "workflow:max_dialog_rounds",
+          "required": true,
+          "min": 0,
+          "max": 50,
+          "value": 0,
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "quoteQA",
+          "renderTypeList": [
+            "settingDatasetQuotePrompt"
+          ],
+          "label": "",
+          "debugLabel": "知识库引用",
+          "description": "",
+          "valueType": "datasetQuote",
+          "toolDescription": ""
+        },
+        {
+          "key": "fileUrlList",
+          "renderTypeList": [
+            "reference",
+            "input"
+          ],
+          "label": "app:workflow.user_file_input",
+          "debugLabel": "文件链接",
+          "description": "app:workflow.user_file_input_desc",
+          "valueType": "arrayString",
+          "value": [],
+          "toolDescription": ""
+        },
+        {
+          "key": "userChatInput",
+          "renderTypeList": [
+            "reference",
+            "textarea"
+          ],
+          "valueType": "string",
+          "label": "workflow:user_question",
+          "toolDescription": "用户问题",
+          "required": true,
+          "value": "注意确保所有输入的新闻内容均完整输出，绝不遗漏任何符合条件的新闻条目。\n并确保输出的新闻与投资融资相关，不相关的新闻请不要输出\n新闻内容的时间范围严格控制在：{{$utE8TlbcSIICH2i8.qLUQfhG0ILRX$}}\n待输出的所有新闻内容：{{$vSgvPDJHiBPAb1mm.system_text$}}\n",
+          "debugLabel": "",
+          "selectedTypeIndex": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "history",
+          "key": "history",
+          "required": true,
+          "label": "common:core.module.output.label.New context",
+          "description": "将本次回复内容拼接上历史记录，作为新的上下文返回",
+          "valueType": "chatHistory",
+          "valueDesc": "{\n  obj: System | Human | AI;\n  value: string;\n}[]",
+          "type": "static"
+        },
+        {
+          "id": "answerText",
+          "key": "answerText",
+          "required": true,
+          "label": "common:core.module.output.label.Ai response content",
+          "description": "将在 stream 回复完毕后触发",
+          "valueType": "string",
+          "type": "static"
+        },
+        {
+          "id": "reasoningText",
+          "key": "reasoningText",
+          "required": false,
+          "label": "workflow:reasoning_text",
+          "valueType": "string",
+          "type": "static",
+          "invalid": true,
+          "description": ""
+        },
+        {
+          "id": "system_error_text",
+          "key": "system_error_text",
+          "type": "error",
+          "valueType": "string",
+          "label": "workflow:error_text",
+          "description": ""
+        }
+      ],
+      "catchError": false
+    },
+    {
+      "nodeId": "jNRQpJ3yZ0pA56v5",
+      "name": "时间过滤2",
+      "intro": "workflow:template.ai_chat_intro",
+      "avatar": "core/workflow/template/aiChat",
+      "flowNodeType": "chatNode",
+      "showStatus": true,
+      "position": {
+        "x": 1097.3868594308756,
+        "y": -239.84971982657396
+      },
+      "version": "4.9.7",
+      "inputs": [
+        {
+          "key": "model",
+          "renderTypeList": [
+            "settingLLMModel",
+            "reference"
+          ],
+          "label": "common:core.module.input.label.aiModel",
+          "valueType": "string",
+          "value": "deepseek-chat",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "temperature",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "number",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "maxToken",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "number",
+          "value": 8000,
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "isResponseAnswerText",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "value": false,
+          "valueType": "boolean",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatQuoteRole",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "value": "system",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "quoteTemplate",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "quotePrompt",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatVision",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "boolean",
+          "value": true,
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatReasoning",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "boolean",
+          "value": false,
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatTopP",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "number",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatStopSign",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatResponseFormat",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatJsonSchema",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "systemPrompt",
+          "renderTypeList": [
+            "textarea",
+            "reference"
+          ],
+          "max": 3000,
+          "valueType": "string",
+          "label": "common:core.ai.Prompt",
+          "description": "common:core.app.tip.systemPromptTip",
+          "placeholder": "common:core.app.tip.chatNodeSystemPromptTip",
+          "value": "# 角色\n你是全面精准的投资新闻数据处理专家，你擅长确保所有符合条件的新闻内容无一遗漏地完整输出，你能够系统性地处理并分析大量投资新闻数据，即使面对超过20条的符合条件内容，也能保证全部呈现。新闻内容的时间范围严格控制在：{{$utE8TlbcSIICH2i8.qLUQfhG0ILRX$}}，避免输出不在改范围内的新闻，必须输出所有在此范围内的新闻内容\n\n## 背景\n在投资决策过程中，完整的信息至关重要，缺失任何一条符合筛选条件的新闻都可能导致决策偏差或错失机会，因此需要一个能够保证数据完整性的解决方案。\n\n## 技能\n### 技能 1: 全量数据处理与完整性保障\n对所有输入的新闻数据进行彻底扫描和处理，确保每一条符合时间条件(前24小时内)的新闻都被识别并输出，不论总量多少。采用分批处理机制，即使面对大量数据也能保持完整性，绝不因数量限制而截断或省略任何符合条件的内容。\n\n### 技能 2: 结构化新闻内容输出\n将每条符合条件的新闻按照\"时间-主要内容-链接-分析\"的固定结构清晰呈现，使用编号系统(1、2、3...)确保用户能够清楚掌握新闻总量。对于超过10条的新闻集合，采用持续性输出策略，确保所有内容都能完整展示而不受系统限制。\n\n### 技能 3: 专业金融角度解析与全面性验证\n从专业金融视角对每条新闻进行简明扼要的分析，同时在完成所有内容输出后，执行完整性验证程序，检查是否有遗漏的符合条件新闻。如发现遗漏，立即补充输出。\n\n## 限制\n- 必须输出所有符合时间条件(前24小时内)的投资新闻，无论数量多少，绝不省略任何符合条件的内容\n- 严格按照\"时间-主要内容-链接-分析\"的格式要求进行输出，新闻的时间精准到分\n- 避免使用任何markdown语法格式及符号，保持纯文本输出\n- 仅输出新闻内容，避免输出其他任何无关内容",
+          "debugLabel": "",
+          "toolDescription": "",
+          "maxLength": 100000,
+          "isRichText": true
+        },
+        {
+          "key": "history",
+          "renderTypeList": [
+            "numberInput",
+            "reference"
+          ],
+          "valueType": "chatHistory",
+          "label": "common:core.module.input.label.chat history",
+          "description": "workflow:max_dialog_rounds",
+          "required": true,
+          "min": 0,
+          "max": 50,
+          "value": 0,
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "quoteQA",
+          "renderTypeList": [
+            "settingDatasetQuotePrompt"
+          ],
+          "label": "",
+          "debugLabel": "知识库引用",
+          "description": "",
+          "valueType": "datasetQuote",
+          "toolDescription": ""
+        },
+        {
+          "key": "fileUrlList",
+          "renderTypeList": [
+            "reference",
+            "input"
+          ],
+          "label": "app:workflow.user_file_input",
+          "debugLabel": "文件链接",
+          "description": "app:workflow.user_file_input_desc",
+          "valueType": "arrayString",
+          "value": [],
+          "toolDescription": ""
+        },
+        {
+          "key": "userChatInput",
+          "renderTypeList": [
+            "reference",
+            "textarea"
+          ],
+          "valueType": "string",
+          "label": "workflow:user_question",
+          "toolDescription": "用户问题",
+          "required": true,
+          "value": "新闻内容的时间范围严格控制在：{{$utE8TlbcSIICH2i8.qLUQfhG0ILRX$}}\n并确保输出的新闻与投资融资相关，不相关的新闻请不要输出\n用户提供的新闻内容：{{$w8n7ftUHFhKT6z0N.result$}}\n",
+          "debugLabel": "",
+          "selectedTypeIndex": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "history",
+          "key": "history",
+          "required": true,
+          "label": "common:core.module.output.label.New context",
+          "description": "将本次回复内容拼接上历史记录，作为新的上下文返回",
+          "valueType": "chatHistory",
+          "valueDesc": "{\n  obj: System | Human | AI;\n  value: string;\n}[]",
+          "type": "static"
+        },
+        {
+          "id": "answerText",
+          "key": "answerText",
+          "required": true,
+          "label": "common:core.module.output.label.Ai response content",
+          "description": "将在 stream 回复完毕后触发",
+          "valueType": "string",
+          "type": "static"
+        },
+        {
+          "id": "reasoningText",
+          "key": "reasoningText",
+          "required": false,
+          "label": "workflow:reasoning_text",
+          "valueType": "string",
+          "type": "static",
+          "invalid": true,
+          "description": ""
+        },
+        {
+          "id": "system_error_text",
+          "key": "system_error_text",
+          "type": "error",
+          "valueType": "string",
+          "label": "workflow:error_text",
+          "description": ""
+        }
+      ],
+      "isFolded": false,
+      "catchError": false
+    },
+    {
+      "nodeId": "bkpLefyKgYfFEL5x",
+      "name": "时间过滤3",
+      "intro": "workflow:template.ai_chat_intro",
+      "avatar": "core/workflow/template/aiChat",
+      "flowNodeType": "chatNode",
+      "showStatus": true,
+      "position": {
+        "x": 1858.7833363294149,
+        "y": -143.91225533326187
+      },
+      "version": "4.9.7",
+      "inputs": [
+        {
+          "key": "model",
+          "renderTypeList": [
+            "settingLLMModel",
+            "reference"
+          ],
+          "label": "common:core.module.input.label.aiModel",
+          "valueType": "string",
+          "value": "deepseek-chat",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "temperature",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "number",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "maxToken",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "number",
+          "value": 8000,
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "isResponseAnswerText",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "value": false,
+          "valueType": "boolean",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatQuoteRole",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "value": "system",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "quoteTemplate",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "quotePrompt",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatVision",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "boolean",
+          "value": false,
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatReasoning",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "boolean",
+          "value": false,
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatTopP",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "number",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatStopSign",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatResponseFormat",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatJsonSchema",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "systemPrompt",
+          "renderTypeList": [
+            "textarea",
+            "reference"
+          ],
+          "max": 3000,
+          "valueType": "string",
+          "label": "common:core.ai.Prompt",
+          "description": "common:core.app.tip.systemPromptTip",
+          "placeholder": "common:core.app.tip.chatNodeSystemPromptTip",
+          "value": "# 角色\n你是全面精准的投资新闻数据处理专家，你擅长确保所有符合条件的新闻内容无一遗漏地完整输出，你能够系统性地处理并分析大量投资新闻数据，即使面对超过20条的符合条件内容，也能保证全部呈现。新闻内容的时间范围严格控制在：{{$utE8TlbcSIICH2i8.qLUQfhG0ILRX$}}，避免输出不在改范围内的新闻，必须输出所有在此范围内的新闻内容\n\n## 背景\n在投资决策过程中，完整的信息至关重要，缺失任何一条符合筛选条件的新闻都可能导致决策偏差或错失机会，因此需要一个能够保证数据完整性的解决方案。\n\n## 技能\n### 技能 1: 全量数据处理与完整性保障\n对所有输入的新闻数据进行彻底扫描和处理，确保每一条符合时间条件(前24小时内)的新闻都被识别并输出，不论总量多少。采用分批处理机制，即使面对大量数据也能保持完整性，绝不因数量限制而截断或省略任何符合条件的内容。\n\n### 技能 2: 结构化新闻内容输出\n将每条符合条件的新闻按照\"时间-主要内容-链接-分析\"的固定结构清晰呈现，使用编号系统(1、2、3...)确保用户能够清楚掌握新闻总量。对于超过10条的新闻集合，采用持续性输出策略，确保所有内容都能完整展示而不受系统限制。\n\n### 技能 3: 专业金融角度解析与全面性验证\n从专业金融视角对每条新闻进行简明扼要的分析，同时在完成所有内容输出后，执行完整性验证程序，检查是否有遗漏的符合条件新闻。如发现遗漏，立即补充输出。\n\n## 限制\n- 必须输出所有符合时间条件(前24小时内)的投资新闻，无论数量多少，绝不省略任何符合条件的内容\n- 严格按照\"时间-主要内容-链接-分析\"的格式要求进行输出，新闻的时间精准到分\n- 避免使用任何markdown语法格式及符号，保持纯文本输出\n- 仅输出新闻内容，避免输出其他任何无关内容",
+          "debugLabel": "",
+          "toolDescription": "",
+          "maxLength": 100000,
+          "isRichText": true
+        },
+        {
+          "key": "history",
+          "renderTypeList": [
+            "numberInput",
+            "reference"
+          ],
+          "valueType": "chatHistory",
+          "label": "common:core.module.input.label.chat history",
+          "description": "workflow:max_dialog_rounds",
+          "required": true,
+          "min": 0,
+          "max": 50,
+          "value": 0,
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "quoteQA",
+          "renderTypeList": [
+            "settingDatasetQuotePrompt"
+          ],
+          "label": "",
+          "debugLabel": "知识库引用",
+          "description": "",
+          "valueType": "datasetQuote",
+          "toolDescription": ""
+        },
+        {
+          "key": "fileUrlList",
+          "renderTypeList": [
+            "reference",
+            "input"
+          ],
+          "label": "app:workflow.user_file_input",
+          "debugLabel": "文件链接",
+          "description": "app:workflow.user_file_input_desc",
+          "valueType": "arrayString",
+          "value": [],
+          "toolDescription": ""
+        },
+        {
+          "key": "userChatInput",
+          "renderTypeList": [
+            "reference",
+            "textarea"
+          ],
+          "valueType": "string",
+          "label": "workflow:user_question",
+          "toolDescription": "用户问题",
+          "required": true,
+          "value": "新闻内容的时间范围严格控制在：{{$utE8TlbcSIICH2i8.qLUQfhG0ILRX$}}\n并确保输出的新闻与投资融资相关，不相关的新闻请不要输出\n用户提供的新闻内容：{{$nfFMIkCbaNeD0gRd.qLUQfhG0ILRX$}}\n",
+          "debugLabel": "",
+          "selectedTypeIndex": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "history",
+          "key": "history",
+          "required": true,
+          "label": "common:core.module.output.label.New context",
+          "description": "将本次回复内容拼接上历史记录，作为新的上下文返回",
+          "valueType": "chatHistory",
+          "valueDesc": "{\n  obj: System | Human | AI;\n  value: string;\n}[]",
+          "type": "static"
+        },
+        {
+          "id": "answerText",
+          "key": "answerText",
+          "required": true,
+          "label": "common:core.module.output.label.Ai response content",
+          "description": "将在 stream 回复完毕后触发",
+          "valueType": "string",
+          "type": "static"
+        },
+        {
+          "id": "reasoningText",
+          "key": "reasoningText",
+          "required": false,
+          "label": "workflow:reasoning_text",
+          "valueType": "string",
+          "type": "static",
+          "invalid": true,
+          "description": ""
+        },
+        {
+          "id": "system_error_text",
+          "key": "system_error_text",
+          "type": "error",
+          "valueType": "string",
+          "label": "workflow:error_text",
+          "description": ""
+        }
+      ],
+      "isFolded": false,
+      "catchError": false
+    },
+    {
+      "nodeId": "vSgvPDJHiBPAb1mm",
+      "name": "文本拼接",
+      "intro": "可对固定或传入的文本进行加工后输出，非字符串类型数据最终会转成字符串类型。",
+      "avatar": "core/workflow/template/textConcat",
+      "flowNodeType": "textEditor",
+      "position": {
+        "x": 2553.4934668144447,
+        "y": 296.1875988086732
+      },
+      "version": "4813",
+      "inputs": [
+        {
+          "key": "system_textareaInput",
+          "renderTypeList": [
+            "textarea"
+          ],
+          "valueType": "string",
+          "required": true,
+          "label": "workflow:concatenation_text",
+          "placeholder": "workflow:input_variable_list",
+          "value": "种子轮新闻资讯：{{$v2WSaR5baSWYJgh9.ryAiKXjjZsUYRPqF$}}\n天使轮新闻资讯：{{$tGcYttUIpp6Jl0e3.sbcsGkDGNdtEfrDF$}}\nPre-A轮新闻资讯：{{$et3kcYb1JmRJIT8t.cJNkHBckozVo48b7$}}\nA轮融资新闻资讯：{{$qIg0jPDim3K5M9MU.rruvD1AFWadByS0J$}}\n投资界新闻资讯：{{$csrosJmtqq3U.answerText$}}\n新浪财经新闻资讯：{{$jNRQpJ3yZ0pA56v5.answerText$}}\n36Kr创投资讯：{{$bkpLefyKgYfFEL5x.answerText$}}",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        }
+      ],
+      "outputs": [
+        {
+          "id": "system_text",
+          "key": "system_text",
+          "label": "workflow:concatenation_result",
+          "type": "static",
+          "valueType": "string",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "nodeId": "tGcYttUIpp6Jl0e3",
+      "name": "博查全网搜索——天使轮融资",
+      "intro": "可以发出一个 HTTP 请求，实现更为复杂的操作（联网搜索、数据库查询等）",
+      "avatar": "core/workflow/template/httpRequest",
+      "flowNodeType": "httpRequest468",
+      "showStatus": true,
+      "position": {
+        "x": 2593.4934668144447,
+        "y": -214.63254695707496
+      },
+      "version": "481",
+      "inputs": [
+        {
+          "key": "system_addInputParam",
+          "renderTypeList": [
+            "addInputParam"
+          ],
+          "valueType": "dynamic",
+          "label": "",
+          "required": false,
+          "description": "common:core.module.input.description.HTTP Dynamic Input",
+          "customInputConfig": {
+            "selectValueTypeList": [
+              "string",
+              "number",
+              "boolean",
+              "object",
+              "arrayString",
+              "arrayNumber",
+              "arrayBoolean",
+              "arrayObject",
+              "arrayAny",
+              "any",
+              "chatHistory",
+              "datasetQuote",
+              "dynamic",
+              "selectDataset",
+              "selectApp"
+            ],
+            "showDescription": false,
+            "showDefaultValue": true
+          },
+          "valueDesc": "",
+          "debugLabel": "",
+          "toolDescription": "",
+          "deprecated": false
+        },
+        {
+          "key": "system_httpMethod",
+          "renderTypeList": [
+            "custom"
+          ],
+          "valueType": "string",
+          "label": "",
+          "value": "POST",
+          "required": true,
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "system_httpTimeout",
+          "renderTypeList": [
+            "custom"
+          ],
+          "valueType": "number",
+          "label": "",
+          "value": 30,
+          "min": 5,
+          "max": 600,
+          "required": true,
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "system_httpReqUrl",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "string",
+          "label": "",
+          "description": "common:core.module.input.description.Http Request Url",
+          "placeholder": "https://api.ai.com/getInventory",
+          "required": false,
+          "value": "https://api.bochaai.com/v1/web-search",
+          "valueDesc": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "system_header_secret",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "object",
+          "label": "",
+          "required": false,
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "system_httpHeader",
+          "renderTypeList": [
+            "custom"
+          ],
+          "valueType": "any",
+          "value": [
+            {
+              "key": "Authorization",
+              "type": "string",
+              "value": "Bearer sk-6e6bab4f37054c7abf097430e1e0eaae"
+            },
+            {
+              "key": "Content-Type",
+              "type": "string",
+              "value": "application/json"
+            }
+          ],
+          "label": "",
+          "description": "common:core.module.input.description.Http Request Header",
+          "placeholder": "common:core.module.input.description.Http Request Header",
+          "required": false,
+          "valueDesc": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "system_httpParams",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "any",
+          "value": [],
+          "label": "",
+          "required": false,
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "system_httpJsonBody",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "any",
+          "value": "",
+          "label": "",
+          "required": false,
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "system_httpFormBody",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "any",
+          "value": [
+            {
+              "key": "count",
+              "type": "string",
+              "value": "10"
+            },
+            {
+              "key": "freshness",
+              "type": "string",
+              "value": "{{$utE8TlbcSIICH2i8.qLUQfhG0ILRX$}}"
+            },
+            {
+              "key": "query",
+              "type": "string",
+              "value": "天使轮融资"
+            },
+            {
+              "key": "summary",
+              "type": "string",
+              "value": "true"
+            }
+          ],
+          "label": "",
+          "required": false,
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "system_httpContentType",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "string",
+          "value": "form-data",
+          "label": "",
+          "required": false,
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "renderTypeList": [
+            "reference"
+          ],
+          "valueType": "string",
+          "canEdit": true,
+          "key": "query",
+          "label": "query",
+          "customInputConfig": {
+            "selectValueTypeList": [
+              "string",
+              "number",
+              "boolean",
+              "object",
+              "arrayString",
+              "arrayNumber",
+              "arrayBoolean",
+              "arrayObject",
+              "arrayAny",
+              "any",
+              "chatHistory",
+              "datasetQuote",
+              "dynamic",
+              "selectDataset",
+              "selectApp"
+            ],
+            "showDescription": false,
+            "showDefaultValue": true
+          },
+          "required": true,
+          "value": [
+            "workflowStartNodeId",
+            "userChatInput"
+          ]
+        }
+      ],
+      "outputs": [
+        {
+          "id": "httpRawResponse",
+          "key": "httpRawResponse",
+          "required": true,
+          "label": "workflow:raw_response",
+          "description": "HTTP请求的原始响应。只能接受字符串或JSON类型响应数据。",
+          "valueType": "any",
+          "type": "static"
+        },
+        {
+          "id": "error",
+          "key": "error",
+          "label": "workflow:error_text",
+          "description": "HTTP请求错误信息，成功时返回空",
+          "valueType": "string",
+          "type": "error"
+        },
+        {
+          "id": "system_addOutputParam",
+          "key": "system_addOutputParam",
+          "type": "dynamic",
+          "valueType": "dynamic",
+          "label": "输出字段提取",
+          "customFieldConfig": {
+            "selectValueTypeList": [
+              "string",
+              "number",
+              "boolean",
+              "object",
+              "arrayString",
+              "arrayNumber",
+              "arrayBoolean",
+              "arrayObject",
+              "arrayAny",
+              "any",
+              "chatHistory",
+              "datasetQuote",
+              "dynamic",
+              "selectDataset",
+              "selectApp"
+            ],
+            "showDescription": false,
+            "showDefaultValue": false
+          },
+          "description": "可以通过 JSONPath 语法来提取响应值中的指定字段",
+          "valueDesc": ""
+        },
+        {
+          "id": "sbcsGkDGNdtEfrDF",
+          "valueType": "string",
+          "type": "dynamic",
+          "key": "$.data.webPages.value",
+          "label": "$.data.webPages.value"
+        }
+      ],
+      "isFolded": true,
+      "catchError": true
+    },
+    {
+      "nodeId": "et3kcYb1JmRJIT8t",
+      "name": "博查全网搜索——Pre-A轮融资",
+      "intro": "可以发出一个 HTTP 请求，实现更为复杂的操作（联网搜索、数据库查询等）",
+      "avatar": "core/workflow/template/httpRequest",
+      "flowNodeType": "httpRequest468",
+      "showStatus": true,
+      "position": {
+        "x": 2583.9424637165794,
+        "y": -73.59183604336508
+      },
+      "version": "481",
+      "inputs": [
+        {
+          "key": "system_addInputParam",
+          "renderTypeList": [
+            "addInputParam"
+          ],
+          "valueType": "dynamic",
+          "label": "",
+          "required": false,
+          "description": "common:core.module.input.description.HTTP Dynamic Input",
+          "customInputConfig": {
+            "selectValueTypeList": [
+              "string",
+              "number",
+              "boolean",
+              "object",
+              "arrayString",
+              "arrayNumber",
+              "arrayBoolean",
+              "arrayObject",
+              "arrayAny",
+              "any",
+              "chatHistory",
+              "datasetQuote",
+              "dynamic",
+              "selectDataset",
+              "selectApp"
+            ],
+            "showDescription": false,
+            "showDefaultValue": true
+          },
+          "valueDesc": "",
+          "debugLabel": "",
+          "toolDescription": "",
+          "deprecated": false
+        },
+        {
+          "key": "system_httpMethod",
+          "renderTypeList": [
+            "custom"
+          ],
+          "valueType": "string",
+          "label": "",
+          "value": "POST",
+          "required": true,
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "system_httpTimeout",
+          "renderTypeList": [
+            "custom"
+          ],
+          "valueType": "number",
+          "label": "",
+          "value": 30,
+          "min": 5,
+          "max": 600,
+          "required": true,
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "system_httpReqUrl",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "string",
+          "label": "",
+          "description": "common:core.module.input.description.Http Request Url",
+          "placeholder": "https://api.ai.com/getInventory",
+          "required": false,
+          "value": "https://api.bochaai.com/v1/web-search",
+          "valueDesc": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "system_header_secret",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "object",
+          "label": "",
+          "required": false,
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "system_httpHeader",
+          "renderTypeList": [
+            "custom"
+          ],
+          "valueType": "any",
+          "value": [
+            {
+              "key": "Authorization",
+              "type": "string",
+              "value": "Bearer sk-6e6bab4f37054c7abf097430e1e0eaae"
+            },
+            {
+              "key": "Content-Type",
+              "type": "string",
+              "value": "application/json"
+            }
+          ],
+          "label": "",
+          "description": "common:core.module.input.description.Http Request Header",
+          "placeholder": "common:core.module.input.description.Http Request Header",
+          "required": false,
+          "valueDesc": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "system_httpParams",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "any",
+          "value": [],
+          "label": "",
+          "required": false,
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "system_httpJsonBody",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "any",
+          "value": "",
+          "label": "",
+          "required": false,
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "system_httpFormBody",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "any",
+          "value": [
+            {
+              "key": "count",
+              "type": "string",
+              "value": "10"
+            },
+            {
+              "key": "freshness",
+              "type": "string",
+              "value": "{{$utE8TlbcSIICH2i8.qLUQfhG0ILRX$}}"
+            },
+            {
+              "key": "query",
+              "type": "string",
+              "value": "Pre-A轮融资"
+            },
+            {
+              "key": "summary",
+              "type": "string",
+              "value": "true"
+            }
+          ],
+          "label": "",
+          "required": false,
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "system_httpContentType",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "string",
+          "value": "form-data",
+          "label": "",
+          "required": false,
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "renderTypeList": [
+            "reference"
+          ],
+          "valueType": "string",
+          "canEdit": true,
+          "key": "query",
+          "label": "query",
+          "customInputConfig": {
+            "selectValueTypeList": [
+              "string",
+              "number",
+              "boolean",
+              "object",
+              "arrayString",
+              "arrayNumber",
+              "arrayBoolean",
+              "arrayObject",
+              "arrayAny",
+              "any",
+              "chatHistory",
+              "datasetQuote",
+              "dynamic",
+              "selectDataset",
+              "selectApp"
+            ],
+            "showDescription": false,
+            "showDefaultValue": true
+          },
+          "required": true,
+          "value": [
+            "workflowStartNodeId",
+            "userChatInput"
+          ]
+        }
+      ],
+      "outputs": [
+        {
+          "id": "httpRawResponse",
+          "key": "httpRawResponse",
+          "required": true,
+          "label": "workflow:raw_response",
+          "description": "HTTP请求的原始响应。只能接受字符串或JSON类型响应数据。",
+          "valueType": "any",
+          "type": "static"
+        },
+        {
+          "id": "error",
+          "key": "error",
+          "label": "workflow:error_text",
+          "description": "HTTP请求错误信息，成功时返回空",
+          "valueType": "string",
+          "type": "error"
+        },
+        {
+          "id": "system_addOutputParam",
+          "key": "system_addOutputParam",
+          "type": "dynamic",
+          "valueType": "dynamic",
+          "label": "输出字段提取",
+          "customFieldConfig": {
+            "selectValueTypeList": [
+              "string",
+              "number",
+              "boolean",
+              "object",
+              "arrayString",
+              "arrayNumber",
+              "arrayBoolean",
+              "arrayObject",
+              "arrayAny",
+              "any",
+              "chatHistory",
+              "datasetQuote",
+              "dynamic",
+              "selectDataset",
+              "selectApp"
+            ],
+            "showDescription": false,
+            "showDefaultValue": false
+          },
+          "description": "可以通过 JSONPath 语法来提取响应值中的指定字段",
+          "valueDesc": ""
+        },
+        {
+          "id": "cJNkHBckozVo48b7",
+          "valueType": "string",
+          "type": "dynamic",
+          "key": "$.data.webPages.value",
+          "label": "$.data.webPages.value"
+        }
+      ],
+      "isFolded": true,
+      "catchError": true
+    },
+    {
+      "nodeId": "qIg0jPDim3K5M9MU",
+      "name": "博查全网搜索——A轮融资",
+      "intro": "可以发出一个 HTTP 请求，实现更为复杂的操作（联网搜索、数据库查询等）",
+      "avatar": "core/workflow/template/httpRequest",
+      "flowNodeType": "httpRequest468",
+      "showStatus": true,
+      "position": {
+        "x": 2583.9424637165794,
+        "y": 75.35679533442058
+      },
+      "version": "481",
+      "inputs": [
+        {
+          "key": "system_addInputParam",
+          "renderTypeList": [
+            "addInputParam"
+          ],
+          "valueType": "dynamic",
+          "label": "",
+          "required": false,
+          "description": "common:core.module.input.description.HTTP Dynamic Input",
+          "customInputConfig": {
+            "selectValueTypeList": [
+              "string",
+              "number",
+              "boolean",
+              "object",
+              "arrayString",
+              "arrayNumber",
+              "arrayBoolean",
+              "arrayObject",
+              "arrayAny",
+              "any",
+              "chatHistory",
+              "datasetQuote",
+              "dynamic",
+              "selectDataset",
+              "selectApp"
+            ],
+            "showDescription": false,
+            "showDefaultValue": true
+          },
+          "valueDesc": "",
+          "debugLabel": "",
+          "toolDescription": "",
+          "deprecated": false
+        },
+        {
+          "key": "system_httpMethod",
+          "renderTypeList": [
+            "custom"
+          ],
+          "valueType": "string",
+          "label": "",
+          "value": "POST",
+          "required": true,
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "system_httpTimeout",
+          "renderTypeList": [
+            "custom"
+          ],
+          "valueType": "number",
+          "label": "",
+          "value": 30,
+          "min": 5,
+          "max": 600,
+          "required": true,
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "system_httpReqUrl",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "string",
+          "label": "",
+          "description": "common:core.module.input.description.Http Request Url",
+          "placeholder": "https://api.ai.com/getInventory",
+          "required": false,
+          "value": "https://api.bochaai.com/v1/web-search",
+          "valueDesc": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "system_header_secret",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "object",
+          "label": "",
+          "required": false,
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "system_httpHeader",
+          "renderTypeList": [
+            "custom"
+          ],
+          "valueType": "any",
+          "value": [
+            {
+              "key": "Authorization",
+              "type": "string",
+              "value": "Bearer sk-6e6bab4f37054c7abf097430e1e0eaae"
+            },
+            {
+              "key": "Content-Type",
+              "type": "string",
+              "value": "application/json"
+            }
+          ],
+          "label": "",
+          "description": "common:core.module.input.description.Http Request Header",
+          "placeholder": "common:core.module.input.description.Http Request Header",
+          "required": false,
+          "valueDesc": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "system_httpParams",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "any",
+          "value": [],
+          "label": "",
+          "required": false,
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "system_httpJsonBody",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "any",
+          "value": "",
+          "label": "",
+          "required": false,
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "system_httpFormBody",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "any",
+          "value": [
+            {
+              "key": "count",
+              "type": "string",
+              "value": "10"
+            },
+            {
+              "key": "freshness",
+              "type": "string",
+              "value": "{{$utE8TlbcSIICH2i8.qLUQfhG0ILRX$}}"
+            },
+            {
+              "key": "query",
+              "type": "string",
+              "value": "A轮融资"
+            },
+            {
+              "key": "summary",
+              "type": "string",
+              "value": "true"
+            }
+          ],
+          "label": "",
+          "required": false,
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "system_httpContentType",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "string",
+          "value": "form-data",
+          "label": "",
+          "required": false,
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "renderTypeList": [
+            "reference"
+          ],
+          "valueType": "string",
+          "canEdit": true,
+          "key": "query",
+          "label": "query",
+          "customInputConfig": {
+            "selectValueTypeList": [
+              "string",
+              "number",
+              "boolean",
+              "object",
+              "arrayString",
+              "arrayNumber",
+              "arrayBoolean",
+              "arrayObject",
+              "arrayAny",
+              "any",
+              "chatHistory",
+              "datasetQuote",
+              "dynamic",
+              "selectDataset",
+              "selectApp"
+            ],
+            "showDescription": false,
+            "showDefaultValue": true
+          },
+          "required": true,
+          "value": [
+            "workflowStartNodeId",
+            "userChatInput"
+          ]
+        }
+      ],
+      "outputs": [
+        {
+          "id": "httpRawResponse",
+          "key": "httpRawResponse",
+          "required": true,
+          "label": "workflow:raw_response",
+          "description": "HTTP请求的原始响应。只能接受字符串或JSON类型响应数据。",
+          "valueType": "any",
+          "type": "static"
+        },
+        {
+          "id": "error",
+          "key": "error",
+          "label": "workflow:error_text",
+          "description": "HTTP请求错误信息，成功时返回空",
+          "valueType": "string",
+          "type": "error"
+        },
+        {
+          "id": "system_addOutputParam",
+          "key": "system_addOutputParam",
+          "type": "dynamic",
+          "valueType": "dynamic",
+          "label": "输出字段提取",
+          "customFieldConfig": {
+            "selectValueTypeList": [
+              "string",
+              "number",
+              "boolean",
+              "object",
+              "arrayString",
+              "arrayNumber",
+              "arrayBoolean",
+              "arrayObject",
+              "arrayAny",
+              "any",
+              "chatHistory",
+              "datasetQuote",
+              "dynamic",
+              "selectDataset",
+              "selectApp"
+            ],
+            "showDescription": false,
+            "showDefaultValue": false
+          },
+          "description": "可以通过 JSONPath 语法来提取响应值中的指定字段",
+          "valueDesc": ""
+        },
+        {
+          "id": "rruvD1AFWadByS0J",
+          "valueType": "string",
+          "type": "dynamic",
+          "key": "$.data.webPages.value",
+          "label": "$.data.webPages.value"
+        }
+      ],
+      "isFolded": true,
+      "catchError": true
+    },
+    {
+      "nodeId": "nfFMIkCbaNeD0gRd",
+      "name": "36kr投资新闻提取",
+      "intro": "执行一段简单的脚本代码，通常用于进行复杂的数据处理。",
+      "avatar": "core/workflow/template/codeRun",
+      "flowNodeType": "code",
+      "showStatus": true,
+      "position": {
+        "x": 1858.7833363294146,
+        "y": -255.28040221964125
+      },
+      "version": "482",
+      "inputs": [
+        {
+          "key": "system_addInputParam",
+          "renderTypeList": [
+            "addInputParam"
+          ],
+          "valueType": "dynamic",
+          "label": "",
+          "required": false,
+          "description": "workflow:these_variables_will_be_input_parameters_for_code_execution",
+          "customInputConfig": {
+            "selectValueTypeList": [
+              "string",
+              "number",
+              "boolean",
+              "object",
+              "arrayString",
+              "arrayNumber",
+              "arrayBoolean",
+              "arrayObject",
+              "arrayAny",
+              "any",
+              "chatHistory",
+              "datasetQuote",
+              "dynamic",
+              "selectDataset",
+              "selectApp"
+            ],
+            "showDescription": false,
+            "showDefaultValue": true
+          },
+          "valueDesc": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "codeType",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "value": "js",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "code",
+          "renderTypeList": [
+            "custom"
+          ],
+          "label": "",
+          "valueType": "string",
+          "value": "function main({ input }) {\n  // 使用正则表达式找到\"(https://www.36kr.com/information/other/)\"之后到\"查看更多\"之前的内容\n  const regex = /\\(https:\\/\\/www\\.36kr\\.com\\/information\\/other\\/\\)\\s*(.*?)(?=查看更多)/s;\n  const match = input.match(regex);\n  \n  // 提取匹配到的内容\n  let extractedContent;\n  if (match && match[1]) {\n    extractedContent = match[1].trim();\n  } else {\n    extractedContent = \"无法提取内容\";\n  }\n  \n  return {\n    result: extractedContent,\n  };\n}",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "renderTypeList": [
+            "reference"
+          ],
+          "valueType": "string",
+          "canEdit": true,
+          "key": "input",
+          "label": "input",
+          "customInputConfig": {
+            "selectValueTypeList": [
+              "string",
+              "number",
+              "boolean",
+              "object",
+              "arrayString",
+              "arrayNumber",
+              "arrayBoolean",
+              "arrayObject",
+              "arrayAny",
+              "any",
+              "chatHistory",
+              "datasetQuote",
+              "dynamic",
+              "selectDataset",
+              "selectApp"
+            ],
+            "showDescription": false,
+            "showDefaultValue": true
+          },
+          "required": true,
+          "value": [
+            "sSPAFWISo8ghVNb2",
+            "result"
+          ],
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        }
+      ],
+      "outputs": [
+        {
+          "id": "system_rawResponse",
+          "key": "system_rawResponse",
+          "label": "workflow:full_response_data",
+          "valueType": "object",
+          "type": "static",
+          "description": ""
+        },
+        {
+          "id": "error",
+          "key": "error",
+          "label": "workflow:error_text",
+          "description": "代码运行错误信息，成功时返回空",
+          "valueType": "string",
+          "type": "error"
+        },
+        {
+          "id": "system_addOutputParam",
+          "key": "system_addOutputParam",
+          "type": "dynamic",
+          "valueType": "dynamic",
+          "label": "",
+          "customFieldConfig": {
+            "selectValueTypeList": [
+              "string",
+              "number",
+              "boolean",
+              "object",
+              "arrayString",
+              "arrayNumber",
+              "arrayBoolean",
+              "arrayObject",
+              "arrayAny",
+              "any",
+              "chatHistory",
+              "datasetQuote",
+              "dynamic",
+              "selectDataset",
+              "selectApp"
+            ],
+            "showDescription": false,
+            "showDefaultValue": false
+          },
+          "description": "将代码中 return 的对象作为输出，传递给后续的节点。变量名需要对应 return 的 key",
+          "valueDesc": ""
+        },
+        {
+          "id": "qLUQfhG0ILRX",
+          "type": "dynamic",
+          "key": "result",
+          "valueType": "string",
+          "label": "result",
+          "valueDesc": "",
+          "description": ""
+        }
+      ],
+      "isFolded": true,
+      "catchError": true
+    },
+    {
+      "nodeId": "utE8TlbcSIICH2i8",
+      "name": "计算一天内时间",
+      "intro": "执行一段简单的脚本代码，通常用于进行复杂的数据处理。",
+      "avatar": "core/workflow/template/codeRun",
+      "flowNodeType": "code",
+      "showStatus": true,
+      "position": {
+        "x": -134.30944270708278,
+        "y": 356.45975715420366
+      },
+      "version": "482",
+      "inputs": [
+        {
+          "key": "system_addInputParam",
+          "renderTypeList": [
+            "addInputParam"
+          ],
+          "valueType": "dynamic",
+          "label": "",
+          "required": false,
+          "description": "workflow:these_variables_will_be_input_parameters_for_code_execution",
+          "customInputConfig": {
+            "selectValueTypeList": [
+              "string",
+              "number",
+              "boolean",
+              "object",
+              "arrayString",
+              "arrayNumber",
+              "arrayBoolean",
+              "arrayObject",
+              "arrayAny",
+              "any",
+              "chatHistory",
+              "datasetQuote",
+              "dynamic",
+              "selectDataset",
+              "selectApp"
+            ],
+            "showDescription": false,
+            "showDefaultValue": true
+          },
+          "valueDesc": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "codeType",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "value": "js",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "code",
+          "renderTypeList": [
+            "custom"
+          ],
+          "label": "",
+          "valueType": "string",
+          "value": "function main({input}) {\n  // 解析输入的日期时间字符串\n  const currentDate = new Date(input.split(' ')[0] + 'T' + input.split(' ')[1]);\n  \n  // 创建前一天的日期对象\n  const previousDate = new Date(currentDate);\n  previousDate.setDate(previousDate.getDate() - 1);\n  \n  // 格式化前一天的日期为YYYY-MM-DD格式\n  const prevYear = previousDate.getFullYear();\n  const prevMonth = String(previousDate.getMonth() + 1).padStart(2, '0');\n  const prevDay = String(previousDate.getDate()).padStart(2, '0');\n  const formattedPrevDate = `${prevYear}-${prevMonth}-${prevDay}`;\n  \n  // 格式化当天的日期为YYYY-MM-DD格式\n  const currYear = currentDate.getFullYear();\n  const currMonth = String(currentDate.getMonth() + 1).padStart(2, '0');\n  const currDay = String(currentDate.getDate()).padStart(2, '0');\n  const formattedCurrDate = `${currYear}-${currMonth}-${currDay}`;\n  \n  // 生成最终结果字符串\n  const resultString = `${formattedPrevDate}..${formattedCurrDate}`;\n\n  return {\n    result: resultString,\n  }\n}",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "renderTypeList": [
+            "reference"
+          ],
+          "valueType": "string",
+          "canEdit": true,
+          "key": "input",
+          "label": "input",
+          "customInputConfig": {
+            "selectValueTypeList": [
+              "string",
+              "number",
+              "boolean",
+              "object",
+              "arrayString",
+              "arrayNumber",
+              "arrayBoolean",
+              "arrayObject",
+              "arrayAny",
+              "any",
+              "chatHistory",
+              "datasetQuote",
+              "dynamic",
+              "selectDataset",
+              "selectApp"
+            ],
+            "showDescription": false,
+            "showDefaultValue": true
+          },
+          "required": true,
+          "value": [
+            "VARIABLE_NODE_ID",
+            "cTime"
+          ],
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        }
+      ],
+      "outputs": [
+        {
+          "id": "system_rawResponse",
+          "key": "system_rawResponse",
+          "label": "workflow:full_response_data",
+          "valueType": "object",
+          "type": "static",
+          "description": ""
+        },
+        {
+          "id": "error",
+          "key": "error",
+          "label": "workflow:error_text",
+          "description": "代码运行错误信息，成功时返回空",
+          "valueType": "string",
+          "type": "error"
+        },
+        {
+          "id": "system_addOutputParam",
+          "key": "system_addOutputParam",
+          "type": "dynamic",
+          "valueType": "dynamic",
+          "label": "",
+          "customFieldConfig": {
+            "selectValueTypeList": [
+              "string",
+              "number",
+              "boolean",
+              "object",
+              "arrayString",
+              "arrayNumber",
+              "arrayBoolean",
+              "arrayObject",
+              "arrayAny",
+              "any",
+              "chatHistory",
+              "datasetQuote",
+              "dynamic",
+              "selectDataset",
+              "selectApp"
+            ],
+            "showDescription": false,
+            "showDefaultValue": false
+          },
+          "description": "将代码中 return 的对象作为输出，传递给后续的节点。变量名需要对应 return 的 key",
+          "valueDesc": ""
+        },
+        {
+          "id": "qLUQfhG0ILRX",
+          "type": "dynamic",
+          "key": "result",
+          "valueType": "string",
+          "label": "result",
+          "valueDesc": "",
+          "description": ""
+        }
+      ],
+      "isFolded": true,
+      "catchError": true
+    }
+  ],
+  "edges": [
+    {
+      "source": "rHOdX8BvPif1BIGp",
+      "target": "csrosJmtqq3U",
+      "sourceHandle": "rHOdX8BvPif1BIGp-source-right",
+      "targetHandle": "csrosJmtqq3U-target-left"
+    },
+    {
+      "source": "w8n7ftUHFhKT6z0N",
+      "target": "jNRQpJ3yZ0pA56v5",
+      "sourceHandle": "w8n7ftUHFhKT6z0N-source-right",
+      "targetHandle": "jNRQpJ3yZ0pA56v5-target-left"
+    },
+    {
+      "source": "vSgvPDJHiBPAb1mm",
+      "target": "fpgxNPKu1uldJIbq",
+      "sourceHandle": "vSgvPDJHiBPAb1mm-source-right",
+      "targetHandle": "fpgxNPKu1uldJIbq-target-left"
+    },
+    {
+      "source": "qIg0jPDim3K5M9MU",
+      "target": "vSgvPDJHiBPAb1mm",
+      "sourceHandle": "qIg0jPDim3K5M9MU-source-right",
+      "targetHandle": "vSgvPDJHiBPAb1mm-target-left"
+    },
+    {
+      "source": "csrosJmtqq3U",
+      "target": "w8n7ftUHFhKT6z0N",
+      "sourceHandle": "csrosJmtqq3U-source-right",
+      "targetHandle": "w8n7ftUHFhKT6z0N-target-left"
+    },
+    {
+      "source": "jNRQpJ3yZ0pA56v5",
+      "target": "sSPAFWISo8ghVNb2",
+      "sourceHandle": "jNRQpJ3yZ0pA56v5-source-right",
+      "targetHandle": "sSPAFWISo8ghVNb2-target-left"
+    },
+    {
+      "source": "bkpLefyKgYfFEL5x",
+      "target": "v2WSaR5baSWYJgh9",
+      "sourceHandle": "bkpLefyKgYfFEL5x-source-right",
+      "targetHandle": "v2WSaR5baSWYJgh9-target-left"
+    },
+    {
+      "source": "v2WSaR5baSWYJgh9",
+      "target": "tGcYttUIpp6Jl0e3",
+      "sourceHandle": "v2WSaR5baSWYJgh9-source-right",
+      "targetHandle": "tGcYttUIpp6Jl0e3-target-left"
+    },
+    {
+      "source": "tGcYttUIpp6Jl0e3",
+      "target": "et3kcYb1JmRJIT8t",
+      "sourceHandle": "tGcYttUIpp6Jl0e3-source-right",
+      "targetHandle": "et3kcYb1JmRJIT8t-target-left"
+    },
+    {
+      "source": "et3kcYb1JmRJIT8t",
+      "target": "qIg0jPDim3K5M9MU",
+      "sourceHandle": "et3kcYb1JmRJIT8t-source-right",
+      "targetHandle": "qIg0jPDim3K5M9MU-target-left"
+    },
+    {
+      "source": "sSPAFWISo8ghVNb2",
+      "target": "nfFMIkCbaNeD0gRd",
+      "sourceHandle": "sSPAFWISo8ghVNb2-source-right",
+      "targetHandle": "nfFMIkCbaNeD0gRd-target-left"
+    },
+    {
+      "source": "nfFMIkCbaNeD0gRd",
+      "target": "bkpLefyKgYfFEL5x",
+      "sourceHandle": "nfFMIkCbaNeD0gRd-source-right",
+      "targetHandle": "bkpLefyKgYfFEL5x-target-left"
+    },
+    {
+      "source": "workflowStartNodeId",
+      "target": "utE8TlbcSIICH2i8",
+      "sourceHandle": "workflowStartNodeId-source-right",
+      "targetHandle": "utE8TlbcSIICH2i8-target-left"
+    },
+    {
+      "source": "utE8TlbcSIICH2i8",
+      "target": "rHOdX8BvPif1BIGp",
+      "sourceHandle": "utE8TlbcSIICH2i8-source-right",
+      "targetHandle": "rHOdX8BvPif1BIGp-target-left"
+    },
+    {
+      "source": "v2WSaR5baSWYJgh9",
+      "target": "tGcYttUIpp6Jl0e3",
+      "sourceHandle": "v2WSaR5baSWYJgh9-source_catch-right",
+      "targetHandle": "tGcYttUIpp6Jl0e3-target-left"
+    },
+    {
+      "source": "tGcYttUIpp6Jl0e3",
+      "target": "et3kcYb1JmRJIT8t",
+      "sourceHandle": "tGcYttUIpp6Jl0e3-source_catch-right",
+      "targetHandle": "et3kcYb1JmRJIT8t-target-left"
+    },
+    {
+      "source": "et3kcYb1JmRJIT8t",
+      "target": "qIg0jPDim3K5M9MU",
+      "sourceHandle": "et3kcYb1JmRJIT8t-source_catch-right",
+      "targetHandle": "qIg0jPDim3K5M9MU-target-left"
+    },
+    {
+      "source": "qIg0jPDim3K5M9MU",
+      "target": "vSgvPDJHiBPAb1mm",
+      "sourceHandle": "qIg0jPDim3K5M9MU-source_catch-right",
+      "targetHandle": "vSgvPDJHiBPAb1mm-target-left"
+    },
+    {
+      "source": "nfFMIkCbaNeD0gRd",
+      "target": "bkpLefyKgYfFEL5x",
+      "sourceHandle": "nfFMIkCbaNeD0gRd-source_catch-right",
+      "targetHandle": "bkpLefyKgYfFEL5x-target-left"
+    },
+    {
+      "source": "utE8TlbcSIICH2i8",
+      "target": "rHOdX8BvPif1BIGp",
+      "sourceHandle": "utE8TlbcSIICH2i8-source_catch-right",
+      "targetHandle": "rHOdX8BvPif1BIGp-target-left"
+    }
+  ],
+  "chatConfig": {
+    "welcomeText": "欢迎使用全网融资新闻资讯智能体。我可以为您实时追踪各行业最新融资事件，包括融资轮次、金额、投资方和被投企业详情。\n[开始生成]",
+    "variables": [],
+    "questionGuide": {
+      "open": false
+    },
+    "ttsConfig": {
+      "type": "web"
+    },
+    "whisperConfig": {
+      "open": false,
+      "autoSend": false,
+      "autoTTSResponse": false
+    },
+    "scheduledTriggerConfig": {
+      "cronString": "",
+      "timezone": "Asia/Shanghai",
+      "defaultPrompt": ""
+    },
+    "chatInputGuide": {
+      "open": false,
+      "textList": [],
+      "customUrl": ""
+    },
+    "instruction": "",
+    "autoExecute": {
+      "open": false,
+      "defaultPrompt": ""
+    },
+    "_id": "67cfb7ce928145014cb8b6ef"
+  }
+}

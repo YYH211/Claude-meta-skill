@@ -1,0 +1,1199 @@
+﻿{
+  "nodes": [
+    {
+      "nodeId": "userGuide",
+      "name": "common:core.module.template.system_config",
+      "intro": "common:core.module.template.system_config_info",
+      "avatar": "core/workflow/template/systemConfig",
+      "flowNodeType": "userGuide",
+      "position": {
+        "x": -3887.4112624385834,
+        "y": -629.264869150651
+      },
+      "version": "481",
+      "inputs": [
+        {
+          "key": "welcomeText",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "string",
+          "label": "core.app.Welcome Text",
+          "value": ""
+        },
+        {
+          "key": "variables",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "any",
+          "label": "core.app.Chat Variable",
+          "value": []
+        },
+        {
+          "key": "questionGuide",
+          "valueType": "any",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "core.app.Question Guide",
+          "value": {
+            "open": false
+          }
+        },
+        {
+          "key": "tts",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "any",
+          "label": "",
+          "value": {
+            "type": "web"
+          }
+        },
+        {
+          "key": "whisper",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "any",
+          "label": "",
+          "value": {
+            "open": false,
+            "autoSend": false,
+            "autoTTSResponse": false
+          }
+        },
+        {
+          "key": "scheduleTrigger",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "any",
+          "label": "",
+          "value": null
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "nodeId": "448745",
+      "name": "common:core.module.template.work_start",
+      "intro": "",
+      "avatar": "core/workflow/template/workflowStart",
+      "flowNodeType": "workflowStart",
+      "position": {
+        "x": -3816.9112624385834,
+        "y": -1203.264869150651
+      },
+      "version": "481",
+      "inputs": [
+        {
+          "key": "userChatInput",
+          "renderTypeList": [
+            "reference",
+            "textarea"
+          ],
+          "valueType": "string",
+          "label": "workflow:user_question",
+          "required": true,
+          "toolDescription": "用户问题",
+          "debugLabel": ""
+        }
+      ],
+      "outputs": [
+        {
+          "id": "userChatInput",
+          "key": "userChatInput",
+          "label": "common:core.module.input.label.user question",
+          "type": "static",
+          "valueType": "string",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "nodeId": "iUg6utpAhadR9uI6",
+      "name": "数据库连接",
+      "intro": "可连接常用数据库，并执行sql",
+      "avatar": "core/workflow/template/datasource",
+      "flowNodeType": "tool",
+      "showStatus": true,
+      "position": {
+        "x": -300,
+        "y": -935.5148691506511
+      },
+      "version": "",
+      "inputs": [
+        {
+          "key": "system_input_config",
+          "label": "",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "inputList": [
+            {
+              "key": "databaseType",
+              "label": "数据库类型",
+              "required": true,
+              "inputType": "select",
+              "list": [
+                {
+                  "label": "MySQL",
+                  "value": "MySQL"
+                },
+                {
+                  "label": "PostgreSQL",
+                  "value": "PostgreSQL"
+                },
+                {
+                  "label": "Microsoft SQL Server",
+                  "value": "Microsoft SQL Server"
+                }
+              ]
+            },
+            {
+              "key": "host",
+              "label": "host",
+              "required": true,
+              "inputType": "input"
+            },
+            {
+              "key": "port",
+              "label": "数据库连接端口号",
+              "required": true,
+              "inputType": "numberInput"
+            },
+            {
+              "key": "databaseName",
+              "label": "数据库名称",
+              "required": true,
+              "inputType": "input"
+            },
+            {
+              "key": "user",
+              "label": "数据库账号",
+              "required": true,
+              "inputType": "input"
+            },
+            {
+              "key": "password",
+              "label": "数据库密码",
+              "required": true,
+              "inputType": "secret"
+            }
+          ]
+        },
+        {
+          "key": "sql",
+          "label": "sql",
+          "defaultValue": "",
+          "selectedTypeIndex": 1,
+          "renderTypeList": [
+            "input",
+            "reference"
+          ],
+          "valueType": "string",
+          "description": "sql语句，可以传入sql语句直接执行",
+          "required": true,
+          "toolDescription": "sql语句，可以传入sql语句直接执行",
+          "list": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "value": [
+            "gmtMJNiPW7bsKGrQ",
+            "answerText"
+          ]
+        }
+      ],
+      "outputs": [
+        {
+          "id": "result",
+          "type": "static",
+          "key": "result",
+          "valueType": "object",
+          "label": "结果",
+          "description": "执行结果"
+        },
+        {
+          "id": "system_error_text",
+          "key": "system_error_text",
+          "type": "error",
+          "valueType": "string",
+          "label": "workflow:error_text"
+        }
+      ],
+      "pluginId": "systemTool-databaseConnection",
+      "toolConfig": {
+        "systemTool": {
+          "toolId": "systemTool-databaseConnection"
+        }
+      },
+      "catchError": false
+    },
+    {
+      "nodeId": "gmtMJNiPW7bsKGrQ",
+      "name": "自然语言转SQL",
+      "intro": "AI 大模型对话",
+      "avatar": "core/workflow/template/aiChat",
+      "flowNodeType": "chatNode",
+      "showStatus": true,
+      "position": {
+        "x": -1092.4112624385834,
+        "y": -1353.014869150651
+      },
+      "version": "4.9.7",
+      "inputs": [
+        {
+          "key": "model",
+          "renderTypeList": [
+            "settingLLMModel",
+            "reference"
+          ],
+          "label": "common:core.module.input.label.aiModel",
+          "valueType": "string",
+          "value": "gpt-4.1",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "temperature",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "number",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "maxToken",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "number",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "isResponseAnswerText",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "value": false,
+          "valueType": "boolean",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatQuoteRole",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "value": "system",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "quoteTemplate",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "quotePrompt",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatVision",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "boolean",
+          "value": true,
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatReasoning",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "boolean",
+          "value": true,
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatTopP",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "number",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatStopSign",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatResponseFormat",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatJsonSchema",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "systemPrompt",
+          "renderTypeList": [
+            "textarea",
+            "reference"
+          ],
+          "max": 3000,
+          "valueType": "string",
+          "label": "common:core.ai.Prompt",
+          "description": "common:core.app.tip.systemPromptTip",
+          "placeholder": "common:core.app.tip.chatNodeSystemPromptTip",
+          "value": "# 角色\n你是SQL语句生成专家，你擅长将用户输入的自然语言转换为高效的MySQL数据库SQL语句，你能够确保生成的SQL语句既符合语法规范，又能满足用户的查询需求。仅输出SQL，不要使用markdown格式输出，不要输出任何提示内容，例如SQL语句：\n\n## 背景\n在日常工作中，用户经常需要将自然语言描述的查询需求转换为SQL语句，以便在MySQL数据库中执行。你作为SQL语句生成专家，能够准确理解用户的意图，并将其转化为精确的SQL语句。\n\n## 技能\n### 技能 1: 需求解析与语义理解\n你能够深入解析用户输入的自然语言，准确识别出查询的目标表、字段、条件、排序方式等关键要素。通过语义分析，确保生成的SQL语句与用户的查询意图完全一致。\n\n### 技能 2: SQL语句生成\n你能够根据解析出的需求，生成符合MySQL语法的SQL语句。无论是简单的SELECT查询，还是复杂的JOIN、GROUP BY、HAVING等操作，你都能熟练处理，并确保语句的效率和正确性。\n\n### 技能 3: 优化与验证\n你能够对生成的SQL语句进行优化，确保其执行效率最大化。同时，你具备验证SQL语句正确性的能力，能够在生成后通过模拟执行或语法检查，确保语句无误。\n\n## 限制\n- 生成的SQL语句必须严格符合MySQL语法规范。\n- 不能改变用户的原始查询意图。\n- 在涉及复杂查询时，需确保生成的SQL语句具有可读性和可维护性。\n- 对于模糊或不明确的用户输入，需通过进一步询问来澄清需求。\n- 生成的SQL语句应避免潜在的安全风险，如SQL注入等。\n- 仅输出SQL，不要使用markdown形式输出",
+          "valueDesc": "",
+          "debugLabel": "",
+          "toolDescription": "",
+          "maxLength": 100000,
+          "isRichText": true
+        },
+        {
+          "key": "history",
+          "renderTypeList": [
+            "numberInput",
+            "reference"
+          ],
+          "valueType": "chatHistory",
+          "label": "common:core.module.input.label.chat history",
+          "description": "workflow:max_dialog_rounds",
+          "required": true,
+          "min": 0,
+          "max": 50,
+          "value": 3,
+          "valueDesc": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "quoteQA",
+          "renderTypeList": [
+            "settingDatasetQuotePrompt"
+          ],
+          "label": "",
+          "debugLabel": "知识库引用",
+          "description": "",
+          "valueType": "datasetQuote",
+          "valueDesc": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "fileUrlList",
+          "renderTypeList": [
+            "reference",
+            "input"
+          ],
+          "label": "app:workflow.user_file_input",
+          "debugLabel": "文件链接",
+          "description": "app:workflow.user_file_input_desc",
+          "valueType": "arrayString",
+          "value": [
+            [
+              "448745",
+              "userFiles"
+            ]
+          ],
+          "valueDesc": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "userChatInput",
+          "renderTypeList": [
+            "reference",
+            "textarea"
+          ],
+          "valueType": "string",
+          "label": "workflow:user_question",
+          "toolDescription": "用户问题",
+          "required": true,
+          "value": "自然语言：{{$448745.userChatInput$}}\n表名及表结构：{{$sgOfAWlDSw6zqOwb.system_text$}}",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "selectedTypeIndex": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "history",
+          "key": "history",
+          "required": true,
+          "label": "common:core.module.output.label.New context",
+          "description": "将本次回复内容拼接上历史记录，作为新的上下文返回",
+          "valueType": "chatHistory",
+          "valueDesc": "{\n  obj: System | Human | AI;\n  value: string;\n}[]",
+          "type": "static"
+        },
+        {
+          "id": "answerText",
+          "key": "answerText",
+          "required": true,
+          "label": "common:core.module.output.label.Ai response content",
+          "description": "将在 stream 回复完毕后触发",
+          "valueType": "string",
+          "type": "static"
+        },
+        {
+          "id": "reasoningText",
+          "key": "reasoningText",
+          "required": false,
+          "label": "workflow:reasoning_text",
+          "valueType": "string",
+          "type": "static",
+          "invalid": true,
+          "description": ""
+        },
+        {
+          "id": "system_error_text",
+          "key": "system_error_text",
+          "type": "error",
+          "valueType": "string",
+          "label": "workflow:error_text",
+          "description": ""
+        }
+      ],
+      "catchError": false
+    },
+    {
+      "nodeId": "at1VY0yz4Ua298ul",
+      "name": "SQL查询总结",
+      "intro": "AI 大模型对话",
+      "avatar": "core/workflow/template/aiChat",
+      "flowNodeType": "chatNode",
+      "showStatus": true,
+      "position": {
+        "x": 337.58873756141656,
+        "y": -1353.014869150651
+      },
+      "version": "4.9.7",
+      "inputs": [
+        {
+          "key": "model",
+          "renderTypeList": [
+            "settingLLMModel",
+            "reference"
+          ],
+          "label": "common:core.module.input.label.aiModel",
+          "valueType": "string",
+          "value": "gpt-4.1",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "temperature",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "number",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "maxToken",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "number",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "isResponseAnswerText",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "value": true,
+          "valueType": "boolean",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatQuoteRole",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "value": "system",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "quoteTemplate",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "quotePrompt",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatVision",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "boolean",
+          "value": true,
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatReasoning",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "boolean",
+          "value": true,
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatTopP",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "number",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatStopSign",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatResponseFormat",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatJsonSchema",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "systemPrompt",
+          "renderTypeList": [
+            "textarea",
+            "reference"
+          ],
+          "max": 3000,
+          "valueType": "string",
+          "label": "common:core.ai.Prompt",
+          "description": "common:core.app.tip.systemPromptTip",
+          "placeholder": "common:core.app.tip.chatNodeSystemPromptTip",
+          "value": "# 角色\n你是SQL查询结果解释专家，你擅长将复杂的SQL查询结果转化为清晰、易懂的自然语言描述，你能够根据用户的具体问题和查询结果，提供准确且易于理解的分析报告。\n\n## 背景\n在数据分析和业务决策过程中，SQL查询结果是获取信息的关键步骤。然而，这些结果往往以表格或数据集的形式呈现，对于非技术人员来说可能难以理解。你作为SQL查询结果解释专家，能够将这些数据转化为自然语言，帮助用户更好地理解数据背后的含义。\n\n## 技能\n### 技能 1: 数据结果的自然语言转化\n你能够将SQL查询结果中的关键数据点转化为自然语言描述，确保用户能够轻松理解数据的含义。例如，将“SELECT COUNT(*) FROM users WHERE age > 30;”的结果解释为“在用户表中，年龄大于30岁的用户共有500人。”\n\n### 技能 2: 提供上下文和洞察\n你不仅能够解释数据结果，还能根据用户的问题提供进一步的上下文和洞察。例如，如果用户询问“哪些产品的销量最高？”，你不仅能列出销量最高的产品，还能分析这些产品的销售趋势或与其他产品的对比情况。\n\n### 技能 3: 定制化解释\n你能够根据用户的需求定制解释的详细程度和重点。例如，对于需要详细分析的业务人员，你可以提供深入的数据解读；对于只需要概括信息的管理层，你可以提供简洁的总结。\n\n## 限制\n- 解释必须基于SQL查询结果的准确数据，不能添加未经证实的信息。\n- 解释语言必须清晰、简洁，避免使用过于专业的术语，除非用户明确要求。\n- 根据用户的时间要求，确保解释的及时性，避免过度延迟。\n- 解释中应避免主观判断，除非用户明确要求提供个人见解。\n- 确保解释的格式易于阅读，如有必要，可以使用分段、列表等方式增强可读性。",
+          "valueDesc": "",
+          "debugLabel": "",
+          "toolDescription": "",
+          "maxLength": 100000,
+          "isRichText": true
+        },
+        {
+          "key": "history",
+          "renderTypeList": [
+            "numberInput",
+            "reference"
+          ],
+          "valueType": "chatHistory",
+          "label": "common:core.module.input.label.chat history",
+          "description": "workflow:max_dialog_rounds",
+          "required": true,
+          "min": 0,
+          "max": 50,
+          "value": 3,
+          "valueDesc": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "quoteQA",
+          "renderTypeList": [
+            "settingDatasetQuotePrompt"
+          ],
+          "label": "",
+          "debugLabel": "知识库引用",
+          "description": "",
+          "valueType": "datasetQuote",
+          "valueDesc": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "fileUrlList",
+          "renderTypeList": [
+            "reference",
+            "input"
+          ],
+          "label": "app:workflow.user_file_input",
+          "debugLabel": "文件链接",
+          "description": "app:workflow.user_file_input_desc",
+          "valueType": "arrayString",
+          "value": [
+            [
+              "448745",
+              "userFiles"
+            ]
+          ],
+          "valueDesc": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "userChatInput",
+          "renderTypeList": [
+            "reference",
+            "textarea"
+          ],
+          "valueType": "string",
+          "label": "workflow:user_question",
+          "toolDescription": "用户问题",
+          "required": true,
+          "value": "用户的问题：{{$448745.userChatInput$}}\n数据库查询结果：{{$iUg6utpAhadR9uI6.result$}}",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "selectedTypeIndex": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "history",
+          "key": "history",
+          "required": true,
+          "label": "common:core.module.output.label.New context",
+          "description": "将本次回复内容拼接上历史记录，作为新的上下文返回",
+          "valueType": "chatHistory",
+          "valueDesc": "{\n  obj: System | Human | AI;\n  value: string;\n}[]",
+          "type": "static"
+        },
+        {
+          "id": "answerText",
+          "key": "answerText",
+          "required": true,
+          "label": "common:core.module.output.label.Ai response content",
+          "description": "将在 stream 回复完毕后触发",
+          "valueType": "string",
+          "type": "static"
+        },
+        {
+          "id": "reasoningText",
+          "key": "reasoningText",
+          "required": false,
+          "label": "workflow:reasoning_text",
+          "valueType": "string",
+          "type": "static",
+          "invalid": true,
+          "description": ""
+        },
+        {
+          "id": "system_error_text",
+          "key": "system_error_text",
+          "type": "error",
+          "valueType": "string",
+          "label": "workflow:error_text",
+          "description": ""
+        }
+      ],
+      "catchError": false
+    },
+    {
+      "nodeId": "dZVucKFAB9XoSXp3",
+      "name": "确保数据库安全",
+      "intro": "根据用户的历史记录和当前问题判断该次提问的类型。可以添加多组问题类型，下面是一个模板例子:\n类型1: 打招呼\n类型2: 关于商品“使用”问题\n类型3: 关于商品“购买”问题\n类型4: 其他问题",
+      "avatar": "core/workflow/template/questionClassify",
+      "flowNodeType": "classifyQuestion",
+      "showStatus": true,
+      "position": {
+        "x": -3326.4112624385834,
+        "y": -1471.764869150651
+      },
+      "version": "4.9.2",
+      "inputs": [
+        {
+          "key": "model",
+          "renderTypeList": [
+            "selectLLMModel",
+            "reference"
+          ],
+          "label": "common:core.module.input.label.aiModel",
+          "required": true,
+          "valueType": "string",
+          "llmModelType": "classify",
+          "value": "qwen2.5-72b-instruct",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "systemPrompt",
+          "renderTypeList": [
+            "textarea",
+            "reference"
+          ],
+          "max": 3000,
+          "valueType": "string",
+          "label": "common:core.module.input.label.Background",
+          "description": "common:core.module.input.description.Background",
+          "placeholder": "common:core.module.input.placeholder.Classify background",
+          "value": "# 自然语言查询请求判断系统\n\n## 任务描述\n你是一个专门用于判断用户输入是否为数据库查询请求的安全检测系统。你的核心职责是确保只有安全的查询操作能够通过，严格阻止任何可能修改、删除或破坏数据库数据的请求。\n\n## 判断标准\n\n### ✅ 允许通过的查询类型（仅限SELECT操作）：\n- 数据检索和查看请求\n- 统计分析请求（计数、求和、平均值等）\n- 条件筛选查询\n- 排序和分组查询\n- 多表联合查询\n- 聚合函数查询\n- 数据库元数据查询（查询所有表格名称及表格字段结构）\n### ❌ 严格拒绝的操作类型：\n- 数据修改操作（UPDATE、INSERT、DELETE）\n- 表结构变更（CREATE、ALTER、DROP）\n- 权限管理操作（GRANT、REVOKE）\n- 数据库管理操作（BACKUP、RESTORE）\n- 存储过程和函数调用\n- 事务控制语句\n- 任何包含潜在恶意意图的输入\n\n### ⚠️ 高风险关键词识别：\n拒绝包含以下意图的输入：\n- 修改、更新、删除、插入、添加、变更\n- 创建、建立、新建、删除表/数据库\n- 授权、权限、用户管理\n- 执行、运行脚本\n- 备份、恢复、导入、导出",
+          "valueDesc": "",
+          "debugLabel": "",
+          "toolDescription": "",
+          "maxLength": 100000,
+          "isRichText": true
+        },
+        {
+          "key": "history",
+          "renderTypeList": [
+            "numberInput",
+            "reference"
+          ],
+          "valueType": "chatHistory",
+          "label": "common:core.module.input.label.chat history",
+          "description": "workflow:max_dialog_rounds",
+          "required": true,
+          "min": 0,
+          "max": 50,
+          "value": 6,
+          "valueDesc": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "userChatInput",
+          "renderTypeList": [
+            "reference",
+            "textarea"
+          ],
+          "valueType": "string",
+          "label": "workflow:user_question",
+          "toolDescription": "用户输入的问题（问题需要完善）",
+          "required": true,
+          "value": [
+            "448745",
+            "userChatInput"
+          ],
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": ""
+        },
+        {
+          "renderTypeList": [
+            "custom"
+          ],
+          "valueType": "any",
+          "label": "",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": "",
+          "key": "agents",
+          "value": [
+            {
+              "value": "查询类型请求",
+              "key": "wqre"
+            },
+            {
+              "value": "非查询类型请求",
+              "key": "sdfa"
+            }
+          ]
+        }
+      ],
+      "outputs": [
+        {
+          "id": "cqResult",
+          "key": "cqResult",
+          "required": true,
+          "label": "workflow:classification_result",
+          "valueType": "string",
+          "type": "static",
+          "valueDesc": "",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "nodeId": "gzw991m7olr0G8ir",
+      "name": "指定回复#2",
+      "intro": "该模块可以直接回复一段指定的内容。常用于引导、提示。非字符串内容传入时，会转成字符串进行输出。",
+      "avatar": "core/workflow/template/reply",
+      "flowNodeType": "answerNode",
+      "position": {
+        "x": -2540.4112624385834,
+        "y": -1297.514869150651
+      },
+      "inputs": [
+        {
+          "key": "text",
+          "renderTypeList": [
+            "textarea",
+            "reference"
+          ],
+          "valueType": "any",
+          "required": true,
+          "label": "common:core.module.input.label.Response content",
+          "description": "common:core.module.input.description.Response content",
+          "placeholder": "common:core.module.input.description.Response content",
+          "value": "### ⚠️ChatBI仅支持用户的查询请求",
+          "valueDesc": "",
+          "debugLabel": "",
+          "toolDescription": "",
+          "isRichText": false,
+          "maxLength": 100000
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "nodeId": "sgOfAWlDSw6zqOwb",
+      "name": "文本拼接#2",
+      "intro": "可对固定或传入的文本进行加工后输出，非字符串类型数据最终会转成字符串类型。",
+      "avatar": "core/workflow/template/textConcat",
+      "flowNodeType": "textEditor",
+      "position": {
+        "x": -1754.4112624385834,
+        "y": -955.5148691506511
+      },
+      "inputs": [
+        {
+          "key": "system_textareaInput",
+          "renderTypeList": [
+            "textarea"
+          ],
+          "valueType": "string",
+          "required": true,
+          "label": "workflow:concatenation_text",
+          "placeholder": "workflow:input_variable_list",
+          "value": "表名：business_trip\n表结构：{{$dawLOlXSJR8RKda8.result$}}",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        }
+      ],
+      "outputs": [
+        {
+          "id": "system_text",
+          "key": "system_text",
+          "label": "workflow:concatenation_result",
+          "type": "static",
+          "valueType": "string",
+          "valueDesc": "",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "nodeId": "dawLOlXSJR8RKda8",
+      "name": "查询表中字段#3",
+      "intro": "可连接常用数据库，并执行sql",
+      "avatar": "core/workflow/template/datasource",
+      "flowNodeType": "tool",
+      "showStatus": true,
+      "position": {
+        "x": -2469.4112624385834,
+        "y": -935.5148691506511
+      },
+      "version": "",
+      "inputs": [
+        {
+          "key": "system_input_config",
+          "label": "",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "inputList": [
+            {
+              "key": "databaseType",
+              "label": "数据库类型",
+              "required": true,
+              "inputType": "select",
+              "list": [
+                {
+                  "label": "MySQL",
+                  "value": "MySQL"
+                },
+                {
+                  "label": "PostgreSQL",
+                  "value": "PostgreSQL"
+                },
+                {
+                  "label": "Microsoft SQL Server",
+                  "value": "Microsoft SQL Server"
+                }
+              ]
+            },
+            {
+              "key": "host",
+              "label": "host",
+              "required": true,
+              "inputType": "input"
+            },
+            {
+              "key": "port",
+              "label": "数据库连接端口号",
+              "required": true,
+              "inputType": "numberInput"
+            },
+            {
+              "key": "databaseName",
+              "label": "数据库名称",
+              "required": true,
+              "inputType": "input"
+            },
+            {
+              "key": "user",
+              "label": "数据库账号",
+              "required": true,
+              "inputType": "input"
+            },
+            {
+              "key": "password",
+              "label": "数据库密码",
+              "required": true,
+              "inputType": "secret"
+            }
+          ]
+        },
+        {
+          "key": "sql",
+          "label": "sql",
+          "defaultValue": "",
+          "selectedTypeIndex": 0,
+          "renderTypeList": [
+            "input",
+            "reference"
+          ],
+          "valueType": "string",
+          "description": "sql语句，可以传入sql语句直接执行",
+          "required": true,
+          "toolDescription": "sql语句，可以传入sql语句直接执行",
+          "list": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "value": "SHOW FULL COLUMNS FROM business_trip;"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "result",
+          "type": "static",
+          "key": "result",
+          "valueType": "object",
+          "label": "结果",
+          "description": "执行结果"
+        },
+        {
+          "id": "system_error_text",
+          "key": "system_error_text",
+          "type": "error",
+          "valueType": "string",
+          "label": "workflow:error_text"
+        }
+      ],
+      "pluginId": "systemTool-databaseConnection",
+      "toolConfig": {
+        "systemTool": {
+          "toolId": "systemTool-databaseConnection"
+        }
+      },
+      "catchError": false
+    }
+  ],
+  "edges": [
+    {
+      "source": "iUg6utpAhadR9uI6",
+      "target": "at1VY0yz4Ua298ul",
+      "sourceHandle": "iUg6utpAhadR9uI6-source-right",
+      "targetHandle": "at1VY0yz4Ua298ul-target-left"
+    },
+    {
+      "source": "448745",
+      "target": "dZVucKFAB9XoSXp3",
+      "sourceHandle": "448745-source-right",
+      "targetHandle": "dZVucKFAB9XoSXp3-target-left"
+    },
+    {
+      "source": "dZVucKFAB9XoSXp3",
+      "target": "gzw991m7olr0G8ir",
+      "sourceHandle": "dZVucKFAB9XoSXp3-source-sdfa",
+      "targetHandle": "gzw991m7olr0G8ir-target-left"
+    },
+    {
+      "source": "dawLOlXSJR8RKda8",
+      "target": "sgOfAWlDSw6zqOwb",
+      "sourceHandle": "dawLOlXSJR8RKda8-source-right",
+      "targetHandle": "sgOfAWlDSw6zqOwb-target-left"
+    },
+    {
+      "source": "sgOfAWlDSw6zqOwb",
+      "target": "gmtMJNiPW7bsKGrQ",
+      "sourceHandle": "sgOfAWlDSw6zqOwb-source-right",
+      "targetHandle": "gmtMJNiPW7bsKGrQ-target-left"
+    },
+    {
+      "source": "dZVucKFAB9XoSXp3",
+      "target": "dawLOlXSJR8RKda8",
+      "sourceHandle": "dZVucKFAB9XoSXp3-source-wqre",
+      "targetHandle": "dawLOlXSJR8RKda8-target-left"
+    },
+    {
+      "source": "gmtMJNiPW7bsKGrQ",
+      "target": "iUg6utpAhadR9uI6",
+      "sourceHandle": "gmtMJNiPW7bsKGrQ-source-right",
+      "targetHandle": "iUg6utpAhadR9uI6-target-left"
+    }
+  ],
+  "chatConfig": {
+    "welcomeText": "#### 您好，我是您的差旅预算监控助手，可以帮您实时管理和分析差旅费用，提醒预算动态并防止超支，有任何关于差旅费用的问题欢迎随时告诉我！\n[查询人员名单]\n[查看张三的所有出差详情]\n[查看赵六超出预算的出差详情]\n[李四有几次出差超出预算]\n[哪些部门经常超预算？]\n[单位出差天数成本分析（总费用/出差天数）]\n[不同目的地城市的平均费用水平]\n[各部门出差频次排名]\n[员工个人出差频率统计]\n[关键岗位出差依赖度分析]",
+    "variables": [],
+    "scheduledTriggerConfig": {
+      "cronString": "",
+      "timezone": "Asia/Shanghai",
+      "defaultPrompt": ""
+    },
+    "_id": "6805df45576a82573f6e8e21"
+  }
+}

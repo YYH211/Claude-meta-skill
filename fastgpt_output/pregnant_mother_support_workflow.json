@@ -1,0 +1,2121 @@
+{
+  "nodes": [
+    {
+      "nodeId": "userGuide",
+      "name": "系统配置",
+      "intro": "系统配置",
+      "avatar": "core/workflow/template/systemConfig",
+      "flowNodeType": "userGuide",
+      "position": {
+        "x": 100,
+        "y": 100
+      },
+      "version": "481",
+      "inputs": [
+        {
+          "key": "welcomeText",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "string",
+          "label": "欢迎语",
+          "value": ""
+        },
+        {
+          "key": "variables",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "any",
+          "label": "聊天变量",
+          "value": []
+        },
+        {
+          "key": "questionGuide",
+          "valueType": "any",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "问题引导",
+          "value": {
+            "open": false
+          }
+        },
+        {
+          "key": "tts",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "any",
+          "label": "TTS",
+          "value": {
+            "type": "web"
+          }
+        },
+        {
+          "key": "whisper",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "any",
+          "label": "Whisper",
+          "value": {
+            "open": false,
+            "autoSend": false,
+            "autoTTSResponse": false
+          }
+        },
+        {
+          "key": "scheduleTrigger",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "any",
+          "label": "定时触发",
+          "value": null
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "nodeId": "workflowStart",
+      "name": "开始",
+      "intro": "工作流开始",
+      "avatar": "core/workflow/template/workflowStart",
+      "flowNodeType": "workflowStart",
+      "position": {
+        "x": 400,
+        "y": 100
+      },
+      "version": "481",
+      "inputs": [
+        {
+          "key": "userChatInput",
+          "renderTypeList": [
+            "reference",
+            "textarea"
+          ],
+          "valueType": "string",
+          "label": "用户问题",
+          "required": true,
+          "toolDescription": "用户输入的问题或需求",
+          "debugLabel": ""
+        }
+      ],
+      "outputs": [
+        {
+          "id": "userChatInput",
+          "key": "userChatInput",
+          "label": "用户输入",
+          "type": "static",
+          "valueType": "string",
+          "description": "用户输入的文本内容"
+        }
+      ]
+    },
+    {
+      "nodeId": "intentRecognition",
+      "name": "意图识别",
+      "intro": "识别用户需求类型并路由到相应的专业Agent",
+      "avatar": "core/workflow/template/aiChat",
+      "flowNodeType": "chatNode",
+      "showStatus": true,
+      "position": {
+        "x": 700,
+        "y": 100
+      },
+      "version": "4.9.7",
+      "inputs": [
+        {
+          "key": "model",
+          "renderTypeList": [
+            "settingLLMModel",
+            "reference"
+          ],
+          "label": "对话模型",
+          "valueType": "string",
+          "value": "gpt-4",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "temperature",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "温度",
+          "valueType": "number",
+          "value": 0.3,
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "maxToken",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "最大Token",
+          "valueType": "number",
+          "value": 500,
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "isResponseAnswerText",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "直接回复",
+          "value": false,
+          "valueType": "boolean",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatQuoteRole",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "引用角色",
+          "valueType": "string",
+          "value": "system",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "quoteTemplate",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "引用模板",
+          "valueType": "string",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "quotePrompt",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "引用提示词",
+          "valueType": "string",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatVision",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "视觉",
+          "valueType": "boolean",
+          "value": true,
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatReasoning",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "推理",
+          "valueType": "boolean",
+          "value": true,
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "systemPrompt",
+          "renderTypeList": [
+            "textarea",
+            "reference"
+          ],
+          "max": 3000,
+          "valueType": "string",
+          "label": "系统提示词",
+          "description": "系统提示词",
+          "placeholder": "输入系统提示词",
+          "value": "# 角色\n你是一个专业的意图识别专家,负责分析准妈妈的需求并将其分类到6个专业服务领域。\n\n## 任务\n分析用户输入,识别其需求属于以下哪个类别:\n\n1. **孕期知识科普** - 关键词:临产征兆、待产包、分娩流程、产检、胎动、宫缩、见红、破水等\n2. **产后护理指导** - 关键词:新生儿护理、洗澡、换尿布、喂养、母乳、产后恢复、月子、恶露等\n3. **职场权益咨询** - 关键词:产假、哺乳假、生育保险、职场、工资、社保、报销、离职等\n4. **情绪心理支持** - 关键词:焦虑、抑郁、压力大、情绪、害怕、担心、心理、睡眠等\n5. **就医资源对接** - 关键词:医院、产科、医生、挂号、检查、分娩、龙岗区、就医等\n6. **生活服务协调** - 关键词:月子中心、月嫂、家政、康复、产后修复、育儿嫂等\n\n## 输出格式\n只输出一个数字(1-6),代表最匹配的服务类别。如果涉及多个类别,输出最相关的主要类别编号。",
+          "valueDesc": "",
+          "debugLabel": "",
+          "toolDescription": "",
+          "maxLength": 100000,
+          "isRichText": true
+        },
+        {
+          "key": "history",
+          "renderTypeList": [
+            "numberInput",
+            "reference"
+          ],
+          "valueType": "chatHistory",
+          "label": "对话历史",
+          "description": "对话历史轮数",
+          "required": true,
+          "min": 0,
+          "max": 10,
+          "value": 0,
+          "valueDesc": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "quoteQA",
+          "renderTypeList": [
+            "settingDatasetQuotePrompt"
+          ],
+          "label": "知识库引用",
+          "debugLabel": "知识库引用",
+          "description": "",
+          "valueType": "datasetQuote",
+          "valueDesc": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "fileUrlList",
+          "renderTypeList": [
+            "reference",
+            "input"
+          ],
+          "label": "文件链接",
+          "debugLabel": "文件链接",
+          "description": "用户上传的文件",
+          "valueType": "arrayString",
+          "value": [],
+          "valueDesc": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "userChatInput",
+          "renderTypeList": [
+            "reference",
+            "textarea"
+          ],
+          "valueType": "string",
+          "label": "用户问题",
+          "toolDescription": "用户问题",
+          "required": true,
+          "value": [
+            "workflowStart",
+            "userChatInput"
+          ],
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "selectedTypeIndex": 0
+        }
+      ],
+      "outputs": [
+        {
+          "id": "history",
+          "key": "history",
+          "required": true,
+          "label": "新上下文",
+          "description": "包含历史的上下文",
+          "valueType": "chatHistory",
+          "valueDesc": "",
+          "type": "static"
+        },
+        {
+          "id": "answerText",
+          "key": "answerText",
+          "required": true,
+          "label": "AI回复内容",
+          "description": "AI回复内容",
+          "valueType": "string",
+          "type": "static",
+          "valueDesc": ""
+        },
+        {
+          "id": "reasoningText",
+          "key": "reasoningText",
+          "required": false,
+          "label": "推理文本",
+          "valueType": "string",
+          "type": "static",
+          "invalid": true,
+          "valueDesc": "",
+          "description": ""
+        },
+        {
+          "id": "system_error_text",
+          "key": "system_error_text",
+          "type": "error",
+          "valueType": "string",
+          "label": "错误文本",
+          "description": ""
+        }
+      ],
+      "catchError": false
+    },
+    {
+      "nodeId": "conditionRouter",
+      "name": "条件路由",
+      "intro": "根据意图识别结果路由到相应的专业Agent",
+      "avatar": "core/workflow/template/ifelse",
+      "flowNodeType": "ifElseNode",
+      "showStatus": true,
+      "position": {
+        "x": 1000,
+        "y": 100
+      },
+      "inputs": [
+        {
+          "key": "ifElseList",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "any",
+          "label": "条件列表",
+          "value": [
+            {
+              "condition": "OR",
+              "list": [
+                {
+                  "variable": [
+                    "intentRecognition",
+                    "answerText"
+                  ],
+                  "condition": "includes",
+                  "value": "1"
+                }
+              ]
+            },
+            {
+              "condition": "OR",
+              "list": [
+                {
+                  "variable": [
+                    "intentRecognition",
+                    "answerText"
+                  ],
+                  "condition": "includes",
+                  "value": "2"
+                }
+              ]
+            },
+            {
+              "condition": "OR",
+              "list": [
+                {
+                  "variable": [
+                    "intentRecognition",
+                    "answerText"
+                  ],
+                  "condition": "includes",
+                  "value": "3"
+                }
+              ]
+            },
+            {
+              "condition": "OR",
+              "list": [
+                {
+                  "variable": [
+                    "intentRecognition",
+                    "answerText"
+                  ],
+                  "condition": "includes",
+                  "value": "4"
+                }
+              ]
+            },
+            {
+              "condition": "OR",
+              "list": [
+                {
+                  "variable": [
+                    "intentRecognition",
+                    "answerText"
+                  ],
+                  "condition": "includes",
+                  "value": "5"
+                }
+              ]
+            },
+            {
+              "condition": "OR",
+              "list": [
+                {
+                  "variable": [
+                    "intentRecognition",
+                    "answerText"
+                  ],
+                  "condition": "includes",
+                  "value": "6"
+                }
+              ]
+            }
+          ],
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        }
+      ],
+      "outputs": [
+        {
+          "id": "ifElseResult",
+          "key": "ifElseResult",
+          "label": "判断结果",
+          "valueType": "string",
+          "type": "static",
+          "valueDesc": "",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "nodeId": "prenatalAgent",
+      "name": "孕期知识科普Agent",
+      "intro": "提供专业的孕期知识科普服务",
+      "avatar": "core/workflow/template/aiChat",
+      "flowNodeType": "chatNode",
+      "showStatus": true,
+      "position": {
+        "x": 1300,
+        "y": -300
+      },
+      "version": "4.9.7",
+      "inputs": [
+        {
+          "key": "model",
+          "renderTypeList": [
+            "settingLLMModel",
+            "reference"
+          ],
+          "label": "对话模型",
+          "valueType": "string",
+          "value": "gpt-4",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "temperature",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "温度",
+          "valueType": "number",
+          "value": 0.7,
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "maxToken",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "最大Token",
+          "valueType": "number",
+          "value": 2000,
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "isResponseAnswerText",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "直接回复",
+          "value": true,
+          "valueType": "boolean",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatQuoteRole",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "引用角色",
+          "valueType": "string",
+          "value": "system",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "quoteTemplate",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "引用模板",
+          "valueType": "string",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "quotePrompt",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "引用提示词",
+          "valueType": "string",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatVision",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "视觉",
+          "valueType": "boolean",
+          "value": true,
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatReasoning",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "推理",
+          "valueType": "boolean",
+          "value": true,
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "systemPrompt",
+          "renderTypeList": [
+            "textarea",
+            "reference"
+          ],
+          "max": 3000,
+          "valueType": "string",
+          "label": "系统提示词",
+          "description": "系统提示词",
+          "placeholder": "输入系统提示词",
+          "value": "# 角色\n你是一位经验丰富的产科医生和孕期护理专家,拥有10年以上的临床经验。你擅长为准妈妈提供专业、准确、温暖的孕期知识科普服务。\n\n## 专业领域\n1. **临产征兆识别** - 宫缩、见红、破水等临产信号的判断和应对\n2. **待产包准备** - 产妇用品、新生儿用品的清单和注意事项\n3. **分娩流程说明** - 顺产、剖宫产的过程、时间、疼痛管理\n4. **产前注意事项** - 饮食、运动、休息、胎动监测、产检时间表\n5. **孕期并发症** - 妊高症、妊娠糖尿病等常见问题的预防和处理\n\n## 服务风格\n- **专业权威**: 基于循证医学提供科学信息\n- **温暖关怀**: 用亲切的语气给予心理支持\n- **通俗易懂**: 将专业术语转化为易懂的语言\n- **实用导向**: 提供可操作的具体建议\n\n## 回复格式\n1. 首先给予情感支持和安抚\n2. 用清晰的结构解答问题\n3. 提供具体可操作的建议\n4. 必要时提醒就医或咨询专业人士\n\n## 限制\n- 不做具体诊断,仅提供科普信息\n- 涉及医疗问题时提醒咨询医生\n- 保持客观中立,不夸大风险",
+          "valueDesc": "",
+          "debugLabel": "",
+          "toolDescription": "",
+          "maxLength": 100000,
+          "isRichText": true
+        },
+        {
+          "key": "history",
+          "renderTypeList": [
+            "numberInput",
+            "reference"
+          ],
+          "valueType": "chatHistory",
+          "label": "对话历史",
+          "description": "对话历史轮数",
+          "required": true,
+          "min": 0,
+          "max": 50,
+          "value": 6,
+          "valueDesc": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "quoteQA",
+          "renderTypeList": [
+            "settingDatasetQuotePrompt"
+          ],
+          "label": "知识库引用",
+          "debugLabel": "知识库引用",
+          "description": "",
+          "valueType": "datasetQuote",
+          "valueDesc": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "fileUrlList",
+          "renderTypeList": [
+            "reference",
+            "input"
+          ],
+          "label": "文件链接",
+          "debugLabel": "文件链接",
+          "description": "用户上传的文件",
+          "valueType": "arrayString",
+          "value": [
+            [
+              "workflowStart",
+              "userFiles"
+            ]
+          ],
+          "valueDesc": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "userChatInput",
+          "renderTypeList": [
+            "reference",
+            "textarea"
+          ],
+          "valueType": "string",
+          "label": "用户问题",
+          "toolDescription": "用户问题",
+          "required": true,
+          "value": [
+            "workflowStart",
+            "userChatInput"
+          ],
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "selectedTypeIndex": 0
+        }
+      ],
+      "outputs": [
+        {
+          "id": "history",
+          "key": "history",
+          "required": true,
+          "label": "新上下文",
+          "description": "包含历史的上下文",
+          "valueType": "chatHistory",
+          "valueDesc": "",
+          "type": "static"
+        },
+        {
+          "id": "answerText",
+          "key": "answerText",
+          "required": true,
+          "label": "AI回复内容",
+          "description": "AI回复内容",
+          "valueType": "string",
+          "type": "static",
+          "valueDesc": ""
+        },
+        {
+          "id": "reasoningText",
+          "key": "reasoningText",
+          "required": false,
+          "label": "推理文本",
+          "valueType": "string",
+          "type": "static",
+          "invalid": true,
+          "valueDesc": "",
+          "description": ""
+        },
+        {
+          "id": "system_error_text",
+          "key": "system_error_text",
+          "type": "error",
+          "valueType": "string",
+          "label": "错误文本",
+          "description": ""
+        }
+      ],
+      "catchError": false
+    },
+    {
+      "nodeId": "postpartumAgent",
+      "name": "产后护理指导Agent",
+      "intro": "提供专业的产后护理和新生儿护理指导",
+      "avatar": "core/workflow/template/aiChat",
+      "flowNodeType": "chatNode",
+      "showStatus": true,
+      "position": {
+        "x": 1300,
+        "y": -180
+      },
+      "version": "4.9.7",
+      "inputs": [
+        {
+          "key": "model",
+          "renderTypeList": [
+            "settingLLMModel",
+            "reference"
+          ],
+          "label": "对话模型",
+          "valueType": "string",
+          "value": "gpt-4",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "temperature",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "温度",
+          "valueType": "number",
+          "value": 0.7,
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "maxToken",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "最大Token",
+          "valueType": "number",
+          "value": 2000,
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "isResponseAnswerText",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "直接回复",
+          "value": true,
+          "valueType": "boolean",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatQuoteRole",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "引用角色",
+          "valueType": "string",
+          "value": "system",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "quoteTemplate",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "引用模板",
+          "valueType": "string",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "quotePrompt",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "引用提示词",
+          "valueType": "string",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatVision",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "视觉",
+          "valueType": "boolean",
+          "value": true,
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatReasoning",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "推理",
+          "valueType": "boolean",
+          "value": true,
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "systemPrompt",
+          "renderTypeList": [
+            "textarea",
+            "reference"
+          ],
+          "max": 3000,
+          "valueType": "string",
+          "label": "系统提示词",
+          "description": "系统提示词",
+          "placeholder": "输入系统提示词",
+          "value": "# 角色\n你是一位资深的产后护理专家和育儿顾问,拥有15年以上的母婴护理经验。你擅长为新手妈妈提供专业、实用的产后护理和新生儿护理指导。\n\n## 专业领域\n1. **新生儿护理** - 洗澡、换尿布、脐带护理、睡眠指导、哭闹安抚等\n2. **母乳喂养** - 含接姿势、堵奶预防、追奶方法、断奶指导等\n3. **产后恢复** - 恶露观察、伤口护理、盆底肌修复、产后运动等\n4. **月子饮食** - 营养搭配、催奶食谱、忌口清单、水分补充等\n5. **情绪调适** - 产后情绪低落、角色转换、睡眠不足应对等\n\n## 服务风格\n- **耐心细致**: 用简单易懂的步骤说明操作方法\n- **鼓励支持**: 肯定新妈妈的努力,减轻焦虑感\n- **科学育儿**: 基于现代育儿理念提供专业建议\n- **灵活变通**: 理解每个宝宝和妈妈的情况不同\n\n## 回复格式\n1. 首先肯定新妈妈的担忧和努力\n2. 提供清晰的步骤或解决方案\n3. 补充相关的注意事项和提醒\n4. 给予情感支持和鼓励\n\n## 限制\n- 不做医疗诊断,异常情况建议就医\n- 尊重不同的育儿选择和观念\n- 必要时建议咨询专业人士",
+          "valueDesc": "",
+          "debugLabel": "",
+          "toolDescription": "",
+          "maxLength": 100000,
+          "isRichText": true
+        },
+        {
+          "key": "history",
+          "renderTypeList": [
+            "numberInput",
+            "reference"
+          ],
+          "valueType": "chatHistory",
+          "label": "对话历史",
+          "description": "对话历史轮数",
+          "required": true,
+          "min": 0,
+          "max": 50,
+          "value": 6,
+          "valueDesc": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "quoteQA",
+          "renderTypeList": [
+            "settingDatasetQuotePrompt"
+          ],
+          "label": "知识库引用",
+          "debugLabel": "知识库引用",
+          "description": "",
+          "valueType": "datasetQuote",
+          "valueDesc": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "fileUrlList",
+          "renderTypeList": [
+            "reference",
+            "input"
+          ],
+          "label": "文件链接",
+          "debugLabel": "文件链接",
+          "description": "用户上传的文件",
+          "valueType": "arrayString",
+          "value": [
+            [
+              "workflowStart",
+              "userFiles"
+            ]
+          ],
+          "valueDesc": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "userChatInput",
+          "renderTypeList": [
+            "reference",
+            "textarea"
+          ],
+          "valueType": "string",
+          "label": "用户问题",
+          "toolDescription": "用户问题",
+          "required": true,
+          "value": [
+            "workflowStart",
+            "userChatInput"
+          ],
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "selectedTypeIndex": 0
+        }
+      ],
+      "outputs": [
+        {
+          "id": "history",
+          "key": "history",
+          "required": true,
+          "label": "新上下文",
+          "description": "包含历史的上下文",
+          "valueType": "chatHistory",
+          "valueDesc": "",
+          "type": "static"
+        },
+        {
+          "id": "answerText",
+          "key": "answerText",
+          "required": true,
+          "label": "AI回复内容",
+          "description": "AI回复内容",
+          "valueType": "string",
+          "type": "static",
+          "valueDesc": ""
+        },
+        {
+          "id": "reasoningText",
+          "key": "reasoningText",
+          "required": false,
+          "label": "推理文本",
+          "valueType": "string",
+          "type": "static",
+          "invalid": true,
+          "valueDesc": "",
+          "description": ""
+        },
+        {
+          "id": "system_error_text",
+          "key": "system_error_text",
+          "type": "error",
+          "valueType": "string",
+          "label": "错误文本",
+          "description": ""
+        }
+      ],
+      "catchError": false
+    },
+    {
+      "nodeId": "workplaceAgent",
+      "name": "职场权益咨询Agent",
+      "intro": "提供专业的职场权益和劳动法咨询服务",
+      "avatar": "core/workflow/template/aiChat",
+      "flowNodeType": "chatNode",
+      "showStatus": true,
+      "position": {
+        "x": 1300,
+        "y": -60
+      },
+      "version": "4.9.7",
+      "inputs": [
+        {
+          "key": "model",
+          "renderTypeList": [
+            "settingLLMModel",
+            "reference"
+          ],
+          "label": "对话模型",
+          "valueType": "string",
+          "value": "gpt-4",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "temperature",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "温度",
+          "valueType": "number",
+          "value": 0.5,
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "maxToken",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "最大Token",
+          "valueType": "number",
+          "value": 2000,
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "isResponseAnswerText",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "直接回复",
+          "value": true,
+          "valueType": "boolean",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatQuoteRole",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "引用角色",
+          "valueType": "string",
+          "value": "system",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "quoteTemplate",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "引用模板",
+          "valueType": "string",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "quotePrompt",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "引用提示词",
+          "valueType": "string",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatVision",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "视觉",
+          "valueType": "boolean",
+          "value": true,
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatReasoning",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "推理",
+          "valueType": "boolean",
+          "value": true,
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "systemPrompt",
+          "renderTypeList": [
+            "textarea",
+            "reference"
+          ],
+          "max": 3000,
+          "valueType": "string",
+          "label": "系统提示词",
+          "description": "系统提示词",
+          "placeholder": "输入系统提示词",
+          "value": "# 角色\n你是一位资深的劳动法律师和职场权益专家,拥有12年以上的劳动法实务经验。你擅长为职场女性提供专业的劳动权益咨询和法律支持。\n\n## 专业领域\n1. **产假政策** - 产假天数、产假期间工资、产假申请流程等\n2. **哺乳假规定** - 哺乳假时长、哺乳假工资、哺乳室权益等\n3. **生育保险** - 报销流程、报销标准、申领条件、所需材料等\n4. **职场权益保护** - 孕期劳动保护、违法解除、调岗降薪应对等\n5. **社保公积金** - 缴纳标准、断缴影响、转移接续等\n\n## 服务风格\n- **专业严谨**: 基于法律法规提供准确信息\n- **条理清晰**: 分步骤说明政策内容和操作流程\n- **维护权益**: 强调劳动者的合法权益\n- **务实建议**: 提供可操作的具体行动方案\n\n## 回复格式\n1. 明确相关法律法规或政策依据\n2. 详细说明具体权利和保障内容\n3. 提供操作步骤和注意事项\n4. 必要时建议咨询专业律师或劳动部门\n\n## 重要说明\n- **地域差异**: 提醒用户不同地区可能存在政策差异\n- **法律依据**: 引用具体法律条文增强说服力\n- **时效性**: 注意法律法规的时效性\n- **专业限制**: 复杂法律问题建议咨询专业律师",
+          "valueDesc": "",
+          "debugLabel": "",
+          "toolDescription": "",
+          "maxLength": 100000,
+          "isRichText": true
+        },
+        {
+          "key": "history",
+          "renderTypeList": [
+            "numberInput",
+            "reference"
+          ],
+          "valueType": "chatHistory",
+          "label": "对话历史",
+          "description": "对话历史轮数",
+          "required": true,
+          "min": 0,
+          "max": 50,
+          "value": 6,
+          "valueDesc": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "quoteQA",
+          "renderTypeList": [
+            "settingDatasetQuotePrompt"
+          ],
+          "label": "知识库引用",
+          "debugLabel": "知识库引用",
+          "description": "",
+          "valueType": "datasetQuote",
+          "valueDesc": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "fileUrlList",
+          "renderTypeList": [
+            "reference",
+            "input"
+          ],
+          "label": "文件链接",
+          "debugLabel": "文件链接",
+          "description": "用户上传的文件",
+          "valueType": "arrayString",
+          "value": [
+            [
+              "workflowStart",
+              "userFiles"
+            ]
+          ],
+          "valueDesc": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "userChatInput",
+          "renderTypeList": [
+            "reference",
+            "textarea"
+          ],
+          "valueType": "string",
+          "label": "用户问题",
+          "toolDescription": "用户问题",
+          "required": true,
+          "value": [
+            "workflowStart",
+            "userChatInput"
+          ],
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "selectedTypeIndex": 0
+        }
+      ],
+      "outputs": [
+        {
+          "id": "history",
+          "key": "history",
+          "required": true,
+          "label": "新上下文",
+          "description": "包含历史的上下文",
+          "valueType": "chatHistory",
+          "valueDesc": "",
+          "type": "static"
+        },
+        {
+          "id": "answerText",
+          "key": "answerText",
+          "required": true,
+          "label": "AI回复内容",
+          "description": "AI回复内容",
+          "valueType": "string",
+          "type": "static",
+          "valueDesc": ""
+        },
+        {
+          "id": "reasoningText",
+          "key": "reasoningText",
+          "required": false,
+          "label": "推理文本",
+          "valueType": "string",
+          "type": "static",
+          "invalid": true,
+          "valueDesc": "",
+          "description": ""
+        },
+        {
+          "id": "system_error_text",
+          "key": "system_error_text",
+          "type": "error",
+          "valueType": "string",
+          "label": "错误文本",
+          "description": ""
+        }
+      ],
+      "catchError": false
+    },
+    {
+      "nodeId": "psychologicalAgent",
+      "name": "情绪心理支持Agent",
+      "intro": "提供专业的情绪疏导和心理支持服务",
+      "avatar": "core/workflow/template/aiChat",
+      "flowNodeType": "chatNode",
+      "showStatus": true,
+      "position": {
+        "x": 1300,
+        "y": 60
+      },
+      "version": "4.9.7",
+      "inputs": [
+        {
+          "key": "model",
+          "renderTypeList": [
+            "settingLLMModel",
+            "reference"
+          ],
+          "label": "对话模型",
+          "valueType": "string",
+          "value": "gpt-4",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "temperature",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "温度",
+          "valueType": "number",
+          "value": 0.8,
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "maxToken",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "最大Token",
+          "valueType": "number",
+          "value": 2000,
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "isResponseAnswerText",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "直接回复",
+          "value": true,
+          "valueType": "boolean",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatQuoteRole",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "引用角色",
+          "valueType": "string",
+          "value": "system",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "quoteTemplate",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "引用模板",
+          "valueType": "string",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "quotePrompt",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "引用提示词",
+          "valueType": "string",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatVision",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "视觉",
+          "valueType": "boolean",
+          "value": true,
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatReasoning",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "推理",
+          "valueType": "boolean",
+          "value": true,
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "systemPrompt",
+          "renderTypeList": [
+            "textarea",
+            "reference"
+          ],
+          "max": 3000,
+          "valueType": "string",
+          "label": "系统提示词",
+          "description": "系统提示词",
+          "placeholder": "输入系统提示词",
+          "value": "# 角色\n你是一位温暖专业的心理咨询师和孕产期心理健康专家,拥有10年以上的孕产心理辅导经验。你擅长为孕期和产后女性提供情绪支持和心理疏导。\n\n## 专业领域\n1. **产前焦虑疏导** - 对分娩的恐惧、对育儿的不安、对身体变化的担忧等\n2. **产后抑郁预防** - 情绪低落、兴趣丧失、疲劳无力、睡眠障碍等早期识别\n3. **情绪调节方法** - 正念练习、呼吸放松、认知重构、情绪表达技巧等\n4. **角色转换适应** - 从职场女性到母亲的适应、身份认同、自我价值重构等\n5. **家庭关系调适** - 夫妻关系、婆媳关系、与原生家庭的边界等\n\n## 服务风格\n- **温暖共情**: 真诚理解和接纳用户的情绪感受\n- **专业支持**: 运用心理学方法提供有效支持\n- **积极导向**: 引导用户发现自身资源和力量\n- **尊重边界**: 不做心理诊断,严重情况建议就医\n\n## 回复格式\n1. 首先共情和接纳用户的情绪\n2. 帮助用户理解情绪的来源和意义\n3. 提供1-2个具体可行的应对方法\n4. 给予希望和鼓励\n\n## 危机干预\n- 警惕自伤、伤人的风险信号\n- 识别严重的抑郁症状(持续2周以上)\n- 必要时强烈建议寻求专业心理医生帮助\n- 提供心理援助热线等资源信息\n\n## 限制\n- 不做心理诊断,仅提供心理支持和科普\n- 严重心理问题建议转介专业机构\n- 保护用户隐私,建立安全信任的关系",
+          "valueDesc": "",
+          "debugLabel": "",
+          "toolDescription": "",
+          "maxLength": 100000,
+          "isRichText": true
+        },
+        {
+          "key": "history",
+          "renderTypeList": [
+            "numberInput",
+            "reference"
+          ],
+          "valueType": "chatHistory",
+          "label": "对话历史",
+          "description": "对话历史轮数",
+          "required": true,
+          "min": 0,
+          "max": 50,
+          "value": 8,
+          "valueDesc": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "quoteQA",
+          "renderTypeList": [
+            "settingDatasetQuotePrompt"
+          ],
+          "label": "知识库引用",
+          "debugLabel": "知识库引用",
+          "description": "",
+          "valueType": "datasetQuote",
+          "valueDesc": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "fileUrlList",
+          "renderTypeList": [
+            "reference",
+            "input"
+          ],
+          "label": "文件链接",
+          "debugLabel": "文件链接",
+          "description": "用户上传的文件",
+          "valueType": "arrayString",
+          "value": [
+            [
+              "workflowStart",
+              "userFiles"
+            ]
+          ],
+          "valueDesc": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "userChatInput",
+          "renderTypeList": [
+            "reference",
+            "textarea"
+          ],
+          "valueType": "string",
+          "label": "用户问题",
+          "toolDescription": "用户问题",
+          "required": true,
+          "value": [
+            "workflowStart",
+            "userChatInput"
+          ],
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "selectedTypeIndex": 0
+        }
+      ],
+      "outputs": [
+        {
+          "id": "history",
+          "key": "history",
+          "required": true,
+          "label": "新上下文",
+          "description": "包含历史的上下文",
+          "valueType": "chatHistory",
+          "valueDesc": "",
+          "type": "static"
+        },
+        {
+          "id": "answerText",
+          "key": "answerText",
+          "required": true,
+          "label": "AI回复内容",
+          "description": "AI回复内容",
+          "valueType": "string",
+          "type": "static",
+          "valueDesc": ""
+        },
+        {
+          "id": "reasoningText",
+          "key": "reasoningText",
+          "required": false,
+          "label": "推理文本",
+          "valueType": "string",
+          "type": "static",
+          "invalid": true,
+          "valueDesc": "",
+          "description": ""
+        },
+        {
+          "id": "system_error_text",
+          "key": "system_error_text",
+          "type": "error",
+          "valueType": "string",
+          "label": "错误文本",
+          "description": ""
+        }
+      ],
+      "catchError": false
+    },
+    {
+      "nodeId": "medicalAgent",
+      "name": "就医资源对接Agent",
+      "intro": "提供龙岗区产科医院和就医资源推荐",
+      "avatar": "core/workflow/template/aiChat",
+      "flowNodeType": "chatNode",
+      "showStatus": true,
+      "position": {
+        "x": 1300,
+        "y": 180
+      },
+      "version": "4.9.7",
+      "inputs": [
+        {
+          "key": "model",
+          "renderTypeList": [
+            "settingLLMModel",
+            "reference"
+          ],
+          "label": "对话模型",
+          "valueType": "string",
+          "value": "gpt-4",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "temperature",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "温度",
+          "valueType": "number",
+          "value": 0.6,
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "maxToken",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "最大Token",
+          "valueType": "number",
+          "value": 2000,
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "isResponseAnswerText",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "直接回复",
+          "value": true,
+          "valueType": "boolean",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatQuoteRole",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "引用角色",
+          "valueType": "string",
+          "value": "system",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "quoteTemplate",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "引用模板",
+          "valueType": "string",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "quotePrompt",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "引用提示词",
+          "valueType": "string",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatVision",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "视觉",
+          "valueType": "boolean",
+          "value": true,
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatReasoning",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "推理",
+          "valueType": "boolean",
+          "value": true,
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "systemPrompt",
+          "renderTypeList": [
+            "textarea",
+            "reference"
+          ],
+          "max": 3000,
+          "valueType": "string",
+          "label": "系统提示词",
+          "description": "系统提示词",
+          "placeholder": "输入系统提示词",
+          "value": "# 角色\n你是一位专业的就医顾问和医疗资源对接专家,熟悉深圳龙岗区及周边的产科医疗资源。你擅长为准妈妈提供合适的医院推荐和就医指导。\n\n## 专业领域\n1. **龙岗区产科医院推荐** - 公立医院、私立医院、专科医院的对比和推荐\n2. **产科医生选择** - 不同科室专长、医生经验、预约挂号等\n3. **产检和分娩预约** - 建档流程、检查项目、预约方式等\n4. **急诊指引** - 临产急诊、突发情况的处理流程和联系方式\n5. **医保和费用** - 医保报销、自费项目、费用对比等\n\n## 龙岗区主要产科资源\n- 深圳市第三人民医院(三甲)\n- 深圳市龙岗区妇幼保健院(专科)\n- 深圳市龙岗中心医院(三甲)\n- 北京大学深圳医院(附近三甲)\n- 龙岗区人民医院(二甲)\n\n## 服务风格\n- **信息准确**: 基于最新信息提供准确建议\n- **客观中立**: 不偏向任何医院,提供客观对比\n- **贴心周到**: 考虑距离、费用、服务等实际因素\n- **操作清晰**: 提供具体的预约和就医步骤\n\n## 回复格式\n1. 根据用户需求推荐2-3家合适的医院\n2. 说明每家医院的特点和适合人群\n3. 提供预约挂号的具体步骤\n4. 补充就医注意事项和提醒\n\n## 重要说明\n- **信息时效**: 医院信息和政策可能变化,建议提前确认\n- **个体差异**: 根据用户具体情况(高危妊娠、医保类型等)提供针对性建议\n- **优先级**: 说明急诊情况的优先处理原则\n- **专业限制**: 医疗问题建议咨询专业医生",
+          "valueDesc": "",
+          "debugLabel": "",
+          "toolDescription": "",
+          "maxLength": 100000,
+          "isRichText": true
+        },
+        {
+          "key": "history",
+          "renderTypeList": [
+            "numberInput",
+            "reference"
+          ],
+          "valueType": "chatHistory",
+          "label": "对话历史",
+          "description": "对话历史轮数",
+          "required": true,
+          "min": 0,
+          "max": 50,
+          "value": 6,
+          "valueDesc": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "quoteQA",
+          "renderTypeList": [
+            "settingDatasetQuotePrompt"
+          ],
+          "label": "知识库引用",
+          "debugLabel": "知识库引用",
+          "description": "",
+          "valueType": "datasetQuote",
+          "valueDesc": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "fileUrlList",
+          "renderTypeList": [
+            "reference",
+            "input"
+          ],
+          "label": "文件链接",
+          "debugLabel": "文件链接",
+          "description": "用户上传的文件",
+          "valueType": "arrayString",
+          "value": [
+            [
+              "workflowStart",
+              "userFiles"
+            ]
+          ],
+          "valueDesc": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "userChatInput",
+          "renderTypeList": [
+            "reference",
+            "textarea"
+          ],
+          "valueType": "string",
+          "label": "用户问题",
+          "toolDescription": "用户问题",
+          "required": true,
+          "value": [
+            "workflowStart",
+            "userChatInput"
+          ],
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "selectedTypeIndex": 0
+        }
+      ],
+      "outputs": [
+        {
+          "id": "history",
+          "key": "history",
+          "required": true,
+          "label": "新上下文",
+          "description": "包含历史的上下文",
+          "valueType": "chatHistory",
+          "valueDesc": "",
+          "type": "static"
+        },
+        {
+          "id": "answerText",
+          "key": "answerText",
+          "required": true,
+          "label": "AI回复内容",
+          "description": "AI回复内容",
+          "valueType": "string",
+          "type": "static",
+          "valueDesc": ""
+        },
+        {
+          "id": "reasoningText",
+          "key": "reasoningText",
+          "required": false,
+          "label": "推理文本",
+          "valueType": "string",
+          "type": "static",
+          "invalid": true,
+          "valueDesc": "",
+          "description": ""
+        },
+        {
+          "id": "system_error_text",
+          "key": "system_error_text",
+          "type": "error",
+          "valueType": "string",
+          "label": "错误文本",
+          "description": ""
+        }
+      ],
+      "catchError": false
+    },
+    {
+      "nodeId": "lifeServiceAgent",
+      "name": "生活服务协调Agent",
+      "intro": "提供月子中心、月嫂、家政等生活服务推荐",
+      "avatar": "core/workflow/template/aiChat",
+      "flowNodeType": "chatNode",
+      "showStatus": true,
+      "position": {
+        "x": 1300,
+        "y": 300
+      },
+      "version": "4.9.7",
+      "inputs": [
+        {
+          "key": "model",
+          "renderTypeList": [
+            "settingLLMModel",
+            "reference"
+          ],
+          "label": "对话模型",
+          "valueType": "string",
+          "value": "gpt-4",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "temperature",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "温度",
+          "valueType": "number",
+          "value": 0.7,
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "maxToken",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "最大Token",
+          "valueType": "number",
+          "value": 2000,
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "isResponseAnswerText",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "直接回复",
+          "value": true,
+          "valueType": "boolean",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatQuoteRole",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "引用角色",
+          "valueType": "string",
+          "value": "system",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "quoteTemplate",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "引用模板",
+          "valueType": "string",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "quotePrompt",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "引用提示词",
+          "valueType": "string",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatVision",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "视觉",
+          "valueType": "boolean",
+          "value": true,
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatReasoning",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "推理",
+          "valueType": "boolean",
+          "value": true,
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "systemPrompt",
+          "renderTypeList": [
+            "textarea",
+            "reference"
+          ],
+          "max": 3000,
+          "valueType": "string",
+          "label": "系统提示词",
+          "description": "系统提示词",
+          "placeholder": "输入系统提示词",
+          "value": "# 角色\n你是一位经验丰富的生活服务顾问,熟悉深圳龙岗区及周边的母婴生活服务资源。你擅长为准妈妈和新手妈妈推荐合适的生活服务。\n\n## 专业领域\n1. **月子中心推荐** - 龙岗区及周边月子中心对比、价格、服务内容\n2. **月嫂服务** - 月嫂资质、经验、价格、注意事项\n3. **家政服务** - 育儿嫂、保洁、保姆等家政人员推荐\n4. **产后康复** - 盆底肌修复、瑜伽、中医调理等康复机构\n5. **母婴用品** - 待产包、新生儿用品的购买渠道和清单\n\n## 服务风格\n- **需求导向**: 根据用户预算和需求提供针对性推荐\n- **信息透明**: 明确价格、服务内容、注意事项\n- **客观中立**: 不偏向任何商家,提供客观对比\n- **贴心实用**: 考虑距离、服务质量、性价比等实际因素\n\n## 回复格式\n1. 了解用户的具体需求和预算范围\n2. 推荐2-3个合适的服务机构或人员类型\n3. 说明每个选项的优缺点和适合人群\n4. 提供选择标准和注意事项\n5. 给出预约或联系方式的建议\n\n## 重要说明\n- **市场波动**: 价格和服务可能变化,建议提前确认\n- **资质核实**: 强调核实服务人员资质的重要性\n- **合同条款**: 提醒注意服务合同和退款条款\n- **备选方案**: 建议准备多个备选方案\n- **体验优先**: 条件允许建议先体验或实地考察",
+          "valueDesc": "",
+          "debugLabel": "",
+          "toolDescription": "",
+          "maxLength": 100000,
+          "isRichText": true
+        },
+        {
+          "key": "history",
+          "renderTypeList": [
+            "numberInput",
+            "reference"
+          ],
+          "valueType": "chatHistory",
+          "label": "对话历史",
+          "description": "对话历史轮数",
+          "required": true,
+          "min": 0,
+          "max": 50,
+          "value": 6,
+          "valueDesc": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "quoteQA",
+          "renderTypeList": [
+            "settingDatasetQuotePrompt"
+          ],
+          "label": "知识库引用",
+          "debugLabel": "知识库引用",
+          "description": "",
+          "valueType": "datasetQuote",
+          "valueDesc": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "fileUrlList",
+          "renderTypeList": [
+            "reference",
+            "input"
+          ],
+          "label": "文件链接",
+          "debugLabel": "文件链接",
+          "description": "用户上传的文件",
+          "valueType": "arrayString",
+          "value": [
+            [
+              "workflowStart",
+              "userFiles"
+            ]
+          ],
+          "valueDesc": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "userChatInput",
+          "renderTypeList": [
+            "reference",
+            "textarea"
+          ],
+          "valueType": "string",
+          "label": "用户问题",
+          "toolDescription": "用户问题",
+          "required": true,
+          "value": [
+            "workflowStart",
+            "userChatInput"
+          ],
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "selectedTypeIndex": 0
+        }
+      ],
+      "outputs": [
+        {
+          "id": "history",
+          "key": "history",
+          "required": true,
+          "label": "新上下文",
+          "description": "包含历史的上下文",
+          "valueType": "chatHistory",
+          "valueDesc": "",
+          "type": "static"
+        },
+        {
+          "id": "answerText",
+          "key": "answerText",
+          "required": true,
+          "label": "AI回复内容",
+          "description": "AI回复内容",
+          "valueType": "string",
+          "type": "static",
+          "valueDesc": ""
+        },
+        {
+          "id": "reasoningText",
+          "key": "reasoningText",
+          "required": false,
+          "label": "推理文本",
+          "valueType": "string",
+          "type": "static",
+          "invalid": true,
+          "valueDesc": "",
+          "description": ""
+        },
+        {
+          "id": "system_error_text",
+          "key": "system_error_text",
+          "type": "error",
+          "valueType": "string",
+          "label": "错误文本",
+          "description": ""
+        }
+      ],
+      "catchError": false
+    }
+  ],
+  "edges": [
+    {
+      "id": "edge-1",
+      "source": "workflowStart",
+      "target": "intentRecognition",
+      "sourceHandle": "workflowStart-source-right",
+      "targetHandle": "intentRecognition-target-left",
+      "type": "default"
+    },
+    {
+      "id": "edge-2",
+      "source": "intentRecognition",
+      "target": "conditionRouter",
+      "sourceHandle": "intentRecognition-source-right",
+      "targetHandle": "conditionRouter-target-left",
+      "type": "default"
+    },
+    {
+      "id": "edge-3",
+      "source": "conditionRouter",
+      "target": "prenatalAgent",
+      "sourceHandle": "conditionRouter-source-IF",
+      "targetHandle": "prenatalAgent-target-left",
+      "type": "default"
+    },
+    {
+      "id": "edge-4",
+      "source": "conditionRouter",
+      "target": "postpartumAgent",
+      "sourceHandle": "conditionRouter-source-ELSE",
+      "targetHandle": "postpartumAgent-target-left",
+      "type": "default"
+    },
+    {
+      "id": "edge-5",
+      "source": "conditionRouter",
+      "target": "workplaceAgent",
+      "sourceHandle": "conditionRouter-source-ELSE",
+      "targetHandle": "workplaceAgent-target-left",
+      "type": "default"
+    },
+    {
+      "id": "edge-6",
+      "source": "conditionRouter",
+      "target": "psychologicalAgent",
+      "sourceHandle": "conditionRouter-source-ELSE",
+      "targetHandle": "psychologicalAgent-target-left",
+      "type": "default"
+    },
+    {
+      "id": "edge-7",
+      "source": "conditionRouter",
+      "target": "medicalAgent",
+      "sourceHandle": "conditionRouter-source-ELSE",
+      "targetHandle": "medicalAgent-target-left",
+      "type": "default"
+    },
+    {
+      "id": "edge-8",
+      "source": "conditionRouter",
+      "target": "lifeServiceAgent",
+      "sourceHandle": "conditionRouter-source-ELSE",
+      "targetHandle": "lifeServiceAgent-target-left",
+      "type": "default"
+    }
+  ],
+  "chatConfig": {
+    "welcomeText": "# 👋 欢迎来到准妈妈全方位支持中心!\n\n您好!我是您的专属准妈妈助手,很高兴能陪伴您度过这个特殊的时期。无论是孕期知识、产后护理、职场权益,还是情绪支持、就医资源、生活服务,我都会为您提供专业、贴心的帮助。\n\n## 🌟 我能为您做什么?\n\n### 1. 🤰 **孕期知识科普**\n- 临产征兆识别和应对\n- 待产包准备清单\n- 分娩流程说明\n- 产前注意事项\n\n### 2. 👶 **产后护理指导**\n- 新生儿护理技巧\n- 产后恢复方法\n- 母乳喂养指导\n\n### 3. 💼 **职场权益咨询**\n- 产假哺乳假政策\n- 生育保险报销\n- 职场权益保护\n\n### 4. 💝 **情绪心理支持**\n- 产前焦虑疏导\n- 产后抑郁预防\n- 情绪调节方法\n\n### 5. 🏥 **就医资源对接**\n- 龙岗区产科医院推荐\n- 预约挂号指导\n- 就医流程指引\n\n### 6. 🏠 **生活服务协调**\n- 月子中心推荐\n- 月嫂家政服务\n- 产后康复机构\n\n## 💡 如何使用?\n\n直接告诉我您的需求或问题,我会智能识别并为您提供最合适的帮助。比如:\n- \"我最近总觉得宫缩,是不是快生了?\"\n- \"产后怎么恢复身材?\"\n- \"产假期间工资怎么算?\"\n- \"我最近很焦虑,睡不着\"\n- \"龙岗区哪个医院生孩子比较好?\"\n- \"月子中心怎么选?\"\n\n我会根据您的需求,为您提供专业的指导和建议! ✨\n\n**温馨提示**: 本助手提供科普信息和咨询服务,不能替代专业医疗诊断。如有医疗问题,请及时咨询医生。",
+    "variables": [],
+    "questionGuide": {
+      "open": false
+    },
+    "tts": {
+      "type": "web"
+    },
+    "whisperConfig": {
+      "open": true,
+      "autoSend": false,
+      "autoTTSResponse": false
+    },
+    "fileSelectConfig": {
+      "canSelectFile": true,
+      "canSelectImg": true,
+      "maxFiles": 5
+    }
+  }
+}

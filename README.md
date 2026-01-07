@@ -17,8 +17,9 @@ This repository provides ready-to-use skills that extend Claude Code's functiona
 | **[frontend-design](./frontend-design)**           | Creates unique, production-grade frontend interfaces with exceptional design quality and creative aesthetics | - | `cp -r frontend-design .claude/skills/` |
 | **[mcp-builder](./mcp-builder)**                   | Guide for creating high-quality MCP servers that enable LLMs to interact with external services through tools | - | `cp -r mcp-builder .claude/skills/` |
 | **[daily-ai-news](./daily-ai-news)**               | Aggregates and summarizes the latest AI news from multiple sources with concise briefs and direct links | - | `cp -r daily-ai-news .claude/skills/` |
+| **[fastgpt-workflow-generator](./fastgpt-workflow-generator)** | Generates production-ready FastGPT workflow JSON from natural language requirements with AI-powered template matching and three-layer validation | - | `cp -r fastgpt-workflow-generator .claude/skills/` |
 
-**Total:** 7 skills available
+**Total:** 8 skills available
 
 ---
 
@@ -201,6 +202,60 @@ An intelligent skill that aggregates and summarizes the latest AI news from mult
 **Installation:**
 ```bash
 cp -r daily-ai-news .claude/skills/
+```
+
+---
+
+#### 🔧 fastgpt-workflow-generator
+**Version:** [English](./fastgpt-workflow-generator)
+
+An intelligent skill that automatically generates production-ready FastGPT workflow JSON from natural language requirements using AI-powered semantic template matching and comprehensive three-layer validation.
+
+**What's included:**
+- ✅ Phase 1: Requirements Analysis (AI semantic extraction)
+- ✅ Phase 2: Template Matching (two-stage: coarse + fine filtering)
+- ✅ Phase 3: JSON Generation (NodeId generation, auto-layout, reference handling)
+- ✅ Phase 4: Validation (format, connections, logic completeness)
+- ✅ Phase 5: Incremental Modification (add/remove/modify nodes)
+- ✅ Built-in templates (document translation, sales training, resume screening, financial news)
+- ✅ Complete references (40+ node types, validation rules, JSON structure specs)
+- ✅ Validation script (Node.js)
+
+**Key Features:**
+- **AI-Powered Template Matching**: Two-stage semantic matching (metadata + AI analysis) to find the most similar template
+- **Automatic JSON Generation**: Generates complete workflow with semantic NodeIds, auto-layout positions, and proper references
+- **Three-Layer Validation**: Format (JSON structure) → Connections (node references) → Logic (workflow completeness)
+- **Incremental Modification Support**: Add, delete, or modify nodes in existing workflows
+- **Built-in Templates**: 4 production-ready templates covering different domains and complexities
+- **Portable Design**: Self-contained with relative paths, works in any project
+
+**Built-in Templates:**
+- `文档翻译助手.json` - Simple workflow (document processing)
+- `销售陪练大师.json` - Medium complexity (conversational AI)
+- `简历筛选助手_飞书.json` - Complex workflow (data + external integration)
+- `AI金融日报.json` - Scheduled trigger + multi-agent (news aggregation)
+
+**Reference Format:**
+- Array reference: `["nodeId", "key"]` - for direct values
+- Template reference: `{{$nodeId.key$}}` - for string interpolation (double braces!)
+
+**Trigger Keywords:** `"create FastGPT workflow"`, `"generate workflow JSON"`, `"design FastGPT application"`, `"工作流"`, `"workflow automation"`, `"multi-agent systems"`, `"FastGPT templates"`
+
+**Installation:**
+```bash
+cp -r fastgpt-workflow-generator .claude/skills/
+```
+
+**Quick Start:**
+```
+# Example 1: Create from natural language
+"生成一个旅游规划的工作流，收集用户的目的地、天数、预算等信息，然后AI生成详细的旅游规划"
+
+# Example 2: Modify existing workflow
+"在现有问答工作流前添加知识库搜索节点"
+
+# Example 3: Validate workflow
+"验证这个workflow JSON是否正确"
 ```
 
 ---

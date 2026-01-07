@@ -1,0 +1,3573 @@
+﻿{
+  "nodes": [
+    {
+      "nodeId": "userGuide",
+      "name": "common:core.module.template.system_config",
+      "intro": "common:core.module.template.system_config_info",
+      "avatar": "core/workflow/template/systemConfig",
+      "flowNodeType": "userGuide",
+      "position": {
+        "x": -2719.1881027366094,
+        "y": -995.0228629529405
+      },
+      "version": "481",
+      "inputs": [
+        {
+          "key": "welcomeText",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "string",
+          "label": "core.app.Welcome Text",
+          "value": ""
+        },
+        {
+          "key": "variables",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "any",
+          "label": "core.app.Chat Variable",
+          "value": []
+        },
+        {
+          "key": "questionGuide",
+          "valueType": "any",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "core.app.Question Guide",
+          "value": {
+            "open": false
+          }
+        },
+        {
+          "key": "tts",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "any",
+          "label": "",
+          "value": {
+            "type": "web"
+          }
+        },
+        {
+          "key": "whisper",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "any",
+          "label": "",
+          "value": {
+            "open": false,
+            "autoSend": false,
+            "autoTTSResponse": false
+          }
+        },
+        {
+          "key": "scheduleTrigger",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "any",
+          "label": "",
+          "value": null
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "nodeId": "448745",
+      "name": "common:core.module.template.work_start",
+      "intro": "",
+      "avatar": "core/workflow/template/workflowStart",
+      "flowNodeType": "workflowStart",
+      "position": {
+        "x": -2648.1881027366094,
+        "y": -1669.0228629529406
+      },
+      "version": "481",
+      "inputs": [
+        {
+          "key": "userChatInput",
+          "renderTypeList": [
+            "reference",
+            "textarea"
+          ],
+          "valueType": "string",
+          "label": "workflow:user_question",
+          "required": true,
+          "toolDescription": "用户问题",
+          "debugLabel": ""
+        }
+      ],
+      "outputs": [
+        {
+          "id": "userChatInput",
+          "key": "userChatInput",
+          "label": "common:core.module.input.label.user question",
+          "type": "static",
+          "valueType": "string",
+          "description": ""
+        },
+        {
+          "id": "userFiles",
+          "key": "userFiles",
+          "label": "app:workflow.user_file_input",
+          "description": "app:workflow.user_file_input_desc",
+          "type": "static",
+          "valueType": "arrayString"
+        }
+      ]
+    },
+    {
+      "nodeId": "frxY7LYGQtuaOOhG",
+      "name": "PPT生成",
+      "intro": "AI生成PPT：根据文字描述一键生成PPT (根据文字描述一键生成PPT)",
+      "avatar": "core/app/type/mcpToolsFill",
+      "flowNodeType": "tool",
+      "showStatus": true,
+      "position": {
+        "x": 3926.8118972633906,
+        "y": -1807.7728629529406
+      },
+      "version": "6826f0d5e334c475dcf8ac59",
+      "inputs": [
+        {
+          "key": "toolData",
+          "label": "Tool Data",
+          "valueType": "object",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "value": {
+            "name": "288251_1015992_jjyibotID_d9830baf369c4700845a9a43096f3e1c",
+            "description": "AI生成PPT：根据文字描述一键生成PPT (根据文字描述一键生成PPT)",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "text": {
+                  "description": "描述内容,请填写生成PPT所需的描述内容",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "text"
+              ]
+            },
+            "url": " https://mcp.jijyun.cn/mcp/h5GcQ239TQ973uLhxp8506ec1746502894/sse"
+          },
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "text",
+          "label": "text",
+          "valueType": "string",
+          "description": "描述内容,请填写生成PPT所需的描述内容",
+          "toolDescription": "描述内容,请填写生成PPT所需的描述内容",
+          "required": true,
+          "renderTypeList": [
+            "input"
+          ],
+          "value": "PPT大纲：{{$VARIABLE_NODE_ID.PPT大纲缓存$}}",
+          "valueDesc": "",
+          "debugLabel": ""
+        }
+      ],
+      "outputs": [
+        {
+          "id": "system_rawResponse",
+          "key": "system_rawResponse",
+          "required": true,
+          "label": "原始响应",
+          "description": "工具的原始响应",
+          "valueType": "any",
+          "type": "static",
+          "valueDesc": ""
+        }
+      ],
+      "pluginId": "6826f0d5e334c475dcf8ac57",
+      "catchError": false
+    },
+    {
+      "nodeId": "lcEeHvusHqHEJiFz",
+      "name": "获取任务id",
+      "intro": "执行一段简单的脚本代码，通常用于进行复杂的数据处理。",
+      "avatar": "core/workflow/template/codeRun",
+      "flowNodeType": "code",
+      "showStatus": true,
+      "position": {
+        "x": 6199.811897263391,
+        "y": -2397.7728629529406
+      },
+      "version": "482",
+      "inputs": [
+        {
+          "key": "system_addInputParam",
+          "renderTypeList": [
+            "addInputParam"
+          ],
+          "valueType": "dynamic",
+          "label": "",
+          "required": false,
+          "description": "workflow:these_variables_will_be_input_parameters_for_code_execution",
+          "customInputConfig": {
+            "selectValueTypeList": [
+              "string",
+              "number",
+              "boolean",
+              "object",
+              "arrayString",
+              "arrayNumber",
+              "arrayBoolean",
+              "arrayObject",
+              "arrayAny",
+              "any",
+              "chatHistory",
+              "datasetQuote",
+              "dynamic",
+              "selectDataset",
+              "selectApp"
+            ],
+            "showDescription": false,
+            "showDefaultValue": true
+          },
+          "valueDesc": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "codeType",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "value": "js",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "code",
+          "renderTypeList": [
+            "custom"
+          ],
+          "label": "",
+          "valueType": "string",
+          "value": "function main({input}) {\n  // 从输入内容中获取text字段\n  const contentText = input.content[0].text;\n  \n  // 解析JSON字符串\n  const parsedData = JSON.parse(contentText);\n  \n  // 从解析后的数据中提取result.data.id字段\n  const resultId = parsedData.result.data.id;\n  \n  // 返回提取的id作为结果\n  return {\n    result: resultId\n  };\n}",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "renderTypeList": [
+            "reference"
+          ],
+          "valueType": "any",
+          "canEdit": true,
+          "key": "input",
+          "label": "input",
+          "customInputConfig": {
+            "selectValueTypeList": [
+              "string",
+              "number",
+              "boolean",
+              "object",
+              "arrayString",
+              "arrayNumber",
+              "arrayBoolean",
+              "arrayObject",
+              "arrayAny",
+              "any",
+              "chatHistory",
+              "datasetQuote",
+              "dynamic",
+              "selectDataset",
+              "selectApp"
+            ],
+            "showDescription": false,
+            "showDefaultValue": true
+          },
+          "required": true,
+          "value": [
+            "frxY7LYGQtuaOOhG",
+            "system_rawResponse"
+          ],
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        }
+      ],
+      "outputs": [
+        {
+          "id": "system_rawResponse",
+          "key": "system_rawResponse",
+          "label": "workflow:full_response_data",
+          "valueType": "object",
+          "type": "static",
+          "description": ""
+        },
+        {
+          "id": "error",
+          "key": "error",
+          "label": "workflow:error_text",
+          "description": "代码运行错误信息，成功时返回空",
+          "valueType": "string",
+          "type": "error"
+        },
+        {
+          "id": "system_addOutputParam",
+          "key": "system_addOutputParam",
+          "type": "dynamic",
+          "valueType": "dynamic",
+          "label": "",
+          "customFieldConfig": {
+            "selectValueTypeList": [
+              "string",
+              "number",
+              "boolean",
+              "object",
+              "arrayString",
+              "arrayNumber",
+              "arrayBoolean",
+              "arrayObject",
+              "arrayAny",
+              "any",
+              "chatHistory",
+              "datasetQuote",
+              "dynamic",
+              "selectDataset",
+              "selectApp"
+            ],
+            "showDescription": false,
+            "showDefaultValue": false
+          },
+          "description": "将代码中 return 的对象作为输出，传递给后续的节点。变量名需要对应 return 的 key",
+          "valueDesc": ""
+        },
+        {
+          "id": "qLUQfhG0ILRX",
+          "type": "dynamic",
+          "key": "result",
+          "valueType": "any",
+          "label": "result",
+          "valueDesc": "",
+          "description": ""
+        }
+      ],
+      "catchError": true
+    },
+    {
+      "nodeId": "vGlNpCYp0dLKpaFL",
+      "name": "判断器",
+      "intro": "根据一定的条件，执行不同的分支。",
+      "avatar": "core/workflow/template/ifelse",
+      "flowNodeType": "ifElseNode",
+      "showStatus": true,
+      "position": {
+        "x": 8158.811897263391,
+        "y": -2627.7728629529406
+      },
+      "inputs": [
+        {
+          "key": "ifElseList",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "any",
+          "label": "",
+          "value": [
+            {
+              "condition": "AND",
+              "list": [
+                {
+                  "variable": [
+                    "r3f1XGghe90VJAO8",
+                    "qLUQfhG0ILRX"
+                  ],
+                  "condition": "equalTo",
+                  "value": "生成已完成..."
+                }
+              ]
+            }
+          ],
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        }
+      ],
+      "outputs": [
+        {
+          "id": "ifElseResult",
+          "key": "ifElseResult",
+          "label": "workflow:judgment_result",
+          "valueType": "string",
+          "type": "static",
+          "valueDesc": "",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "nodeId": "tilQNZSdwBOEfUos",
+      "name": "获取PPT生成结果",
+      "intro": "AI生成PPT：获取PPT生成结果 (获取PPT生成结果)",
+      "avatar": "core/app/type/mcpToolsFill",
+      "flowNodeType": "tool",
+      "showStatus": true,
+      "position": {
+        "x": 6900,
+        "y": -2131.2728629529406
+      },
+      "version": "6826eef1e334c475dcf894a5",
+      "inputs": [
+        {
+          "key": "toolData",
+          "label": "Tool Data",
+          "valueType": "object",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "value": {
+            "name": "288246_1015991_jjyibotID_d9830baf369c4700845a9a43096f3e1c",
+            "description": "AI生成PPT：获取PPT生成结果 (获取PPT生成结果)",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "description": "任务id,请填写任务id，任务id可通过该应用下其他执行动作获取",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id"
+              ]
+            },
+            "url": " https://mcp.jijyun.cn/mcp/h5GcQ239TQ973uLhxp8506ec1746502894/sse"
+          },
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "id",
+          "label": "id",
+          "valueType": "string",
+          "description": "任务id,请填写任务id，任务id可通过该应用下其他执行动作获取",
+          "toolDescription": "任务id,请填写任务id，任务id可通过该应用下其他执行动作获取",
+          "required": true,
+          "renderTypeList": [
+            "input"
+          ],
+          "value": "{{$lcEeHvusHqHEJiFz.qLUQfhG0ILRX$}}",
+          "valueDesc": "",
+          "debugLabel": ""
+        }
+      ],
+      "outputs": [
+        {
+          "id": "system_rawResponse",
+          "key": "system_rawResponse",
+          "required": true,
+          "label": "原始响应",
+          "description": "工具的原始响应",
+          "valueType": "any",
+          "type": "static",
+          "valueDesc": ""
+        }
+      ],
+      "isFolded": false,
+      "pluginId": "6826eef1e334c475dcf894a3",
+      "catchError": false
+    },
+    {
+      "nodeId": "r3f1XGghe90VJAO8",
+      "name": "获取生成结果",
+      "intro": "执行一段简单的脚本代码，通常用于进行复杂的数据处理。",
+      "avatar": "core/workflow/template/codeRun",
+      "flowNodeType": "code",
+      "showStatus": true,
+      "position": {
+        "x": 7638.811897263391,
+        "y": -3278.7728629529406
+      },
+      "version": "482",
+      "inputs": [
+        {
+          "key": "system_addInputParam",
+          "renderTypeList": [
+            "addInputParam"
+          ],
+          "valueType": "dynamic",
+          "label": "",
+          "required": false,
+          "description": "workflow:these_variables_will_be_input_parameters_for_code_execution",
+          "customInputConfig": {
+            "selectValueTypeList": [
+              "string",
+              "number",
+              "boolean",
+              "object",
+              "arrayString",
+              "arrayNumber",
+              "arrayBoolean",
+              "arrayObject",
+              "arrayAny",
+              "any",
+              "chatHistory",
+              "datasetQuote",
+              "dynamic",
+              "selectDataset",
+              "selectApp"
+            ],
+            "showDescription": false,
+            "showDefaultValue": true
+          },
+          "valueDesc": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "codeType",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "value": "js",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "code",
+          "renderTypeList": [
+            "custom"
+          ],
+          "label": "",
+          "valueType": "string",
+          "value": "function main({input}) {\n  try {\n    // 提取输入中的文本内容\n    const textContent = input.content[0].text;\n    \n    // 解析JSON字符串\n    const parsedData = JSON.parse(textContent);\n    \n    // 检查是否存在结果数据\n    if (parsedData && parsedData.result && parsedData.result.data) {\n      // 提取state_description字段作为结果\n      const stateDescription = parsedData.result.data.state_description;\n      return {\n        result: stateDescription,\n      };\n    } else {\n      // 如果找不到相关数据，返回默认错误消息\n      return {\n        result: \"无法获取生成状态\",\n      };\n    }\n  } catch (error) {\n    // 处理解析错误\n    console.error(\"处理输入数据时出错:\", error);\n    return {\n      result: \"数据处理错误\",\n    };\n  }\n}",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "renderTypeList": [
+            "reference"
+          ],
+          "valueType": "any",
+          "canEdit": true,
+          "key": "input",
+          "label": "input",
+          "customInputConfig": {
+            "selectValueTypeList": [
+              "string",
+              "number",
+              "boolean",
+              "object",
+              "arrayString",
+              "arrayNumber",
+              "arrayBoolean",
+              "arrayObject",
+              "arrayAny",
+              "any",
+              "chatHistory",
+              "datasetQuote",
+              "dynamic",
+              "selectDataset",
+              "selectApp"
+            ],
+            "showDescription": false,
+            "showDefaultValue": true
+          },
+          "required": true,
+          "value": [
+            "tilQNZSdwBOEfUos",
+            "system_rawResponse"
+          ],
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        }
+      ],
+      "outputs": [
+        {
+          "id": "system_rawResponse",
+          "key": "system_rawResponse",
+          "label": "workflow:full_response_data",
+          "valueType": "object",
+          "type": "static",
+          "description": ""
+        },
+        {
+          "id": "error",
+          "key": "error",
+          "label": "workflow:error_text",
+          "description": "代码运行错误信息，成功时返回空",
+          "valueType": "string",
+          "type": "error"
+        },
+        {
+          "id": "system_addOutputParam",
+          "key": "system_addOutputParam",
+          "type": "dynamic",
+          "valueType": "dynamic",
+          "label": "",
+          "customFieldConfig": {
+            "selectValueTypeList": [
+              "string",
+              "number",
+              "boolean",
+              "object",
+              "arrayString",
+              "arrayNumber",
+              "arrayBoolean",
+              "arrayObject",
+              "arrayAny",
+              "any",
+              "chatHistory",
+              "datasetQuote",
+              "dynamic",
+              "selectDataset",
+              "selectApp"
+            ],
+            "showDescription": false,
+            "showDefaultValue": false
+          },
+          "description": "将代码中 return 的对象作为输出，传递给后续的节点。变量名需要对应 return 的 key",
+          "valueDesc": ""
+        },
+        {
+          "id": "qLUQfhG0ILRX",
+          "type": "dynamic",
+          "key": "result",
+          "valueType": "any",
+          "label": "result",
+          "valueDesc": "",
+          "description": ""
+        }
+      ],
+      "catchError": true
+    },
+    {
+      "nodeId": "chSoeQv3YFaQFTNM",
+      "name": "成功提示",
+      "intro": "该模块可以直接回复一段指定的内容。常用于引导、提示。非字符串内容传入时，会转成字符串进行输出。",
+      "avatar": "core/workflow/template/reply",
+      "flowNodeType": "answerNode",
+      "position": {
+        "x": 8995.811897263391,
+        "y": -2760.7728629529406
+      },
+      "inputs": [
+        {
+          "key": "text",
+          "renderTypeList": [
+            "textarea",
+            "reference"
+          ],
+          "valueType": "any",
+          "required": true,
+          "label": "common:core.module.input.label.Response content",
+          "description": "common:core.module.input.description.Response content",
+          "placeholder": "common:core.module.input.description.Response content",
+          "value": "PPT生成完毕！请点击下面链接~\n[ChatPPT生成结果]({{$qbqgkhSXVJBFZz7r.qLUQfhG0ILRX$}})\n",
+          "valueDesc": "",
+          "debugLabel": "",
+          "toolDescription": "",
+          "isRichText": false,
+          "maxLength": 100000
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "nodeId": "qbqgkhSXVJBFZz7r",
+      "name": "获取PPT链接",
+      "intro": "执行一段简单的脚本代码，通常用于进行复杂的数据处理。",
+      "avatar": "core/workflow/template/codeRun",
+      "flowNodeType": "code",
+      "showStatus": true,
+      "position": {
+        "x": 7638.811897263391,
+        "y": -2397.7728629529406
+      },
+      "version": "482",
+      "inputs": [
+        {
+          "key": "system_addInputParam",
+          "renderTypeList": [
+            "addInputParam"
+          ],
+          "valueType": "dynamic",
+          "label": "",
+          "required": false,
+          "description": "workflow:these_variables_will_be_input_parameters_for_code_execution",
+          "customInputConfig": {
+            "selectValueTypeList": [
+              "string",
+              "number",
+              "boolean",
+              "object",
+              "arrayString",
+              "arrayNumber",
+              "arrayBoolean",
+              "arrayObject",
+              "arrayAny",
+              "any",
+              "chatHistory",
+              "datasetQuote",
+              "dynamic",
+              "selectDataset",
+              "selectApp"
+            ],
+            "showDescription": false,
+            "showDefaultValue": true
+          },
+          "valueDesc": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "codeType",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "value": "js",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "code",
+          "renderTypeList": [
+            "custom"
+          ],
+          "label": "",
+          "valueType": "string",
+          "value": "function main({input}) {\n  // 获取输入中的内容文本\n  const contentText = input.content[0].text;\n  \n  try {\n    // 解析JSON字符串获取数据\n    const parsedData = JSON.parse(contentText);\n    \n    // 从解析后的数据中提取预览URL\n    const previewUrl = parsedData.result.data.preview_url;\n    \n    // 返回预览URL作为结果\n    return {\n      result: previewUrl,\n    };\n  } catch (error) {\n    // 如果解析失败，返回错误信息\n    return {\n      result: \"Error processing input: \" + error.message,\n    };\n  }\n}",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "renderTypeList": [
+            "reference"
+          ],
+          "valueType": "any",
+          "canEdit": true,
+          "key": "input",
+          "label": "input",
+          "customInputConfig": {
+            "selectValueTypeList": [
+              "string",
+              "number",
+              "boolean",
+              "object",
+              "arrayString",
+              "arrayNumber",
+              "arrayBoolean",
+              "arrayObject",
+              "arrayAny",
+              "any",
+              "chatHistory",
+              "datasetQuote",
+              "dynamic",
+              "selectDataset",
+              "selectApp"
+            ],
+            "showDescription": false,
+            "showDefaultValue": true
+          },
+          "required": true,
+          "value": [
+            "tilQNZSdwBOEfUos",
+            "system_rawResponse"
+          ],
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        }
+      ],
+      "outputs": [
+        {
+          "id": "system_rawResponse",
+          "key": "system_rawResponse",
+          "label": "workflow:full_response_data",
+          "valueType": "object",
+          "type": "static",
+          "description": ""
+        },
+        {
+          "id": "error",
+          "key": "error",
+          "label": "workflow:error_text",
+          "description": "代码运行错误信息，成功时返回空",
+          "valueType": "string",
+          "type": "error"
+        },
+        {
+          "id": "system_addOutputParam",
+          "key": "system_addOutputParam",
+          "type": "dynamic",
+          "valueType": "dynamic",
+          "label": "",
+          "customFieldConfig": {
+            "selectValueTypeList": [
+              "string",
+              "number",
+              "boolean",
+              "object",
+              "arrayString",
+              "arrayNumber",
+              "arrayBoolean",
+              "arrayObject",
+              "arrayAny",
+              "any",
+              "chatHistory",
+              "datasetQuote",
+              "dynamic",
+              "selectDataset",
+              "selectApp"
+            ],
+            "showDescription": false,
+            "showDefaultValue": false
+          },
+          "description": "将代码中 return 的对象作为输出，传递给后续的节点。变量名需要对应 return 的 key",
+          "valueDesc": ""
+        },
+        {
+          "id": "qLUQfhG0ILRX",
+          "type": "dynamic",
+          "key": "result",
+          "valueType": "any",
+          "label": "result",
+          "valueDesc": "",
+          "description": ""
+        }
+      ],
+      "catchError": true
+    },
+    {
+      "nodeId": "jIHEOiUURLcWVpvC",
+      "name": "流程等待",
+      "intro": "让工作流等待指定时间后运行",
+      "avatar": "core/workflow/template/sleep",
+      "flowNodeType": "pluginModule",
+      "showStatus": true,
+      "position": {
+        "x": 9781.811897263391,
+        "y": -1855.0228629529406
+      },
+      "version": "",
+      "inputs": [
+        {
+          "key": "ms",
+          "label": "延迟时长(毫秒)",
+          "defaultValue": 1000,
+          "renderTypeList": [
+            "numberInput",
+            "reference"
+          ],
+          "valueType": "number",
+          "value": 20000
+        }
+      ],
+      "outputs": [
+        {
+          "id": "system_error_text",
+          "key": "system_error_text",
+          "type": "error",
+          "valueType": "string",
+          "label": "workflow:error_text"
+        }
+      ],
+      "pluginId": "community-delay",
+      "toolConfig": {
+        "systemTool": {
+          "toolId": "systemTool-delay"
+        }
+      },
+      "catchError": false
+    },
+    {
+      "nodeId": "qF4vv3ssGhrbiAJB",
+      "name": "等待提示",
+      "intro": "该模块可以直接回复一段指定的内容。常用于引导、提示。非字符串内容传入时，会转成字符串进行输出。",
+      "avatar": "core/workflow/template/reply",
+      "flowNodeType": "answerNode",
+      "position": {
+        "x": 8995.811897263391,
+        "y": -2009.2728629529406
+      },
+      "inputs": [
+        {
+          "key": "text",
+          "renderTypeList": [
+            "textarea",
+            "reference"
+          ],
+          "valueType": "any",
+          "required": true,
+          "label": "common:core.module.input.label.Response content",
+          "description": "common:core.module.input.description.Response content",
+          "placeholder": "common:core.module.input.description.Response content",
+          "value": "PPT生成中...(20s查询一次生成结果)\n",
+          "valueDesc": "",
+          "debugLabel": "",
+          "toolDescription": "",
+          "isRichText": false,
+          "maxLength": 100000
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "nodeId": "nrqXS4n6tvha0GoS",
+      "name": "获取是否成功开始生成",
+      "intro": "执行一段简单的脚本代码，通常用于进行复杂的数据处理。",
+      "avatar": "core/workflow/template/codeRun",
+      "flowNodeType": "code",
+      "showStatus": true,
+      "position": {
+        "x": 4709.811897263391,
+        "y": -2035.2728629529406
+      },
+      "version": "482",
+      "inputs": [
+        {
+          "key": "system_addInputParam",
+          "renderTypeList": [
+            "addInputParam"
+          ],
+          "valueType": "dynamic",
+          "label": "",
+          "required": false,
+          "description": "workflow:these_variables_will_be_input_parameters_for_code_execution",
+          "customInputConfig": {
+            "selectValueTypeList": [
+              "string",
+              "number",
+              "boolean",
+              "object",
+              "arrayString",
+              "arrayNumber",
+              "arrayBoolean",
+              "arrayObject",
+              "arrayAny",
+              "any",
+              "chatHistory",
+              "datasetQuote",
+              "dynamic",
+              "selectDataset",
+              "selectApp"
+            ],
+            "showDescription": false,
+            "showDefaultValue": true
+          },
+          "valueDesc": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "codeType",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "value": "js",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "code",
+          "renderTypeList": [
+            "custom"
+          ],
+          "label": "",
+          "valueType": "string",
+          "value": "function main({input}) {\n  // 解析input中的文本内容\n  const content = input.content[0].text;\n  \n  try {\n    // 将JSON字符串解析为JavaScript对象\n    const parsedData = JSON.parse(content);\n    \n    // 提取msg字段的值\n    const msgValue = parsedData.result.msg;\n    \n    // 返回提取的值\n    return {\n      result: msgValue\n    };\n  } catch (error) {\n    // 处理JSON解析错误\n    return {\n      result: \"解析错误: \" + error.message\n    };\n  }\n}",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "renderTypeList": [
+            "reference"
+          ],
+          "valueType": "any",
+          "canEdit": true,
+          "key": "input",
+          "label": "input",
+          "customInputConfig": {
+            "selectValueTypeList": [
+              "string",
+              "number",
+              "boolean",
+              "object",
+              "arrayString",
+              "arrayNumber",
+              "arrayBoolean",
+              "arrayObject",
+              "arrayAny",
+              "any",
+              "chatHistory",
+              "datasetQuote",
+              "dynamic",
+              "selectDataset",
+              "selectApp"
+            ],
+            "showDescription": false,
+            "showDefaultValue": true
+          },
+          "required": true,
+          "value": [
+            "frxY7LYGQtuaOOhG",
+            "system_rawResponse"
+          ],
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        }
+      ],
+      "outputs": [
+        {
+          "id": "system_rawResponse",
+          "key": "system_rawResponse",
+          "label": "workflow:full_response_data",
+          "valueType": "object",
+          "type": "static",
+          "description": ""
+        },
+        {
+          "id": "error",
+          "key": "error",
+          "label": "workflow:error_text",
+          "description": "代码运行错误信息，成功时返回空",
+          "valueType": "string",
+          "type": "error"
+        },
+        {
+          "id": "system_addOutputParam",
+          "key": "system_addOutputParam",
+          "type": "dynamic",
+          "valueType": "dynamic",
+          "label": "",
+          "customFieldConfig": {
+            "selectValueTypeList": [
+              "string",
+              "number",
+              "boolean",
+              "object",
+              "arrayString",
+              "arrayNumber",
+              "arrayBoolean",
+              "arrayObject",
+              "arrayAny",
+              "any",
+              "chatHistory",
+              "datasetQuote",
+              "dynamic",
+              "selectDataset",
+              "selectApp"
+            ],
+            "showDescription": false,
+            "showDefaultValue": false
+          },
+          "description": "将代码中 return 的对象作为输出，传递给后续的节点。变量名需要对应 return 的 key",
+          "valueDesc": ""
+        },
+        {
+          "id": "qLUQfhG0ILRX",
+          "type": "dynamic",
+          "key": "result",
+          "valueType": "any",
+          "label": "result",
+          "valueDesc": "",
+          "description": ""
+        }
+      ],
+      "isFolded": false,
+      "catchError": true
+    },
+    {
+      "nodeId": "b5REHNbGggzKStou",
+      "name": "判断器#2",
+      "intro": "根据一定的条件，执行不同的分支。",
+      "avatar": "core/workflow/template/ifelse",
+      "flowNodeType": "ifElseNode",
+      "showStatus": true,
+      "position": {
+        "x": 5400,
+        "y": -1965
+      },
+      "inputs": [
+        {
+          "key": "ifElseList",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "any",
+          "label": "",
+          "value": [
+            {
+              "condition": "AND",
+              "list": [
+                {
+                  "variable": [
+                    "nrqXS4n6tvha0GoS",
+                    "qLUQfhG0ILRX"
+                  ],
+                  "condition": "equalTo",
+                  "value": "success"
+                }
+              ]
+            }
+          ],
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        }
+      ],
+      "outputs": [
+        {
+          "id": "ifElseResult",
+          "key": "ifElseResult",
+          "label": "workflow:judgment_result",
+          "valueType": "string",
+          "type": "static",
+          "valueDesc": "",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "nodeId": "bT4FSV7XEMWwGjWu",
+      "name": "指定回复#3",
+      "intro": "该模块可以直接回复一段指定的内容。常用于引导、提示。非字符串内容传入时，会转成字符串进行输出。",
+      "avatar": "core/workflow/template/reply",
+      "flowNodeType": "answerNode",
+      "position": {
+        "x": 6066.811897263391,
+        "y": -1516.7728629529406
+      },
+      "inputs": [
+        {
+          "key": "text",
+          "renderTypeList": [
+            "textarea",
+            "reference"
+          ],
+          "valueType": "any",
+          "required": true,
+          "label": "common:core.module.input.label.Response content",
+          "description": "common:core.module.input.description.Response content",
+          "placeholder": "common:core.module.input.description.Response content",
+          "value": "PPT生成失败~",
+          "valueDesc": "",
+          "debugLabel": "",
+          "toolDescription": "",
+          "isRichText": false,
+          "maxLength": 100000
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "nodeId": "tYFeZ9mf3XvonT94",
+      "name": "根据标题生成PPT大纲",
+      "intro": "AI 大模型对话",
+      "avatar": "core/workflow/template/aiChat",
+      "flowNodeType": "chatNode",
+      "showStatus": true,
+      "position": {
+        "x": 1745.8118972633906,
+        "y": -3387.2728629529406
+      },
+      "version": "4.9.7",
+      "inputs": [
+        {
+          "key": "model",
+          "renderTypeList": [
+            "settingLLMModel",
+            "reference"
+          ],
+          "label": "common:core.module.input.label.aiModel",
+          "valueType": "string",
+          "value": "gpt-4.1",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "temperature",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "number",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "maxToken",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "number",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "isResponseAnswerText",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "value": true,
+          "valueType": "boolean",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatQuoteRole",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "value": "system",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "quoteTemplate",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "quotePrompt",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatVision",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "boolean",
+          "value": true,
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatReasoning",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "boolean",
+          "value": true,
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatTopP",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "number",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatStopSign",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatResponseFormat",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatJsonSchema",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "systemPrompt",
+          "renderTypeList": [
+            "textarea",
+            "reference"
+          ],
+          "max": 3000,
+          "valueType": "string",
+          "label": "common:core.ai.Prompt",
+          "description": "common:core.app.tip.systemPromptTip",
+          "placeholder": "common:core.app.tip.chatNodeSystemPromptTip",
+          "value": "# 角色\n你是专业PPT大纲设计专家，你擅长将客户需求转化为结构清晰的演示文稿框架，你能够创建逻辑连贯、层次分明的markdown格式演示大纲。\n## 背景\n优质的演示文稿需要结构良好的大纲作为基础。作为PPT大纲设计专家，你需要将用户的描述准确转化为专业的演示框架，确保内容组织合理，覆盖所有关键点，并符合演示逻辑。\n## 技能\n### 技能 1: 内容结构化分析与组织\n分析用户描述的主题，提取3-5个核心要点作为主要章节。为每个主要章节创建2-4个子主题，确保逻辑流畅的叙事结构。自动识别并包含标准演示组件：开场介绍（目的说明、问题陈述）、主体内容（分析、示例、数据）和结论部分（总结、行动建议）。将抽象概念转化为具体可展示的内容单元，确保每个部分都有明确的演示价值。\n### 技能 2: Markdown格式精准应用\n严格使用markdown语法构建多层级大纲，包括：使用#表示主标题，##表示一级章节标题，###表示二级子标题，####表示三级内容点。对每个层级的内容点使用-符号创建简洁明了的要点列表。保持一致的格式规范，包括标题大小写、缩进和段落间距，确保大纲视觉清晰。根据内容重要性和逻辑关系，合理设计2-3级的层级结构，避免结构过于复杂或过于简单。\n### 技能 3: 演示节奏与平衡优化\n设计15-30分钟标准演示长度的内容结构，确保每个主要章节分配2-5分钟的演示时间。平衡各章节内容比重，避免某一部分过于冗长或过于简略。在关键转折点添加过渡元素，使整个演示流程顺畅连贯。根据主题复杂度自动调整大纲详细程度，技术性主题提供更多细节层级，概念性主题保持简洁明了的结构。\n## 限制\n- 严格仅输出markdown格式大纲，不包含任何解释性文字、注释或额外建议。\n- 保持用户原始描述中的核心概念和术语不变，确保专业准确性。\n- 大纲必须保持简洁，每个要点使用5-15个字的短语表达，不使用完整句子。\n- 不得包含具体内容的撰写或设计建议，仅提供结构框架。\n- 输出内容必须纯粹是大纲形式，不包含任何引言或结束语。\n## 输出格式\n# [演示标题]\n\n## 1. [开场/引言]\n- [要点1]\n- [要点2]\n\n## 2. [第一主题]\n### 2.1 [子主题]\n- [要点]\n- [要点]\n### 2.2 [子主题]\n- [要点]\n- [要点]\n\n## 3. [第二主题]\n[...]\n\n## n. [总结/结论]\n- [要点1]\n- [要点2]",
+          "valueDesc": "",
+          "debugLabel": "",
+          "toolDescription": "",
+          "maxLength": 100000,
+          "isRichText": true
+        },
+        {
+          "key": "history",
+          "renderTypeList": [
+            "numberInput",
+            "reference"
+          ],
+          "valueType": "chatHistory",
+          "label": "common:core.module.input.label.chat history",
+          "description": "workflow:max_dialog_rounds",
+          "required": true,
+          "min": 0,
+          "max": 50,
+          "value": "",
+          "valueDesc": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "quoteQA",
+          "renderTypeList": [
+            "settingDatasetQuotePrompt"
+          ],
+          "label": "",
+          "debugLabel": "知识库引用",
+          "description": "",
+          "valueType": "datasetQuote",
+          "valueDesc": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "fileUrlList",
+          "renderTypeList": [
+            "reference",
+            "input"
+          ],
+          "label": "app:workflow.user_file_input",
+          "debugLabel": "文件链接",
+          "description": "app:workflow.user_file_input_desc",
+          "valueType": "arrayString",
+          "value": [],
+          "valueDesc": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "userChatInput",
+          "renderTypeList": [
+            "reference",
+            "textarea"
+          ],
+          "valueType": "string",
+          "label": "workflow:user_question",
+          "toolDescription": "用户问题",
+          "required": true,
+          "value": "PPT主题：{{$d2oeBfsHHQYe3FbF.请输入PPT主题$}}\n当前目录大纲：{{$VARIABLE_NODE_ID.PPT大纲缓存$}}（若为空则省略）",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "selectedTypeIndex": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "history",
+          "key": "history",
+          "required": true,
+          "label": "common:core.module.output.label.New context",
+          "description": "将本次回复内容拼接上历史记录，作为新的上下文返回",
+          "valueType": "chatHistory",
+          "valueDesc": "{\n  obj: System | Human | AI;\n  value: string;\n}[]",
+          "type": "static"
+        },
+        {
+          "id": "answerText",
+          "key": "answerText",
+          "required": true,
+          "label": "common:core.module.output.label.Ai response content",
+          "description": "将在 stream 回复完毕后触发",
+          "valueType": "string",
+          "type": "static",
+          "valueDesc": ""
+        },
+        {
+          "id": "reasoningText",
+          "key": "reasoningText",
+          "required": false,
+          "label": "workflow:reasoning_text",
+          "valueType": "string",
+          "type": "static",
+          "invalid": true,
+          "valueDesc": "",
+          "description": ""
+        },
+        {
+          "id": "system_error_text",
+          "key": "system_error_text",
+          "type": "error",
+          "valueType": "string",
+          "label": "workflow:error_text",
+          "description": ""
+        }
+      ],
+      "catchError": false
+    },
+    {
+      "nodeId": "sBwvc7pEXLzVyRD9",
+      "name": "指定回复#4",
+      "intro": "该模块可以直接回复一段指定的内容。常用于引导、提示。非字符串内容传入时，会转成字符串进行输出。",
+      "avatar": "core/workflow/template/reply",
+      "flowNodeType": "answerNode",
+      "position": {
+        "x": 934.3118972633906,
+        "y": -2930.7728629529406
+      },
+      "inputs": [
+        {
+          "key": "text",
+          "renderTypeList": [
+            "textarea",
+            "reference"
+          ],
+          "valueType": "any",
+          "required": true,
+          "label": "common:core.module.input.label.Response content",
+          "description": "common:core.module.input.description.Response content",
+          "placeholder": "common:core.module.input.description.Response content",
+          "value": "# PPT大纲：\n\n",
+          "valueDesc": "",
+          "debugLabel": "",
+          "toolDescription": "",
+          "isRichText": false,
+          "maxLength": 100000
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "nodeId": "o9D9NRuAhDvmzZSH",
+      "name": "更新当前目录大纲",
+      "intro": "可以更新指定节点的输出值或更新全局变量",
+      "avatar": "core/workflow/template/variableUpdate",
+      "flowNodeType": "variableUpdate",
+      "showStatus": false,
+      "position": {
+        "x": 2551.8118972633906,
+        "y": -2928.2728629529406
+      },
+      "inputs": [
+        {
+          "key": "updateList",
+          "valueType": "any",
+          "label": "",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "value": [
+            {
+              "variable": [
+                "VARIABLE_NODE_ID",
+                "PPT大纲缓存"
+              ],
+              "value": [
+                "",
+                "{{$tYFeZ9mf3XvonT94.answerText$}}"
+              ],
+              "valueType": "string",
+              "renderType": "input"
+            }
+          ],
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "nodeId": "i6f4qF6J7N9a8N53",
+      "name": "用户选择",
+      "intro": "该模块可配置多个选项，以供对话时选择。不同选项可导向不同工作流支线",
+      "avatar": "core/workflow/template/userSelect",
+      "flowNodeType": "userSelect",
+      "position": {
+        "x": 3227.8118972633906,
+        "y": -3077.7728629529406
+      },
+      "inputs": [
+        {
+          "key": "description",
+          "renderTypeList": [
+            "textarea"
+          ],
+          "valueType": "string",
+          "label": "app:workflow.select_description",
+          "description": "app:workflow.select_description_tip",
+          "placeholder": "app:workflow.select_description_placeholder",
+          "value": "",
+          "valueDesc": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "renderTypeList": [
+            "custom"
+          ],
+          "valueType": "any",
+          "label": "",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": "",
+          "key": "userSelectOptions",
+          "value": [
+            {
+              "value": "开始生成PPT",
+              "key": "option1"
+            },
+            {
+              "value": "取消",
+              "key": "quNMZQZpWVUmmrpt"
+            }
+          ]
+        }
+      ],
+      "outputs": [
+        {
+          "id": "selectResult",
+          "key": "selectResult",
+          "required": true,
+          "label": "app:workflow.select_result",
+          "valueType": "string",
+          "type": "static",
+          "valueDesc": "",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "nodeId": "kRox3qngRniC25Q3",
+      "name": "指定回复#5",
+      "intro": "该模块可以直接回复一段指定的内容。常用于引导、提示。非字符串内容传入时，会转成字符串进行输出。",
+      "avatar": "core/workflow/template/reply",
+      "flowNodeType": "answerNode",
+      "position": {
+        "x": 6066.811897263391,
+        "y": -1153.7728629529406
+      },
+      "inputs": [
+        {
+          "key": "text",
+          "renderTypeList": [
+            "textarea",
+            "reference"
+          ],
+          "valueType": "any",
+          "required": true,
+          "label": "common:core.module.input.label.Response content",
+          "description": "common:core.module.input.description.Response content",
+          "placeholder": "common:core.module.input.description.Response content",
+          "value": "PPT开始生成，预计等待1min-2min\n",
+          "valueDesc": "",
+          "debugLabel": "",
+          "toolDescription": "",
+          "isRichText": false,
+          "maxLength": 100000
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "nodeId": "dCn5htI9Mjn4b1Ld",
+      "name": "用户选择#2",
+      "intro": "该模块可配置多个选项，以供对话时选择。不同选项可导向不同工作流支线",
+      "avatar": "core/workflow/template/userSelect",
+      "flowNodeType": "userSelect",
+      "position": {
+        "x": -1320.1881027366094,
+        "y": -1411.7728629529406
+      },
+      "inputs": [
+        {
+          "key": "description",
+          "renderTypeList": [
+            "textarea"
+          ],
+          "valueType": "string",
+          "label": "app:workflow.select_description",
+          "description": "app:workflow.select_description_tip",
+          "placeholder": "app:workflow.select_description_placeholder",
+          "value": "请选择PPT生成方式~",
+          "valueDesc": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "renderTypeList": [
+            "custom"
+          ],
+          "valueType": "any",
+          "label": "",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": "",
+          "key": "userSelectOptions",
+          "value": [
+            {
+              "value": "输入主题生成PPT",
+              "key": "option1"
+            },
+            {
+              "value": "输入大纲生成PPT",
+              "key": "option2"
+            },
+            {
+              "value": "上传文件生成PPT",
+              "key": "qZseoj46H1LU40df"
+            },
+            {
+              "value": "输入网页生成PPT",
+              "key": "ceYn6RO9HtoXtcve"
+            }
+          ]
+        }
+      ],
+      "outputs": [
+        {
+          "id": "selectResult",
+          "key": "selectResult",
+          "required": true,
+          "label": "app:workflow.select_result",
+          "valueType": "string",
+          "type": "static",
+          "valueDesc": "",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "nodeId": "d2oeBfsHHQYe3FbF",
+      "name": "表单输入#2",
+      "intro": "该模块可以配置多种输入，引导用户输入特定内容。",
+      "avatar": "core/workflow/template/formInput",
+      "flowNodeType": "formInput",
+      "position": {
+        "x": 255.81189726339062,
+        "y": -3081.7728629529406
+      },
+      "inputs": [
+        {
+          "key": "description",
+          "renderTypeList": [
+            "textarea"
+          ],
+          "valueType": "string",
+          "label": "app:workflow.select_description",
+          "description": "app:workflow.input_description_tip",
+          "placeholder": "app:workflow.form_input_description_placeholder",
+          "valueDesc": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "renderTypeList": [
+            "custom"
+          ],
+          "valueType": "any",
+          "label": "",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": "",
+          "key": "userInputForms",
+          "value": [
+            {
+              "type": "input",
+              "key": "请输入PPT主题",
+              "label": "请输入PPT主题",
+              "description": "",
+              "value": "",
+              "defaultValue": "",
+              "valueType": "string",
+              "required": true,
+              "list": [
+                {
+                  "label": "",
+                  "value": ""
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "outputs": [
+        {
+          "id": "formInputResult",
+          "key": "formInputResult",
+          "required": true,
+          "label": "workflow:form_input_result",
+          "description": "一个包含完整结果的对象",
+          "valueType": "object",
+          "type": "static",
+          "valueDesc": ""
+        },
+        {
+          "id": "请输入PPT主题",
+          "valueType": "string",
+          "key": "请输入PPT主题",
+          "label": "请输入PPT主题",
+          "type": "static"
+        }
+      ],
+      "isFolded": false
+    },
+    {
+      "nodeId": "yYCz894ntiAzEOVd",
+      "name": "表单输入#3",
+      "intro": "该模块可以配置多种输入，引导用户输入特定内容。",
+      "avatar": "core/workflow/template/formInput",
+      "flowNodeType": "formInput",
+      "position": {
+        "x": 2574.8118972633906,
+        "y": -1594.7728629529406
+      },
+      "inputs": [
+        {
+          "key": "description",
+          "renderTypeList": [
+            "textarea"
+          ],
+          "valueType": "string",
+          "label": "app:workflow.select_description",
+          "description": "app:workflow.input_description_tip",
+          "placeholder": "app:workflow.form_input_description_placeholder",
+          "value": "",
+          "valueDesc": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "renderTypeList": [
+            "custom"
+          ],
+          "valueType": "any",
+          "label": "",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": "",
+          "key": "userInputForms",
+          "value": [
+            {
+              "type": "input",
+              "key": "请输入PPT大纲",
+              "label": "请输入PPT大纲",
+              "description": "",
+              "value": "",
+              "defaultValue": "",
+              "valueType": "string",
+              "required": false,
+              "list": [
+                {
+                  "label": "",
+                  "value": ""
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "outputs": [
+        {
+          "id": "formInputResult",
+          "key": "formInputResult",
+          "required": true,
+          "label": "workflow:form_input_result",
+          "description": "一个包含完整结果的对象",
+          "valueType": "object",
+          "type": "static",
+          "valueDesc": ""
+        },
+        {
+          "id": "请输入PPT大纲",
+          "valueType": "string",
+          "key": "请输入PPT大纲",
+          "label": "请输入PPT大纲",
+          "type": "static"
+        }
+      ]
+    },
+    {
+      "nodeId": "x6kVYt6pYBKvwy4y",
+      "name": "变量更新#2",
+      "intro": "可以更新指定节点的输出值或更新全局变量",
+      "avatar": "core/workflow/template/variableUpdate",
+      "flowNodeType": "variableUpdate",
+      "showStatus": false,
+      "position": {
+        "x": 3247.8118972633906,
+        "y": -1441.2728629529406
+      },
+      "inputs": [
+        {
+          "key": "updateList",
+          "valueType": "any",
+          "label": "",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "value": [
+            {
+              "variable": [
+                "VARIABLE_NODE_ID",
+                "PPT大纲缓存"
+              ],
+              "value": [
+                "",
+                "{{$yYCz894ntiAzEOVd.请输入PPT大纲$}}"
+              ],
+              "valueType": "string",
+              "renderType": "input"
+            }
+          ],
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "nodeId": "sqwwle1CWrSlfVPF",
+      "name": "文档解析",
+      "intro": "解析本轮对话上传的文档，并返回对应文档内容",
+      "avatar": "core/workflow/template/readFiles",
+      "flowNodeType": "readFiles",
+      "showStatus": true,
+      "position": {
+        "x": 193.81189726339062,
+        "y": -2140.7728629529406
+      },
+      "version": "4.9.2",
+      "inputs": [
+        {
+          "key": "fileUrlList",
+          "renderTypeList": [
+            "reference"
+          ],
+          "valueType": "arrayString",
+          "label": "app:workflow.file_url",
+          "required": true,
+          "value": [
+            [
+              "448745",
+              "userFiles"
+            ]
+          ],
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        }
+      ],
+      "outputs": [
+        {
+          "id": "system_text",
+          "key": "system_text",
+          "label": "app:workflow.read_files_result",
+          "description": "文档原文，由文件名和文档内容组成，多个文件之间通过横线隔开。",
+          "valueType": "string",
+          "type": "static",
+          "valueDesc": ""
+        },
+        {
+          "id": "system_rawResponse",
+          "key": "system_rawResponse",
+          "label": "workflow:raw_response",
+          "description": "工具的原始响应",
+          "valueType": "arrayObject",
+          "type": "static"
+        },
+        {
+          "id": "system_error_text",
+          "key": "system_error_text",
+          "type": "error",
+          "valueType": "string",
+          "label": "workflow:error_text",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "nodeId": "mJt0e5Os6YOzWO30",
+      "name": "根据文档内容生成PPT大纲",
+      "intro": "AI 大模型对话",
+      "avatar": "core/workflow/template/aiChat",
+      "flowNodeType": "chatNode",
+      "showStatus": true,
+      "position": {
+        "x": 934.3118972633906,
+        "y": -2566.7728629529406
+      },
+      "version": "4.9.7",
+      "inputs": [
+        {
+          "key": "model",
+          "renderTypeList": [
+            "settingLLMModel",
+            "reference"
+          ],
+          "label": "common:core.module.input.label.aiModel",
+          "valueType": "string",
+          "value": "gpt-4.1",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "temperature",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "number",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "maxToken",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "number",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "isResponseAnswerText",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "value": true,
+          "valueType": "boolean",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatQuoteRole",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "value": "system",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "quoteTemplate",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "quotePrompt",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatVision",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "boolean",
+          "value": true,
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatReasoning",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "boolean",
+          "value": true,
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatTopP",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "number",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatStopSign",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatResponseFormat",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatJsonSchema",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "systemPrompt",
+          "renderTypeList": [
+            "textarea",
+            "reference"
+          ],
+          "max": 3000,
+          "valueType": "string",
+          "label": "common:core.ai.Prompt",
+          "description": "common:core.app.tip.systemPromptTip",
+          "placeholder": "common:core.app.tip.chatNodeSystemPromptTip",
+          "value": "# 角色\n你是专业PPT大纲设计专家，你擅长分析用户上传的文档内容，提取关键信息并转化为结构清晰的演示文稿框架，你能够创建逻辑连贯、层次分明的markdown格式演示大纲。\n\n## 背景\n优质的演示文稿需要结构良好的大纲作为基础。作为PPT大纲设计专家，你需要深入分析用户上传的文档内容，理解其核心要点和逻辑关系，将文档信息准确转化为专业的演示框架，确保内容组织合理，覆盖所有关键点，并符合演示逻辑。\n\n## 技能\n### 技能 1: 文档内容深度解析与提取\n仔细阅读并分析用户上传的文档，识别文档类型（报告、论文、方案、总结等）和主要内容。提取文档中的3-5个核心主题作为主要章节，挖掘关键数据、案例、观点和结论。分析文档的逻辑结构和论证脉络，保持原文档的核心观点和重要信息完整性。将文档中的复杂内容转化为适合演示的简洁要点，确保信息传达的准确性和完整性。\n\n### 技能 2: 内容结构化重组与优化\n根据文档内容特点，设计符合演示逻辑的章节结构，为每个主要章节创建2-4个子主题。重新组织文档信息，确保演示流程的逻辑性和连贯性，包含必要的背景介绍、核心内容展示和总结建议。识别文档中的关键支撑材料（数据、图表、案例等），将其合理分配到相应章节。确保大纲涵盖文档的所有重要内容，同时删除冗余信息，突出演示重点。\n\n### 技能 3: Markdown格式精准应用与演示优化\n严格使用markdown语法构建多层级大纲，包括：使用#表示主标题，##表示一级章节标题，###表示二级子标题，####表示三级内容点。对每个层级的内容点使用-符号创建简洁明了的要点列表。设计15-30分钟标准演示长度的内容结构，平衡各章节内容比重。根据文档内容的复杂度和重要性，合理设计2-3级的层级结构，确保大纲视觉清晰且易于理解。\n\n## 限制\n- 严格仅输出markdown格式大纲，不包含任何解释性文字、注释或额外建议。\n- 必须基于用户上传的文档内容生成大纲，不得添加文档中未包含的信息。\n- 保持文档中的核心概念、术语和重要数据的准确性，不得随意修改或误解。\n- 大纲必须保持简洁，每个要点使用5-15个字的短语表达，不使用完整句子。\n- 不得包含具体内容的撰写或设计建议，仅提供基于文档的结构框架。\n- 输出内容必须纯粹是大纲形式，不包含任何引言或结束语。\n\n## 输出格式\n# [基于文档的演示标题]\n\n## 1. [开场/背景介绍]\n- [文档背景要点1]\n- [文档背景要点2]\n\n## 2. [第一主题]\n### 2.1 [子主题]\n- [要点]\n- [要点]\n### 2.2 [子主题]\n- [要点]\n- [要点]\n\n## 3. [第二主题]\n[...]\n\n## n. [总结/结论]\n- [文档核心结论1]\n- [文档核心结论2]",
+          "valueDesc": "",
+          "debugLabel": "",
+          "toolDescription": "",
+          "maxLength": 100000,
+          "isRichText": true
+        },
+        {
+          "key": "history",
+          "renderTypeList": [
+            "numberInput",
+            "reference"
+          ],
+          "valueType": "chatHistory",
+          "label": "common:core.module.input.label.chat history",
+          "description": "workflow:max_dialog_rounds",
+          "required": true,
+          "min": 0,
+          "max": 50,
+          "value": "",
+          "valueDesc": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "quoteQA",
+          "renderTypeList": [
+            "settingDatasetQuotePrompt"
+          ],
+          "label": "",
+          "debugLabel": "知识库引用",
+          "description": "",
+          "valueType": "datasetQuote",
+          "valueDesc": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "fileUrlList",
+          "renderTypeList": [
+            "reference",
+            "input"
+          ],
+          "label": "app:workflow.user_file_input",
+          "debugLabel": "文件链接",
+          "description": "app:workflow.user_file_input_desc",
+          "valueType": "arrayString",
+          "value": [
+            [
+              "448745",
+              "userFiles"
+            ]
+          ],
+          "valueDesc": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "userChatInput",
+          "renderTypeList": [
+            "reference",
+            "textarea"
+          ],
+          "valueType": "string",
+          "label": "workflow:user_question",
+          "toolDescription": "用户问题",
+          "required": true,
+          "value": "文档内容：{{$sqwwle1CWrSlfVPF.system_text$}}\n当前目录大纲：{{$VARIABLE_NODE_ID.PPT大纲缓存$}}（若为空则省略）",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "selectedTypeIndex": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "history",
+          "key": "history",
+          "required": true,
+          "label": "common:core.module.output.label.New context",
+          "description": "将本次回复内容拼接上历史记录，作为新的上下文返回",
+          "valueType": "chatHistory",
+          "valueDesc": "{\n  obj: System | Human | AI;\n  value: string;\n}[]",
+          "type": "static"
+        },
+        {
+          "id": "answerText",
+          "key": "answerText",
+          "required": true,
+          "label": "common:core.module.output.label.Ai response content",
+          "description": "将在 stream 回复完毕后触发",
+          "valueType": "string",
+          "type": "static",
+          "valueDesc": ""
+        },
+        {
+          "id": "reasoningText",
+          "key": "reasoningText",
+          "required": false,
+          "label": "workflow:reasoning_text",
+          "valueType": "string",
+          "type": "static",
+          "invalid": true,
+          "valueDesc": "",
+          "description": ""
+        },
+        {
+          "id": "system_error_text",
+          "key": "system_error_text",
+          "type": "error",
+          "valueType": "string",
+          "label": "workflow:error_text",
+          "description": ""
+        }
+      ],
+      "catchError": false
+    },
+    {
+      "nodeId": "pi1nyaTx7jeZEVXT",
+      "name": "变量更新#3",
+      "intro": "可以更新指定节点的输出值或更新全局变量",
+      "avatar": "core/workflow/template/variableUpdate",
+      "flowNodeType": "variableUpdate",
+      "showStatus": false,
+      "position": {
+        "x": 1855.8118972633906,
+        "y": -2111.2728629529406
+      },
+      "inputs": [
+        {
+          "key": "updateList",
+          "valueType": "any",
+          "label": "",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "value": [
+            {
+              "variable": [
+                "VARIABLE_NODE_ID",
+                "PPT大纲缓存"
+              ],
+              "value": [
+                "",
+                "{{$mJt0e5Os6YOzWO30.answerText$}}"
+              ],
+              "valueType": "string",
+              "renderType": "input"
+            }
+          ],
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "nodeId": "bGNXiNohZKDDMc02",
+      "name": "用户选择#3",
+      "intro": "该模块可配置多个选项，以供对话时选择。不同选项可导向不同工作流支线",
+      "avatar": "core/workflow/template/userSelect",
+      "flowNodeType": "userSelect",
+      "position": {
+        "x": 2531.8118972633906,
+        "y": -2251.7728629529406
+      },
+      "inputs": [
+        {
+          "key": "description",
+          "renderTypeList": [
+            "textarea"
+          ],
+          "valueType": "string",
+          "label": "app:workflow.select_description",
+          "description": "app:workflow.select_description_tip",
+          "placeholder": "app:workflow.select_description_placeholder",
+          "value": "",
+          "valueDesc": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "renderTypeList": [
+            "custom"
+          ],
+          "valueType": "any",
+          "label": "",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": "",
+          "key": "userSelectOptions",
+          "value": [
+            {
+              "value": "开始生成PPT",
+              "key": "option1"
+            },
+            {
+              "value": "取消",
+              "key": "pLlLUA5qzjX4Ifgv"
+            }
+          ]
+        }
+      ],
+      "outputs": [
+        {
+          "id": "selectResult",
+          "key": "selectResult",
+          "required": true,
+          "label": "app:workflow.select_result",
+          "valueType": "string",
+          "type": "static",
+          "valueDesc": "",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "nodeId": "isD5EdqFlMmxze1Q",
+      "name": "判断器#3",
+      "intro": "根据一定的条件，执行不同的分支。",
+      "avatar": "core/workflow/template/ifelse",
+      "flowNodeType": "ifElseNode",
+      "showStatus": true,
+      "position": {
+        "x": -660,
+        "y": -975
+      },
+      "inputs": [
+        {
+          "key": "ifElseList",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "any",
+          "label": "",
+          "value": [
+            {
+              "condition": "AND",
+              "list": [
+                {
+                  "variable": [
+                    "448745",
+                    "userFiles"
+                  ],
+                  "condition": "isNotEmpty"
+                }
+              ]
+            }
+          ],
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        }
+      ],
+      "outputs": [
+        {
+          "id": "ifElseResult",
+          "key": "ifElseResult",
+          "label": "workflow:judgment_result",
+          "valueType": "string",
+          "type": "static",
+          "valueDesc": "",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "nodeId": "jzEUhxipE5fGFAFK",
+      "name": "指定回复#6",
+      "intro": "该模块可以直接回复一段指定的内容。常用于引导、提示。非字符串内容传入时，会转成字符串进行输出。",
+      "avatar": "core/workflow/template/reply",
+      "flowNodeType": "answerNode",
+      "position": {
+        "x": 193.81189726339062,
+        "y": -840
+      },
+      "inputs": [
+        {
+          "key": "text",
+          "renderTypeList": [
+            "textarea",
+            "reference"
+          ],
+          "valueType": "any",
+          "required": true,
+          "label": "common:core.module.input.label.Response content",
+          "description": "common:core.module.input.description.Response content",
+          "placeholder": "common:core.module.input.description.Response content",
+          "value": "请上传文件~",
+          "valueDesc": "",
+          "debugLabel": "",
+          "toolDescription": "",
+          "isRichText": false,
+          "maxLength": 100000
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "nodeId": "uoSyONI8zTPSF3oB",
+      "name": "表单输入#5",
+      "intro": "该模块可以配置多种输入，引导用户输入特定内容。",
+      "avatar": "core/workflow/template/formInput",
+      "flowNodeType": "formInput",
+      "position": {
+        "x": -555.6881027366094,
+        "y": -459.7728629529406
+      },
+      "inputs": [
+        {
+          "key": "description",
+          "renderTypeList": [
+            "textarea"
+          ],
+          "valueType": "string",
+          "label": "app:workflow.select_description",
+          "description": "app:workflow.input_description_tip",
+          "placeholder": "app:workflow.form_input_description_placeholder",
+          "value": "",
+          "valueDesc": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "renderTypeList": [
+            "custom"
+          ],
+          "valueType": "any",
+          "label": "",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": "",
+          "key": "userInputForms",
+          "value": [
+            {
+              "type": "input",
+              "key": "请输入网页地址",
+              "label": "请输入网页地址",
+              "description": "",
+              "value": "",
+              "defaultValue": "",
+              "valueType": "string",
+              "required": true,
+              "list": [
+                {
+                  "label": "",
+                  "value": ""
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "outputs": [
+        {
+          "id": "formInputResult",
+          "key": "formInputResult",
+          "required": true,
+          "label": "workflow:form_input_result",
+          "description": "一个包含完整结果的对象",
+          "valueType": "object",
+          "type": "static",
+          "valueDesc": ""
+        },
+        {
+          "id": "url",
+          "valueType": "string",
+          "key": "请输入网页地址",
+          "label": "请输入网页地址",
+          "type": "static"
+        }
+      ]
+    },
+    {
+      "nodeId": "cXPV72ZwRE53Aebq",
+      "name": "网页内容抓取",
+      "intro": "可获取一个网页链接内容，并以 Markdown 格式输出，仅支持获取静态网站。",
+      "avatar": "core/workflow/template/fetchUrl",
+      "flowNodeType": "pluginModule",
+      "showStatus": true,
+      "position": {
+        "x": 193.81189726339062,
+        "y": -380.7728629529406
+      },
+      "version": "",
+      "inputs": [
+        {
+          "key": "url",
+          "label": "url",
+          "selectedTypeIndex": 0,
+          "renderTypeList": [
+            "reference",
+            "input"
+          ],
+          "valueType": "string",
+          "description": "需要读取的网页链接",
+          "required": true,
+          "toolDescription": "需要读取的网页链接",
+          "value": [
+            "uoSyONI8zTPSF3oB",
+            "url"
+          ]
+        }
+      ],
+      "outputs": [
+        {
+          "id": "title",
+          "type": "static",
+          "key": "title",
+          "valueType": "string",
+          "label": "网页标题"
+        },
+        {
+          "id": "result",
+          "type": "static",
+          "key": "result",
+          "valueType": "string",
+          "label": "网页内容"
+        },
+        {
+          "id": "system_error_text",
+          "key": "system_error_text",
+          "type": "error",
+          "valueType": "string",
+          "label": "workflow:error_text"
+        }
+      ],
+      "pluginId": "community-fetchUrl",
+      "toolConfig": {
+        "systemTool": {
+          "toolId": "systemTool-fetchUrl"
+        }
+      },
+      "catchError": false
+    },
+    {
+      "nodeId": "pWpRRMlG7q39n5Vp",
+      "name": "根据网页内容生成PPT大纲",
+      "intro": "AI 大模型对话",
+      "avatar": "core/workflow/template/aiChat",
+      "flowNodeType": "chatNode",
+      "showStatus": true,
+      "position": {
+        "x": 1745.8118972633906,
+        "y": -1175.0228629529406
+      },
+      "version": "4.9.7",
+      "inputs": [
+        {
+          "key": "model",
+          "renderTypeList": [
+            "settingLLMModel",
+            "reference"
+          ],
+          "label": "common:core.module.input.label.aiModel",
+          "valueType": "string",
+          "value": "gpt-4.1",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "temperature",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "number",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "maxToken",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "number",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "isResponseAnswerText",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "value": true,
+          "valueType": "boolean",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatQuoteRole",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "value": "system",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "quoteTemplate",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "quotePrompt",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatVision",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "boolean",
+          "value": true,
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatReasoning",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "boolean",
+          "value": true,
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatTopP",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "number",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatStopSign",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatResponseFormat",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatJsonSchema",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "systemPrompt",
+          "renderTypeList": [
+            "textarea",
+            "reference"
+          ],
+          "max": 3000,
+          "valueType": "string",
+          "label": "common:core.ai.Prompt",
+          "description": "common:core.app.tip.systemPromptTip",
+          "placeholder": "common:core.app.tip.chatNodeSystemPromptTip",
+          "value": "# 角色\n你是专业PPT大纲设计专家，你擅长分析用户提供的网页内容，提取关键信息并转化为结构清晰的演示文稿框架，你能够创建逻辑连贯、层次分明的markdown格式演示大纲。\n\n## 背景\n优质的演示文稿需要结构良好的大纲作为基础。作为PPT大纲设计专家，你需要深入分析用户提供的网页内容，理解其核心要点和逻辑关系，将网页信息准确转化为专业的演示框架，确保内容组织合理，覆盖所有关键点，并符合演示逻辑。\n\n## 技能\n### 技能 1: 网页内容深度解析与提取\n仔细阅读并分析用户提供的网页内容，识别网页类型（新闻、博客、产品介绍、研究报告、官方公告等）和主要内容。提取网页中的3-5个核心主题作为主要章节，挖掘关键数据、案例、观点和结论。分析网页的信息结构和表达脉络，保持原网页的核心观点和重要信息完整性。将网页中的复杂内容转化为适合演示的简洁要点，确保信息传达的准确性和完整性。\n\n### 技能 2: 内容结构化重组与优化\n根据网页内容特点，设计符合演示逻辑的章节结构，为每个主要章节创建2-4个子主题。重新组织网页信息，确保演示流程的逻辑性和连贯性，包含必要的背景介绍、核心内容展示和总结建议。识别网页中的关键支撑材料（数据、图表、案例等），将其合理分配到相应章节。确保大纲涵盖网页的所有重要内容，同时删除冗余信息，突出演示重点。\n\n### 技能 3: Markdown格式精准应用与演示优化\n严格使用markdown语法构建多层级大纲，包括：使用#表示主标题，##表示一级章节标题，###表示二级子标题，####表示三级内容点。对每个层级的内容点使用-符号创建简洁明了的要点列表。设计15-30分钟标准演示长度的内容结构，平衡各章节内容比重。根据网页内容的复杂度和重要性，合理设计2-3级的层级结构，确保大纲视觉清晰且易于理解。\n\n## 限制\n- 严格仅输出markdown格式大纲，不包含任何解释性文字、注释或额外建议。\n- 必须基于用户提供的网页内容生成大纲，不得添加网页中未包含的信息。\n- 保持网页中的核心概念、术语和重要数据的准确性，不得随意修改或误解。\n- 大纲必须保持简洁，每个要点使用5-15个字的短语表达，不使用完整句子。\n- 不得包含具体内容的撰写或设计建议，仅提供基于网页的结构框架。\n- 输出内容必须纯粹是大纲形式，不包含任何引言或结束语。\n\n## 输出格式\n# [基于网页的演示标题]\n\n## 1. [开场/背景介绍]\n- [网页背景要点1]\n- [网页背景要点2]\n\n## 2. [第一主题]\n### 2.1 [子主题]\n- [要点]\n- [要点]\n### 2.2 [子主题]\n- [要点]\n- [要点]\n\n## 3. [第二主题]\n[...]\n\n## n. [总结/结论]\n- [网页核心结论1]\n- [网页核心结论2]",
+          "valueDesc": "",
+          "debugLabel": "",
+          "toolDescription": "",
+          "maxLength": 100000,
+          "isRichText": true
+        },
+        {
+          "key": "history",
+          "renderTypeList": [
+            "numberInput",
+            "reference"
+          ],
+          "valueType": "chatHistory",
+          "label": "common:core.module.input.label.chat history",
+          "description": "workflow:max_dialog_rounds",
+          "required": true,
+          "min": 0,
+          "max": 50,
+          "value": "",
+          "valueDesc": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "quoteQA",
+          "renderTypeList": [
+            "settingDatasetQuotePrompt"
+          ],
+          "label": "",
+          "debugLabel": "知识库引用",
+          "description": "",
+          "valueType": "datasetQuote",
+          "valueDesc": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "fileUrlList",
+          "renderTypeList": [
+            "reference",
+            "input"
+          ],
+          "label": "app:workflow.user_file_input",
+          "debugLabel": "文件链接",
+          "description": "app:workflow.user_file_input_desc",
+          "valueType": "arrayString",
+          "value": [],
+          "valueDesc": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "userChatInput",
+          "renderTypeList": [
+            "reference",
+            "textarea"
+          ],
+          "valueType": "string",
+          "label": "workflow:user_question",
+          "toolDescription": "用户问题",
+          "required": true,
+          "value": "文档内容：{{$cXPV72ZwRE53Aebq.result$}}\n当前目录大纲：{{$VARIABLE_NODE_ID.PPT大纲缓存$}}（若为空则省略）",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "selectedTypeIndex": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "history",
+          "key": "history",
+          "required": true,
+          "label": "common:core.module.output.label.New context",
+          "description": "将本次回复内容拼接上历史记录，作为新的上下文返回",
+          "valueType": "chatHistory",
+          "valueDesc": "{\n  obj: System | Human | AI;\n  value: string;\n}[]",
+          "type": "static"
+        },
+        {
+          "id": "answerText",
+          "key": "answerText",
+          "required": true,
+          "label": "common:core.module.output.label.Ai response content",
+          "description": "将在 stream 回复完毕后触发",
+          "valueType": "string",
+          "type": "static",
+          "valueDesc": ""
+        },
+        {
+          "id": "reasoningText",
+          "key": "reasoningText",
+          "required": false,
+          "label": "workflow:reasoning_text",
+          "valueType": "string",
+          "type": "static",
+          "invalid": true,
+          "valueDesc": "",
+          "description": ""
+        },
+        {
+          "id": "system_error_text",
+          "key": "system_error_text",
+          "type": "error",
+          "valueType": "string",
+          "label": "workflow:error_text",
+          "description": ""
+        }
+      ],
+      "catchError": false
+    },
+    {
+      "nodeId": "bY1HjQh2L0jh5wtf",
+      "name": "变量更新#4",
+      "intro": "可以更新指定节点的输出值或更新全局变量",
+      "avatar": "core/workflow/template/variableUpdate",
+      "flowNodeType": "variableUpdate",
+      "showStatus": false,
+      "position": {
+        "x": 2551.8118972633906,
+        "y": -725.0228629529406
+      },
+      "inputs": [
+        {
+          "key": "updateList",
+          "valueType": "any",
+          "label": "",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "value": [
+            {
+              "variable": [
+                "VARIABLE_NODE_ID",
+                "PPT大纲缓存"
+              ],
+              "value": [
+                "",
+                "{{$pWpRRMlG7q39n5Vp.answerText$}}"
+              ],
+              "valueType": "string",
+              "renderType": "input"
+            }
+          ],
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "nodeId": "lSLLoXDDAZpOlhKK",
+      "name": "用户选择#4",
+      "intro": "该模块可配置多个选项，以供对话时选择。不同选项可导向不同工作流支线",
+      "avatar": "core/workflow/template/userSelect",
+      "flowNodeType": "userSelect",
+      "position": {
+        "x": 3227.8118972633906,
+        "y": -865.5228629529406
+      },
+      "inputs": [
+        {
+          "key": "description",
+          "renderTypeList": [
+            "textarea"
+          ],
+          "valueType": "string",
+          "label": "app:workflow.select_description",
+          "description": "app:workflow.select_description_tip",
+          "placeholder": "app:workflow.select_description_placeholder",
+          "value": "",
+          "valueDesc": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "renderTypeList": [
+            "custom"
+          ],
+          "valueType": "any",
+          "label": "",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": "",
+          "key": "userSelectOptions",
+          "value": [
+            {
+              "value": "开始生成PPT",
+              "key": "option1"
+            },
+            {
+              "value": "取消",
+              "key": "zQ327M97Nue2VPk2"
+            }
+          ]
+        }
+      ],
+      "outputs": [
+        {
+          "id": "selectResult",
+          "key": "selectResult",
+          "required": true,
+          "label": "app:workflow.select_result",
+          "valueType": "string",
+          "type": "static",
+          "valueDesc": "",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "nodeId": "p01nE67uxKzkhoWp",
+      "name": "判断器#4",
+      "intro": "根据一定的条件，执行不同的分支。",
+      "avatar": "core/workflow/template/ifelse",
+      "flowNodeType": "ifElseNode",
+      "showStatus": true,
+      "position": {
+        "x": 908.8118972633906,
+        "y": -357.2728629529406
+      },
+      "inputs": [
+        {
+          "key": "ifElseList",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "any",
+          "label": "",
+          "value": [
+            {
+              "condition": "AND",
+              "list": [
+                {
+                  "variable": [
+                    "cXPV72ZwRE53Aebq",
+                    "result"
+                  ],
+                  "condition": "notEqual",
+                  "value": "undefined"
+                }
+              ]
+            }
+          ],
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        }
+      ],
+      "outputs": [
+        {
+          "id": "ifElseResult",
+          "key": "ifElseResult",
+          "label": "workflow:judgment_result",
+          "valueType": "string",
+          "type": "static",
+          "valueDesc": "",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "nodeId": "hJh3GrDlhUKe6hfh",
+      "name": "指定回复#7",
+      "intro": "该模块可以直接回复一段指定的内容。常用于引导、提示。非字符串内容传入时，会转成字符串进行输出。",
+      "avatar": "core/workflow/template/reply",
+      "flowNodeType": "answerNode",
+      "position": {
+        "x": 1745.8118972633906,
+        "y": 100.97713704705939
+      },
+      "inputs": [
+        {
+          "key": "text",
+          "renderTypeList": [
+            "textarea",
+            "reference"
+          ],
+          "valueType": "any",
+          "required": true,
+          "label": "common:core.module.input.label.Response content",
+          "description": "common:core.module.input.description.Response content",
+          "placeholder": "common:core.module.input.description.Response content",
+          "value": "无法获取网页内容~",
+          "valueDesc": "",
+          "debugLabel": "",
+          "toolDescription": "",
+          "isRichText": false,
+          "maxLength": 100000
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "nodeId": "e0UEmMLQk889c3DN",
+      "name": "指定回复#8",
+      "intro": "该模块可以直接回复一段指定的内容。常用于引导、提示。非字符串内容传入时，会转成字符串进行输出。",
+      "avatar": "core/workflow/template/reply",
+      "flowNodeType": "answerNode",
+      "position": {
+        "x": 3923.8118972633906,
+        "y": -708.5228629529406
+      },
+      "inputs": [
+        {
+          "key": "text",
+          "renderTypeList": [
+            "textarea",
+            "reference"
+          ],
+          "valueType": "any",
+          "required": true,
+          "label": "common:core.module.input.label.Response content",
+          "description": "common:core.module.input.description.Response content",
+          "placeholder": "common:core.module.input.description.Response content",
+          "value": "感谢您的使用！",
+          "valueDesc": "",
+          "debugLabel": "",
+          "toolDescription": "",
+          "isRichText": false,
+          "maxLength": 100000
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "nodeId": "cxvhaoFXGwLpnb1h",
+      "name": "指定回复#9",
+      "intro": "该模块可以直接回复一段指定的内容。常用于引导、提示。非字符串内容传入时，会转成字符串进行输出。",
+      "avatar": "core/workflow/template/reply",
+      "flowNodeType": "answerNode",
+      "position": {
+        "x": 3137.8118972633906,
+        "y": -1954.5228629529406
+      },
+      "inputs": [
+        {
+          "key": "text",
+          "renderTypeList": [
+            "textarea",
+            "reference"
+          ],
+          "valueType": "any",
+          "required": true,
+          "label": "common:core.module.input.label.Response content",
+          "description": "common:core.module.input.description.Response content",
+          "placeholder": "common:core.module.input.description.Response content",
+          "value": "感谢您的使用！",
+          "valueDesc": "",
+          "debugLabel": "",
+          "toolDescription": "",
+          "isRichText": false,
+          "maxLength": 100000
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "nodeId": "pqjO4z0TEdXNNNuw",
+      "name": "指定回复#10",
+      "intro": "该模块可以直接回复一段指定的内容。常用于引导、提示。非字符串内容传入时，会转成字符串进行输出。",
+      "avatar": "core/workflow/template/reply",
+      "flowNodeType": "answerNode",
+      "position": {
+        "x": 3923.8118972633906,
+        "y": -2940.7728629529406
+      },
+      "inputs": [
+        {
+          "key": "text",
+          "renderTypeList": [
+            "textarea",
+            "reference"
+          ],
+          "valueType": "any",
+          "required": true,
+          "label": "common:core.module.input.label.Response content",
+          "description": "common:core.module.input.description.Response content",
+          "placeholder": "common:core.module.input.description.Response content",
+          "value": "感谢您的使用！",
+          "valueDesc": "",
+          "debugLabel": "",
+          "toolDescription": "",
+          "isRichText": false,
+          "maxLength": 100000
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "nodeId": "cv4tyZSeaTZa0ziA",
+      "name": "判断器#5",
+      "intro": "根据一定的条件，执行不同的分支。",
+      "avatar": "core/workflow/template/ifelse",
+      "flowNodeType": "ifElseNode",
+      "showStatus": true,
+      "position": {
+        "x": -2157.1881027366094,
+        "y": -1562.0228629529406
+      },
+      "inputs": [
+        {
+          "key": "ifElseList",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "any",
+          "label": "",
+          "value": [
+            {
+              "condition": "AND",
+              "list": [
+                {
+                  "variable": [
+                    "448745",
+                    "userFiles"
+                  ],
+                  "condition": "isNotEmpty"
+                }
+              ]
+            }
+          ],
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        }
+      ],
+      "outputs": [
+        {
+          "id": "ifElseResult",
+          "key": "ifElseResult",
+          "label": "workflow:judgment_result",
+          "valueType": "string",
+          "type": "static",
+          "valueDesc": "",
+          "description": ""
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "lcEeHvusHqHEJiFz",
+      "target": "tilQNZSdwBOEfUos",
+      "sourceHandle": "lcEeHvusHqHEJiFz-source-right",
+      "targetHandle": "tilQNZSdwBOEfUos-target-left"
+    },
+    {
+      "source": "tilQNZSdwBOEfUos",
+      "target": "r3f1XGghe90VJAO8",
+      "sourceHandle": "tilQNZSdwBOEfUos-source-right",
+      "targetHandle": "r3f1XGghe90VJAO8-target-left"
+    },
+    {
+      "source": "r3f1XGghe90VJAO8",
+      "target": "vGlNpCYp0dLKpaFL",
+      "sourceHandle": "r3f1XGghe90VJAO8-source-right",
+      "targetHandle": "vGlNpCYp0dLKpaFL-target-left"
+    },
+    {
+      "source": "vGlNpCYp0dLKpaFL",
+      "target": "chSoeQv3YFaQFTNM",
+      "sourceHandle": "vGlNpCYp0dLKpaFL-source-IF",
+      "targetHandle": "chSoeQv3YFaQFTNM-target-left"
+    },
+    {
+      "source": "tilQNZSdwBOEfUos",
+      "target": "qbqgkhSXVJBFZz7r",
+      "sourceHandle": "tilQNZSdwBOEfUos-source-right",
+      "targetHandle": "qbqgkhSXVJBFZz7r-target-left"
+    },
+    {
+      "source": "qbqgkhSXVJBFZz7r",
+      "target": "vGlNpCYp0dLKpaFL",
+      "sourceHandle": "qbqgkhSXVJBFZz7r-source-right",
+      "targetHandle": "vGlNpCYp0dLKpaFL-target-left"
+    },
+    {
+      "source": "vGlNpCYp0dLKpaFL",
+      "target": "qF4vv3ssGhrbiAJB",
+      "sourceHandle": "vGlNpCYp0dLKpaFL-source-ELSE",
+      "targetHandle": "qF4vv3ssGhrbiAJB-target-left"
+    },
+    {
+      "source": "qF4vv3ssGhrbiAJB",
+      "target": "jIHEOiUURLcWVpvC",
+      "sourceHandle": "qF4vv3ssGhrbiAJB-source-right",
+      "targetHandle": "jIHEOiUURLcWVpvC-target-left"
+    },
+    {
+      "source": "jIHEOiUURLcWVpvC",
+      "target": "tilQNZSdwBOEfUos",
+      "sourceHandle": "jIHEOiUURLcWVpvC-source-right",
+      "targetHandle": "tilQNZSdwBOEfUos-target-left"
+    },
+    {
+      "source": "frxY7LYGQtuaOOhG",
+      "target": "nrqXS4n6tvha0GoS",
+      "sourceHandle": "frxY7LYGQtuaOOhG-source-right",
+      "targetHandle": "nrqXS4n6tvha0GoS-target-left"
+    },
+    {
+      "source": "nrqXS4n6tvha0GoS",
+      "target": "b5REHNbGggzKStou",
+      "sourceHandle": "nrqXS4n6tvha0GoS-source-right",
+      "targetHandle": "b5REHNbGggzKStou-target-left"
+    },
+    {
+      "source": "b5REHNbGggzKStou",
+      "target": "lcEeHvusHqHEJiFz",
+      "sourceHandle": "b5REHNbGggzKStou-source-IF",
+      "targetHandle": "lcEeHvusHqHEJiFz-target-left"
+    },
+    {
+      "source": "b5REHNbGggzKStou",
+      "target": "bT4FSV7XEMWwGjWu",
+      "sourceHandle": "b5REHNbGggzKStou-source-ELSE",
+      "targetHandle": "bT4FSV7XEMWwGjWu-target-left"
+    },
+    {
+      "source": "sBwvc7pEXLzVyRD9",
+      "target": "tYFeZ9mf3XvonT94",
+      "sourceHandle": "sBwvc7pEXLzVyRD9-source-right",
+      "targetHandle": "tYFeZ9mf3XvonT94-target-left"
+    },
+    {
+      "source": "tYFeZ9mf3XvonT94",
+      "target": "o9D9NRuAhDvmzZSH",
+      "sourceHandle": "tYFeZ9mf3XvonT94-source-right",
+      "targetHandle": "o9D9NRuAhDvmzZSH-target-left"
+    },
+    {
+      "source": "b5REHNbGggzKStou",
+      "target": "kRox3qngRniC25Q3",
+      "sourceHandle": "b5REHNbGggzKStou-source-IF",
+      "targetHandle": "kRox3qngRniC25Q3-target-left"
+    },
+    {
+      "source": "dCn5htI9Mjn4b1Ld",
+      "target": "d2oeBfsHHQYe3FbF",
+      "sourceHandle": "dCn5htI9Mjn4b1Ld-source-option1",
+      "targetHandle": "d2oeBfsHHQYe3FbF-target-left"
+    },
+    {
+      "source": "d2oeBfsHHQYe3FbF",
+      "target": "sBwvc7pEXLzVyRD9",
+      "sourceHandle": "d2oeBfsHHQYe3FbF-source-right",
+      "targetHandle": "sBwvc7pEXLzVyRD9-target-left"
+    },
+    {
+      "source": "dCn5htI9Mjn4b1Ld",
+      "target": "yYCz894ntiAzEOVd",
+      "sourceHandle": "dCn5htI9Mjn4b1Ld-source-option2",
+      "targetHandle": "yYCz894ntiAzEOVd-target-left"
+    },
+    {
+      "source": "yYCz894ntiAzEOVd",
+      "target": "x6kVYt6pYBKvwy4y",
+      "sourceHandle": "yYCz894ntiAzEOVd-source-right",
+      "targetHandle": "x6kVYt6pYBKvwy4y-target-left"
+    },
+    {
+      "source": "sqwwle1CWrSlfVPF",
+      "target": "mJt0e5Os6YOzWO30",
+      "sourceHandle": "sqwwle1CWrSlfVPF-source-right",
+      "targetHandle": "mJt0e5Os6YOzWO30-target-left"
+    },
+    {
+      "source": "mJt0e5Os6YOzWO30",
+      "target": "pi1nyaTx7jeZEVXT",
+      "sourceHandle": "mJt0e5Os6YOzWO30-source-right",
+      "targetHandle": "pi1nyaTx7jeZEVXT-target-left"
+    },
+    {
+      "source": "pi1nyaTx7jeZEVXT",
+      "target": "bGNXiNohZKDDMc02",
+      "sourceHandle": "pi1nyaTx7jeZEVXT-source-right",
+      "targetHandle": "bGNXiNohZKDDMc02-target-left"
+    },
+    {
+      "source": "bGNXiNohZKDDMc02",
+      "target": "frxY7LYGQtuaOOhG",
+      "sourceHandle": "bGNXiNohZKDDMc02-source-option1",
+      "targetHandle": "frxY7LYGQtuaOOhG-target-left"
+    },
+    {
+      "source": "dCn5htI9Mjn4b1Ld",
+      "target": "isD5EdqFlMmxze1Q",
+      "sourceHandle": "dCn5htI9Mjn4b1Ld-source-qZseoj46H1LU40df",
+      "targetHandle": "isD5EdqFlMmxze1Q-target-left"
+    },
+    {
+      "source": "isD5EdqFlMmxze1Q",
+      "target": "sqwwle1CWrSlfVPF",
+      "sourceHandle": "isD5EdqFlMmxze1Q-source-IF",
+      "targetHandle": "sqwwle1CWrSlfVPF-target-left"
+    },
+    {
+      "source": "isD5EdqFlMmxze1Q",
+      "target": "jzEUhxipE5fGFAFK",
+      "sourceHandle": "isD5EdqFlMmxze1Q-source-ELSE",
+      "targetHandle": "jzEUhxipE5fGFAFK-target-left"
+    },
+    {
+      "source": "dCn5htI9Mjn4b1Ld",
+      "target": "uoSyONI8zTPSF3oB",
+      "sourceHandle": "dCn5htI9Mjn4b1Ld-source-ceYn6RO9HtoXtcve",
+      "targetHandle": "uoSyONI8zTPSF3oB-target-left"
+    },
+    {
+      "source": "uoSyONI8zTPSF3oB",
+      "target": "cXPV72ZwRE53Aebq",
+      "sourceHandle": "uoSyONI8zTPSF3oB-source-right",
+      "targetHandle": "cXPV72ZwRE53Aebq-target-left"
+    },
+    {
+      "source": "pWpRRMlG7q39n5Vp",
+      "target": "bY1HjQh2L0jh5wtf",
+      "sourceHandle": "pWpRRMlG7q39n5Vp-source-right",
+      "targetHandle": "bY1HjQh2L0jh5wtf-target-left"
+    },
+    {
+      "source": "bY1HjQh2L0jh5wtf",
+      "target": "lSLLoXDDAZpOlhKK",
+      "sourceHandle": "bY1HjQh2L0jh5wtf-source-right",
+      "targetHandle": "lSLLoXDDAZpOlhKK-target-left"
+    },
+    {
+      "source": "lSLLoXDDAZpOlhKK",
+      "target": "frxY7LYGQtuaOOhG",
+      "sourceHandle": "lSLLoXDDAZpOlhKK-source-option1",
+      "targetHandle": "frxY7LYGQtuaOOhG-target-left"
+    },
+    {
+      "source": "cXPV72ZwRE53Aebq",
+      "target": "p01nE67uxKzkhoWp",
+      "sourceHandle": "cXPV72ZwRE53Aebq-source-right",
+      "targetHandle": "p01nE67uxKzkhoWp-target-left"
+    },
+    {
+      "source": "p01nE67uxKzkhoWp",
+      "target": "pWpRRMlG7q39n5Vp",
+      "sourceHandle": "p01nE67uxKzkhoWp-source-IF",
+      "targetHandle": "pWpRRMlG7q39n5Vp-target-left"
+    },
+    {
+      "source": "p01nE67uxKzkhoWp",
+      "target": "hJh3GrDlhUKe6hfh",
+      "sourceHandle": "p01nE67uxKzkhoWp-source-ELSE",
+      "targetHandle": "hJh3GrDlhUKe6hfh-target-left"
+    },
+    {
+      "source": "lSLLoXDDAZpOlhKK",
+      "target": "e0UEmMLQk889c3DN",
+      "sourceHandle": "lSLLoXDDAZpOlhKK-source-zQ327M97Nue2VPk2",
+      "targetHandle": "e0UEmMLQk889c3DN-target-left"
+    },
+    {
+      "source": "bGNXiNohZKDDMc02",
+      "target": "cxvhaoFXGwLpnb1h",
+      "sourceHandle": "bGNXiNohZKDDMc02-source-pLlLUA5qzjX4Ifgv",
+      "targetHandle": "cxvhaoFXGwLpnb1h-target-left"
+    },
+    {
+      "source": "i6f4qF6J7N9a8N53",
+      "target": "pqjO4z0TEdXNNNuw",
+      "sourceHandle": "i6f4qF6J7N9a8N53-source-quNMZQZpWVUmmrpt",
+      "targetHandle": "pqjO4z0TEdXNNNuw-target-left"
+    },
+    {
+      "source": "cv4tyZSeaTZa0ziA",
+      "target": "sqwwle1CWrSlfVPF",
+      "sourceHandle": "cv4tyZSeaTZa0ziA-source-IF",
+      "targetHandle": "sqwwle1CWrSlfVPF-target-left"
+    },
+    {
+      "source": "cv4tyZSeaTZa0ziA",
+      "target": "dCn5htI9Mjn4b1Ld",
+      "sourceHandle": "cv4tyZSeaTZa0ziA-source-ELSE",
+      "targetHandle": "dCn5htI9Mjn4b1Ld-target-left"
+    },
+    {
+      "source": "o9D9NRuAhDvmzZSH",
+      "target": "i6f4qF6J7N9a8N53",
+      "sourceHandle": "o9D9NRuAhDvmzZSH-source-right",
+      "targetHandle": "i6f4qF6J7N9a8N53-target-left"
+    },
+    {
+      "source": "i6f4qF6J7N9a8N53",
+      "target": "frxY7LYGQtuaOOhG",
+      "sourceHandle": "i6f4qF6J7N9a8N53-source-option1",
+      "targetHandle": "frxY7LYGQtuaOOhG-target-left"
+    },
+    {
+      "source": "x6kVYt6pYBKvwy4y",
+      "target": "frxY7LYGQtuaOOhG",
+      "sourceHandle": "x6kVYt6pYBKvwy4y-source-right",
+      "targetHandle": "frxY7LYGQtuaOOhG-target-left"
+    },
+    {
+      "source": "448745",
+      "target": "cv4tyZSeaTZa0ziA",
+      "sourceHandle": "448745-source-right",
+      "targetHandle": "cv4tyZSeaTZa0ziA-target-left"
+    },
+    {
+      "source": "lcEeHvusHqHEJiFz",
+      "target": "tilQNZSdwBOEfUos",
+      "sourceHandle": "lcEeHvusHqHEJiFz-source_catch-right",
+      "targetHandle": "tilQNZSdwBOEfUos-target-left"
+    },
+    {
+      "source": "r3f1XGghe90VJAO8",
+      "target": "vGlNpCYp0dLKpaFL",
+      "sourceHandle": "r3f1XGghe90VJAO8-source_catch-right",
+      "targetHandle": "vGlNpCYp0dLKpaFL-target-left"
+    },
+    {
+      "source": "qbqgkhSXVJBFZz7r",
+      "target": "vGlNpCYp0dLKpaFL",
+      "sourceHandle": "qbqgkhSXVJBFZz7r-source_catch-right",
+      "targetHandle": "vGlNpCYp0dLKpaFL-target-left"
+    },
+    {
+      "source": "nrqXS4n6tvha0GoS",
+      "target": "b5REHNbGggzKStou",
+      "sourceHandle": "nrqXS4n6tvha0GoS-source_catch-right",
+      "targetHandle": "b5REHNbGggzKStou-target-left"
+    }
+  ],
+  "chatConfig": {
+    "welcomeText": "🎉欢迎使用PPT设计助手。请直接输入您想要制作的PPT内容描述，我将为您自动生成结构化的PPT大纲，并继续为您设计专业美观的演示文稿。请告诉我您需要制作的PPT主题和内容要点。\n生成结果预览：https://chat-ppt.com/generateResults?generateID=haxnqNxu5cB5HdDaZ9Hk2x9m9t2TQMfY\n\n",
+    "variables": [
+      {
+        "id": "wabcpz",
+        "key": "PPT大纲缓存",
+        "label": "PPT大纲缓存",
+        "type": "custom",
+        "description": "无需填写",
+        "required": false,
+        "valueType": "string",
+        "list": [
+          {
+            "value": "",
+            "label": ""
+          }
+        ],
+        "defaultValue": "",
+        "enums": [
+          {
+            "value": "",
+            "label": ""
+          }
+        ],
+        "icon": "core/workflow/inputType/customVariable"
+      }
+    ],
+    "scheduledTriggerConfig": {
+      "cronString": "",
+      "timezone": "Asia/Shanghai",
+      "defaultPrompt": ""
+    },
+    "fileSelectConfig": {
+      "canSelectFile": true,
+      "canSelectImg": true,
+      "maxFiles": 15,
+      "customPdfParse": true
+    },
+    "autoExecute": {
+      "open": true,
+      "defaultPrompt": "1"
+    },
+    "_id": "6826ea5d829a2af2fc4cdb9f"
+  }
+}

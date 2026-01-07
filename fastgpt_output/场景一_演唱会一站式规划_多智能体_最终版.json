@@ -1,0 +1,1546 @@
+{
+  "nodes": [
+    {
+      "nodeId": "userGuide",
+      "name": "系统配置",
+      "intro": "",
+      "avatar": "core/workflow/template/systemConfig",
+      "flowNodeType": "userGuide",
+      "position": {
+        "x": -600,
+        "y": -250
+      },
+      "version": "481",
+      "inputs": [],
+      "outputs": []
+    },
+    {
+      "nodeId": "workflowStart",
+      "name": "流程开始",
+      "intro": "",
+      "avatar": "core/workflow/template/workflowStart",
+      "flowNodeType": "workflowStart",
+      "position": {
+        "x": -200,
+        "y": 0
+      },
+      "version": "481",
+      "inputs": [
+        {
+          "key": "userChatInput",
+          "renderTypeList": [
+            "reference",
+            "textarea"
+          ],
+          "valueType": "string",
+          "label": "workflow:user_question",
+          "toolDescription": "用户问题",
+          "required": true,
+          "debugLabel": ""
+        }
+      ],
+      "outputs": [
+        {
+          "id": "userChatInput",
+          "key": "userChatInput",
+          "label": "common:core.module.input.label.user question",
+          "type": "static",
+          "valueType": "string",
+          "description": ""
+        },
+        {
+          "id": "userFiles",
+          "key": "userFiles",
+          "label": "app:workflow.user_file_input",
+          "description": "app:workflow.user_file_input_desc",
+          "type": "static",
+          "valueType": "arrayString"
+        }
+      ]
+    },
+    {
+      "nodeId": "intentAnalysis",
+      "name": "小龙包总助理-意图识别",
+      "intro": "负责识别用户需求并提取关键信息",
+      "avatar": "core/workflow/template/aiChat",
+      "flowNodeType": "chatNode",
+      "showStatus": true,
+      "position": {
+        "x": 200,
+        "y": 0
+      },
+      "version": "4.9.7",
+      "inputs": [
+        {
+          "key": "model",
+          "renderTypeList": [
+            "settingLLMModel",
+            "reference"
+          ],
+          "label": "common:core.module.input.label.aiModel",
+          "valueType": "string",
+          "value": "gpt-4o-mini",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "temperature",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "number",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "maxToken",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "number",
+          "value": 2000,
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "isResponseAnswerText",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "value": false,
+          "valueType": "boolean",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatQuoteRole",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "value": "system",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "quoteTemplate",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "quotePrompt",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatVision",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "boolean",
+          "value": false,
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatReasoning",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "boolean",
+          "value": false,
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "systemPrompt",
+          "renderTypeList": [
+            "textarea",
+            "reference"
+          ],
+          "max": 3000,
+          "valueType": "string",
+          "label": "common:core.ai.Prompt",
+          "description": "common:core.app.tip.systemPromptTip",
+          "placeholder": "common:core.app.tip.chatNodeSystemPromptTip",
+          "value": "# 角色定义\n你是小龙包总助理的意图识别专家，负责从用户的自然语言输入中提取演唱会出行的关键信息。\n\n## 核心任务\n从用户输入中提取并结构化以下信息：\n1. 出发城市\n2. 目的地城市\n3. 演出时间\n4. 预算范围\n5. 特殊需求\n\n## 输出格式\n请以JSON格式输出提取的信息：\n\n```json\n{\n  \"departure_city\": \"出发城市\",\n  \"destination_city\": \"目的地城市\",\n  \"event_date\": \"演出日期（YYYY-MM-DD）\",\n  \"budget\": \"预算范围\",\n  \"special_requirements\": \"特殊需求\"\n}\n```\n\n## 示例\n用户输入：\"我想从武汉去深圳看周杰伦演唱会，时间是3月15日，预算3000元\"\n\n输出：\n```json\n{\n  \"departure_city\": \"武汉\",\n  \"destination_city\": \"深圳\",\n  \"event_date\": \"2025-03-15\",\n  \"budget\": \"3000元\",\n  \"special_requirements\": \"无\"\n}\n```\n\n## 限制\n- 如果用户未提及某项信息，对应字段填写\"未提供\"\n- 必须严格按照JSON格式输出\n- 日期必须转换为YYYY-MM-DD格式",
+          "debugLabel": "",
+          "toolDescription": "",
+          "maxLength": 100000,
+          "isRichText": true
+        },
+        {
+          "key": "history",
+          "renderTypeList": [
+            "numberInput",
+            "reference"
+          ],
+          "valueType": "chatHistory",
+          "label": "common:core.module.input.label.chat history",
+          "description": "workflow:max_dialog_rounds",
+          "required": true,
+          "min": 0,
+          "max": 50,
+          "value": 0,
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "quoteQA",
+          "renderTypeList": [
+            "settingDatasetQuotePrompt"
+          ],
+          "label": "",
+          "debugLabel": "知识库引用",
+          "description": "",
+          "valueType": "datasetQuote",
+          "toolDescription": ""
+        },
+        {
+          "key": "fileUrlList",
+          "renderTypeList": [
+            "reference",
+            "input"
+          ],
+          "label": "app:workflow.user_file_input",
+          "debugLabel": "文件链接",
+          "description": "app:workflow.user_file_input_desc",
+          "valueType": "arrayString",
+          "value": [],
+          "toolDescription": ""
+        },
+        {
+          "key": "userChatInput",
+          "renderTypeList": [
+            "reference",
+            "textarea"
+          ],
+          "valueType": "string",
+          "label": "workflow:user_question",
+          "toolDescription": "用户问题",
+          "required": true,
+          "value": [
+            "workflowStart",
+            "userChatInput"
+          ],
+          "debugLabel": "",
+          "selectedTypeIndex": 0
+        }
+      ],
+      "outputs": [
+        {
+          "id": "history",
+          "key": "history",
+          "required": true,
+          "label": "common:core.module.output.label.New context",
+          "description": "将本次回复内容拼接上历史记录，作为新的上下文返回",
+          "valueType": "chatHistory",
+          "valueDesc": "{\n  obj: System | Human | AI;\n  value: string;\n}[]",
+          "type": "static"
+        },
+        {
+          "id": "answerText",
+          "key": "answerText",
+          "required": true,
+          "label": "common:core.module.output.label.Ai response content",
+          "description": "将在 stream 回复完毕后触发",
+          "valueType": "string",
+          "type": "static"
+        },
+        {
+          "id": "reasoningText",
+          "key": "reasoningText",
+          "required": false,
+          "label": "workflow:reasoning_text",
+          "valueType": "string",
+          "type": "static",
+          "invalid": true,
+          "description": ""
+        },
+        {
+          "id": "system_error_text",
+          "key": "system_error_text",
+          "type": "error",
+          "valueType": "string",
+          "label": "workflow:error_text",
+          "description": ""
+        }
+      ],
+      "isFolded": false,
+      "catchError": false
+    },
+    {
+      "nodeId": "activityAssistant",
+      "name": "活动助理",
+      "intro": "负责核验活动信息并提供场馆须知",
+      "avatar": "core/workflow/template/aiChat",
+      "flowNodeType": "chatNode",
+      "showStatus": true,
+      "position": {
+        "x": 600,
+        "y": -200
+      },
+      "version": "4.9.7",
+      "inputs": [
+        {
+          "key": "model",
+          "renderTypeList": [
+            "settingLLMModel",
+            "reference"
+          ],
+          "label": "common:core.module.input.label.aiModel",
+          "valueType": "string",
+          "value": "gpt-4o-mini",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "temperature",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "number",
+          "value": 0.7,
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "maxToken",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "number",
+          "value": 3000,
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "isResponseAnswerText",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "value": false,
+          "valueType": "boolean",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatQuoteRole",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "value": "system",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "quoteTemplate",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "quotePrompt",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatVision",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "boolean",
+          "value": false,
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatReasoning",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "boolean",
+          "value": false,
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "systemPrompt",
+          "renderTypeList": [
+            "textarea",
+            "reference"
+          ],
+          "max": 3000,
+          "valueType": "string",
+          "label": "common:core.ai.Prompt",
+          "description": "common:core.app.tip.systemPromptTip",
+          "placeholder": "common:core.app.tip.chatNodeSystemPromptTip",
+          "value": "# 角色定义\n你是活动助理，专门负责核验演唱会活动信息，提供准确的场馆信息和入场须知。\n\n## 核心任务\n根据用户提供的活动信息，提供以下内容：\n\n### 1. 活动基本信息\n- 活动名称\n- 演出时间\n- 场馆名称\n- 场馆地址\n- 座位区域分布\n\n### 2. 入场须知\n- 入场时间（建议提前多久到达）\n- 禁止携带物品清单\n- 必需携带物品（门票、身份证等）\n- 安检流程说明\n\n### 3. 交通信息\n- 场馆周边交通概况\n- 最近地铁站/公交站\n- 停车场信息\n\n### 4. 重要提醒\n- 天气预警建议\n- 应急联系方式\n- 其他注意事项\n\n## 输出格式\n使用Markdown格式，包含emoji图标，清晰易读：\n\n---\n## 🎵 活动信息\n**活动名称**：XXX\n**演出时间**：XXX\n**场馆名称**：XXX\n**场馆地址**：XXX\n\n## 🎫 入场须知\n### 入场时间\nXXX\n\n### 禁止携带物品\n- XXX\n- XXX\n\n### 必需携带\n- XXX\n- XXX\n\n---\n\n## 限制\n- 基于用户提供的信息生成，如果信息不完整，明确告知需要补充的内容\n- 使用友好、专业的语气\n- 确保信息准确可靠",
+          "debugLabel": "",
+          "toolDescription": "",
+          "maxLength": 100000,
+          "isRichText": true
+        },
+        {
+          "key": "history",
+          "renderTypeList": [
+            "numberInput",
+            "reference"
+          ],
+          "valueType": "chatHistory",
+          "label": "common:core.module.input.label.chat history",
+          "description": "workflow:max_dialog_rounds",
+          "required": true,
+          "min": 0,
+          "max": 50,
+          "value": 0,
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "quoteQA",
+          "renderTypeList": [
+            "settingDatasetQuotePrompt"
+          ],
+          "label": "",
+          "debugLabel": "知识库引用",
+          "description": "",
+          "valueType": "datasetQuote",
+          "toolDescription": ""
+        },
+        {
+          "key": "fileUrlList",
+          "renderTypeList": [
+            "reference",
+            "input"
+          ],
+          "label": "app:workflow.user_file_input",
+          "debugLabel": "文件链接",
+          "description": "app:workflow.user_file_input_desc",
+          "valueType": "arrayString",
+          "value": [],
+          "toolDescription": ""
+        },
+        {
+          "key": "userChatInput",
+          "renderTypeList": [
+            "reference",
+            "textarea"
+          ],
+          "valueType": "string",
+          "label": "workflow:user_question",
+          "toolDescription": "用户问题",
+          "required": true,
+          "value": "用户需求：{{$intentAnalysis.answerText$}}\n\n请提供该演唱会的详细活动信息、场馆须知和入场指南。",
+          "debugLabel": "",
+          "selectedTypeIndex": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "history",
+          "key": "history",
+          "required": true,
+          "label": "common:core.module.output.label.New context",
+          "description": "将本次回复内容拼接上历史记录，作为新的上下文返回",
+          "valueType": "chatHistory",
+          "valueDesc": "{\n  obj: System | Human | AI;\n  value: string;\n}[]",
+          "type": "static"
+        },
+        {
+          "id": "answerText",
+          "key": "answerText",
+          "required": true,
+          "label": "common:core.module.output.label.Ai response content",
+          "description": "将在 stream 回复完毕后触发",
+          "valueType": "string",
+          "type": "static"
+        },
+        {
+          "id": "reasoningText",
+          "key": "reasoningText",
+          "required": false,
+          "label": "workflow:reasoning_text",
+          "valueType": "string",
+          "type": "static",
+          "invalid": true,
+          "description": ""
+        },
+        {
+          "id": "system_error_text",
+          "key": "system_error_text",
+          "type": "error",
+          "valueType": "string",
+          "label": "workflow:error_text",
+          "description": ""
+        }
+      ],
+      "isFolded": false,
+      "catchError": false
+    },
+    {
+      "nodeId": "travelAssistant",
+      "name": "出行助理",
+      "intro": "负责提供交通方案规划",
+      "avatar": "core/workflow/template/aiChat",
+      "flowNodeType": "chatNode",
+      "showStatus": true,
+      "position": {
+        "x": 600,
+        "y": -66
+      },
+      "version": "4.9.7",
+      "inputs": [
+        {
+          "key": "model",
+          "renderTypeList": [
+            "settingLLMModel",
+            "reference"
+          ],
+          "label": "common:core.module.input.label.aiModel",
+          "valueType": "string",
+          "value": "gpt-4o-mini",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "temperature",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "number",
+          "value": 0.7,
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "maxToken",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "number",
+          "value": 3000,
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "isResponseAnswerText",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "value": false,
+          "valueType": "boolean",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatQuoteRole",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "value": "system",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "quoteTemplate",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "quotePrompt",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatVision",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "boolean",
+          "value": false,
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatReasoning",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "boolean",
+          "value": false,
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "systemPrompt",
+          "renderTypeList": [
+            "textarea",
+            "reference"
+          ],
+          "max": 3000,
+          "valueType": "string",
+          "label": "common:core.ai.Prompt",
+          "description": "common:core.app.tip.systemPromptTip",
+          "placeholder": "common:core.app.tip.chatNodeSystemPromptTip",
+          "value": "# 角色定义\n你是出行助理，专门负责规划从出发地到目的地的完整交通方案。\n\n## 核心任务\n根据用户提供的出行信息，提供详细的交通方案：\n\n### 1. 大交通方案（往返）\n- 飞机（航班号、起降时间、价格）\n- 高铁/火车（车次、出发到达时间、价格）\n- 大巴（班次、时长、价格）\n\n### 2. 市内交通方案\n- 机场/高铁站到酒店的交通方式\n- 酒店到演出场馆的交通方式\n- 预计时长和费用\n\n### 3. 时间安排建议\n- 建议出发时间（考虑演出开始时间）\n- 路线时间预算\n- 应急时间预留\n\n### 4. 预算参考\n- 各交通方式费用对比\n- 性价比推荐\n- 总预算估算\n\n## 输出格式\n使用Markdown格式，清晰呈现方案对比：\n\n---\n## ✈️ 大交通方案\n### 方案1：飞机（推荐）\n- **航班**：XXX\n- **时间**：XXX - XXX\n- **价格**：XXX元\n\n### 方案2：高铁\n- **车次**：XXX\n- **时间**：XXX - XXX\n- **价格**：XXX元\n\n## 🚗 市内交通\n### 机场/车站 → 酒店\nXXX\n\n### 酒店 → 场馆\nXXX\n\n## 💰 预算参考\n- 大交通：XXX元\n- 市内交通：XXX元\n- **合计**：XXX元\n\n---\n\n## 限制\n- 提供至少2-3个交通方案供选择\n- 考虑不同预算需求\n- 确保时间安排合理（避免迟到风险）\n- 使用真实、可靠的交通信息",
+          "debugLabel": "",
+          "toolDescription": "",
+          "maxLength": 100000,
+          "isRichText": true
+        },
+        {
+          "key": "history",
+          "renderTypeList": [
+            "numberInput",
+            "reference"
+          ],
+          "valueType": "chatHistory",
+          "label": "common:core.module.input.label.chat history",
+          "description": "workflow:max_dialog_rounds",
+          "required": true,
+          "min": 0,
+          "max": 50,
+          "value": 0,
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "quoteQA",
+          "renderTypeList": [
+            "settingDatasetQuotePrompt"
+          ],
+          "label": "",
+          "debugLabel": "知识库引用",
+          "description": "",
+          "valueType": "datasetQuote",
+          "toolDescription": ""
+        },
+        {
+          "key": "fileUrlList",
+          "renderTypeList": [
+            "reference",
+            "input"
+          ],
+          "label": "app:workflow.user_file_input",
+          "debugLabel": "文件链接",
+          "description": "app:workflow.user_file_input_desc",
+          "valueType": "arrayString",
+          "value": [],
+          "toolDescription": ""
+        },
+        {
+          "key": "userChatInput",
+          "renderTypeList": [
+            "reference",
+            "textarea"
+          ],
+          "valueType": "string",
+          "label": "workflow:user_question",
+          "toolDescription": "用户问题",
+          "required": true,
+          "value": "用户需求：{{$intentAnalysis.answerText$}}\n\n请提供完整的交通方案，包括大交通（飞机/高铁）和市内交通。",
+          "debugLabel": "",
+          "selectedTypeIndex": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "history",
+          "key": "history",
+          "required": true,
+          "label": "common:core.module.output.label.New context",
+          "description": "将本次回复内容拼接上历史记录，作为新的上下文返回",
+          "valueType": "chatHistory",
+          "valueDesc": "{\n  obj: System | Human | AI;\n  value: string;\n}[]",
+          "type": "static"
+        },
+        {
+          "id": "answerText",
+          "key": "answerText",
+          "required": true,
+          "label": "common:core.module.output.label.Ai response content",
+          "description": "将在 stream 回复完毕后触发",
+          "valueType": "string",
+          "type": "static"
+        },
+        {
+          "id": "reasoningText",
+          "key": "reasoningText",
+          "required": false,
+          "label": "workflow:reasoning_text",
+          "valueType": "string",
+          "type": "static",
+          "invalid": true,
+          "description": ""
+        },
+        {
+          "id": "system_error_text",
+          "key": "system_error_text",
+          "type": "error",
+          "valueType": "string",
+          "label": "workflow:error_text",
+          "description": ""
+        }
+      ],
+      "isFolded": false,
+      "catchError": false
+    },
+    {
+      "nodeId": "tourismAssistant",
+      "name": "旅游助理",
+      "intro": "负责推荐场馆周边酒店住宿",
+      "avatar": "core/workflow/template/aiChat",
+      "flowNodeType": "chatNode",
+      "showStatus": true,
+      "position": {
+        "x": 600,
+        "y": 68
+      },
+      "version": "4.9.7",
+      "inputs": [
+        {
+          "key": "model",
+          "renderTypeList": [
+            "settingLLMModel",
+            "reference"
+          ],
+          "label": "common:core.module.input.label.aiModel",
+          "valueType": "string",
+          "value": "gpt-4o-mini",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "temperature",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "number",
+          "value": 0.7,
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "maxToken",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "number",
+          "value": 3000,
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "isResponseAnswerText",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "value": false,
+          "valueType": "boolean",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatQuoteRole",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "value": "system",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "quoteTemplate",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "quotePrompt",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatVision",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "boolean",
+          "value": false,
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatReasoning",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "boolean",
+          "value": false,
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "systemPrompt",
+          "renderTypeList": [
+            "textarea",
+            "reference"
+          ],
+          "max": 3000,
+          "valueType": "string",
+          "label": "common:core.ai.Prompt",
+          "description": "common:core.app.tip.systemPromptTip",
+          "placeholder": "common:core.app.tip.chatNodeSystemPromptTip",
+          "value": "# 角色定义\n你是旅游助理，专门负责推荐演出场馆周边的优质住宿方案。\n\n## 核心任务\n根据用户需求，推荐场馆周边的酒店住宿：\n\n### 1. 酒店推荐\n按不同档次推荐3-5家酒店：\n- 经济型（预算友好）\n- 舒适型（性价比高）\n- 高端型（品质体验）\n\n每家酒店包含：\n- 酒店名称\n- 距离场馆距离（步行/驾车时间）\n- 参考价格（每晚）\n- 特色亮点\n- 推荐理由\n\n### 2. 选房建议\n- 根据预算推荐最适合的档次\n- 考虑交通便利性\n- 推荐预订平台和渠道\n\n### 3. 注意事项\n- 演出期间酒店紧张情况提醒\n- 提前预订建议\n- 取消政策说明\n\n## 输出格式\n使用Markdown格式，包含emoji图标：\n\n---\n## 🏨 住宿推荐\n### 💰 经济型\n**1. XXX酒店**\n- **距离**：步行10分钟\n- **价格**：XXX元/晚\n- **特色**：XXX\n- **推荐理由**：XXX\n\n### 💎 舒适型（推荐）\n**1. XXX酒店**\n- **距离**：步行5分钟\n- **价格**：XXX元/晚\n- **特色**：XXX\n- **推荐理由**：XXX\n\n### ⭐ 高端型\n**1. XXX酒店**\n- **距离**：驾车3分钟\n- **价格**：XXX元/晚\n- **特色**：XXX\n- **推荐理由**：XXX\n\n## 📝 预订建议\n- **推荐选择**：根据预算XXX推荐\n- **预订渠道**：XXX\n- **预订提醒**：XXX\n\n---\n\n## 限制\n- 推荐真实存在的酒店\n- 价格仅供参考，以实际为准\n- 考虑不同预算需求\n- 优先推荐距离近、交通方便的酒店",
+          "debugLabel": "",
+          "toolDescription": "",
+          "maxLength": 100000,
+          "isRichText": true
+        },
+        {
+          "key": "history",
+          "renderTypeList": [
+            "numberInput",
+            "reference"
+          ],
+          "valueType": "chatHistory",
+          "label": "common:core.module.input.label.chat history",
+          "description": "workflow:max_dialog_rounds",
+          "required": true,
+          "min": 0,
+          "max": 50,
+          "value": 0,
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "quoteQA",
+          "renderTypeList": [
+            "settingDatasetQuotePrompt"
+          ],
+          "label": "",
+          "debugLabel": "知识库引用",
+          "description": "",
+          "valueType": "datasetQuote",
+          "toolDescription": ""
+        },
+        {
+          "key": "fileUrlList",
+          "renderTypeList": [
+            "reference",
+            "input"
+          ],
+          "label": "app:workflow.user_file_input",
+          "debugLabel": "文件链接",
+          "description": "app:workflow.user_file_input_desc",
+          "valueType": "arrayString",
+          "value": [],
+          "toolDescription": ""
+        },
+        {
+          "key": "userChatInput",
+          "renderTypeList": [
+            "reference",
+            "textarea"
+          ],
+          "valueType": "string",
+          "label": "workflow:user_question",
+          "toolDescription": "用户问题",
+          "required": true,
+          "value": "用户需求：{{$intentAnalysis.answerText$}}\n\n请推荐演出场馆周边的酒店住宿，考虑不同价位和距离因素。",
+          "debugLabel": "",
+          "selectedTypeIndex": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "history",
+          "key": "history",
+          "required": true,
+          "label": "common:core.module.output.label.New context",
+          "description": "将本次回复内容拼接上历史记录，作为新的上下文返回",
+          "valueType": "chatHistory",
+          "valueDesc": "{\n  obj: System | Human | AI;\n  value: string;\n}[]",
+          "type": "static"
+        },
+        {
+          "id": "answerText",
+          "key": "answerText",
+          "required": true,
+          "label": "common:core.module.output.label.Ai response content",
+          "description": "将在 stream 回复完毕后触发",
+          "valueType": "string",
+          "type": "static"
+        },
+        {
+          "id": "reasoningText",
+          "key": "reasoningText",
+          "required": false,
+          "label": "workflow:reasoning_text",
+          "valueType": "string",
+          "type": "static",
+          "invalid": true,
+          "description": ""
+        },
+        {
+          "id": "system_error_text",
+          "key": "system_error_text",
+          "type": "error",
+          "valueType": "string",
+          "label": "workflow:error_text",
+          "description": ""
+        }
+      ],
+      "isFolded": false,
+      "catchError": false
+    },
+    {
+      "nodeId": "foodAssistant",
+      "name": "美食助理",
+      "intro": "负责推荐餐前和散场后的美食",
+      "avatar": "core/workflow/template/aiChat",
+      "flowNodeType": "chatNode",
+      "showStatus": true,
+      "position": {
+        "x": 600,
+        "y": 202
+      },
+      "version": "4.9.7",
+      "inputs": [
+        {
+          "key": "model",
+          "renderTypeList": [
+            "settingLLMModel",
+            "reference"
+          ],
+          "label": "common:core.module.input.label.aiModel",
+          "valueType": "string",
+          "value": "gpt-4o-mini",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "temperature",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "number",
+          "value": 0.7,
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "maxToken",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "number",
+          "value": 3000,
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "isResponseAnswerText",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "value": false,
+          "valueType": "boolean",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatQuoteRole",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "value": "system",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "quoteTemplate",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "quotePrompt",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatVision",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "boolean",
+          "value": false,
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatReasoning",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "boolean",
+          "value": false,
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "systemPrompt",
+          "renderTypeList": [
+            "textarea",
+            "reference"
+          ],
+          "max": 3000,
+          "valueType": "string",
+          "label": "common:core.ai.Prompt",
+          "description": "common:core.app.tip.systemPromptTip",
+          "placeholder": "common:core.app.tip.chatNodeSystemPromptTip",
+          "value": "# 角色定义\n你是美食助理，专门负责推荐演出场馆周边的美食餐厅。\n\n## 核心任务\n推荐场馆周边的美食，分为两个时间段：\n\n### 1. 餐前美食（演出前）\n推荐3-5家适合演出前用餐的餐厅：\n- 轻食简餐类（快捷、不耽误时间）\n- 特色小吃（当地风味）\n- 精致餐厅（如果时间充裕）\n\n每家包含：\n- 餐厅名称\n- 距离场馆距离\n- 人均消费\n- 菜系特色\n- 推荐菜品\n- 营业时间\n- 是否需要预约\n\n### 2. 散场后美食（宵夜/庆祝餐）\n推荐3-5家适合演出后用餐的餐厅：\n- 宵夜美食（营业到深夜）\n- 庆祝聚餐（氛围好、适合多人）\n- 安静放松（舒缓演出后的兴奋）\n\n### 3. 美食攻略\n- 当地必吃特色\n- 避雷指南（游客陷阱提醒）\n- 预订建议\n\n## 输出格式\n使用Markdown格式，清晰分类：\n\n---\n## 🍽️ 餐前美食推荐（演出前）\n### ⏰ 快餐简餐\n**1. XXX餐厅**\n- **距离**：步行5分钟\n- **人均**：XXX元\n- **特色**：XXX\n- **推荐菜**：XXX\n- **营业时间**：XXX\n\n### 🍜 地方特色\n**1. XXX小吃**\n- **距离**：步行8分钟\n- **人均**：XXX元\n- **特色**：XXX\n\n## 🌙 散场后美食（宵夜/庆祝）\n### 🎉 庆祝聚餐\n**1. XXX餐厅**\n- **氛围**：XXX\n- **人均**：XXX元\n- **适合人数**：XXX\n\n### 🌙 宵夜美食\n**1. XXX夜宵**\n- **营业至**：XXX\n- **特色**：XXX\n\n## 💡 美食攻略\n- **必吃特色**：XXX\n- **避雷提醒**：XXX\n\n---\n\n## 限制\n- 推荐真实存在的餐厅\n- 价格仅供参考\n- 考虑演出时间的特殊性\n- 推荐不同口味和价位",
+          "debugLabel": "",
+          "toolDescription": "",
+          "maxLength": 100000,
+          "isRichText": true
+        },
+        {
+          "key": "history",
+          "renderTypeList": [
+            "numberInput",
+            "reference"
+          ],
+          "valueType": "chatHistory",
+          "label": "common:core.module.input.label.chat history",
+          "description": "workflow:max_dialog_rounds",
+          "required": true,
+          "min": 0,
+          "max": 50,
+          "value": 0,
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "quoteQA",
+          "renderTypeList": [
+            "settingDatasetQuotePrompt"
+          ],
+          "label": "",
+          "debugLabel": "知识库引用",
+          "description": "",
+          "valueType": "datasetQuote",
+          "toolDescription": ""
+        },
+        {
+          "key": "fileUrlList",
+          "renderTypeList": [
+            "reference",
+            "input"
+          ],
+          "label": "app:workflow.user_file_input",
+          "debugLabel": "文件链接",
+          "description": "app:workflow.user_file_input_desc",
+          "valueType": "arrayString",
+          "value": [],
+          "toolDescription": ""
+        },
+        {
+          "key": "userChatInput",
+          "renderTypeList": [
+            "reference",
+            "textarea"
+          ],
+          "valueType": "string",
+          "label": "workflow:user_question",
+          "toolDescription": "用户问题",
+          "required": true,
+          "value": "用户需求：{{$intentAnalysis.answerText$}}\n\n请推荐演出场馆周边的美食，包括餐前简餐和散场后的宵夜/庆祝餐厅。",
+          "debugLabel": "",
+          "selectedTypeIndex": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "history",
+          "key": "history",
+          "required": true,
+          "label": "common:core.module.output.label.New context",
+          "description": "将本次回复内容拼接上历史记录，作为新的上下文返回",
+          "valueType": "chatHistory",
+          "valueDesc": "{\n  obj: System | Human | AI;\n  value: string;\n}[]",
+          "type": "static"
+        },
+        {
+          "id": "answerText",
+          "key": "answerText",
+          "required": true,
+          "label": "common:core.module.output.label.Ai response content",
+          "description": "将在 stream 回复完毕后触发",
+          "valueType": "string",
+          "type": "static"
+        },
+        {
+          "id": "reasoningText",
+          "key": "reasoningText",
+          "required": false,
+          "label": "workflow:reasoning_text",
+          "valueType": "string",
+          "type": "static",
+          "invalid": true,
+          "description": ""
+        },
+        {
+          "id": "system_error_text",
+          "key": "system_error_text",
+          "type": "error",
+          "valueType": "string",
+          "label": "workflow:error_text",
+          "description": ""
+        }
+      ],
+      "isFolded": false,
+      "catchError": false
+    },
+    {
+      "nodeId": "textAggregation",
+      "name": "方案汇总",
+      "intro": "汇总所有助理的输出",
+      "avatar": "core/workflow/template/textConcat",
+      "flowNodeType": "textEditor",
+      "position": {
+        "x": 1000,
+        "y": 0
+      },
+      "version": "4813",
+      "inputs": [
+        {
+          "key": "system_textareaInput",
+          "renderTypeList": [
+            "textarea"
+          ],
+          "valueType": "string",
+          "required": true,
+          "label": "workflow:concatenation_text",
+          "placeholder": "workflow:input_variable_list",
+          "value": "# 演唱会一站式出行规划方案\n\n## 📋 用户需求\n{{$intentAnalysis.answerText$}}\n\n---\n\n## 🎵 活动信息\n{{$activityAssistant.answerText$}}\n\n---\n\n## 🚗 交通方案\n{{$travelAssistant.answerText$}}\n\n---\n\n## 🏨 住宿推荐\n{{$tourismAssistant.answerText$}}\n\n---\n\n## 🍽️ 美食推荐\n{{$foodAssistant.answerText$}}",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        }
+      ],
+      "outputs": [
+        {
+          "id": "system_text",
+          "key": "system_text",
+          "label": "workflow:concatenation_result",
+          "type": "static",
+          "valueType": "string",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "nodeId": "coordinatorAssistant",
+      "name": "小龙包总助理-方案汇总",
+      "intro": "生成最终完整的一站式出行方案",
+      "avatar": "core/workflow/template/aiChat",
+      "flowNodeType": "chatNode",
+      "showStatus": true,
+      "position": {
+        "x": 1400,
+        "y": 0
+      },
+      "version": "4.9.7",
+      "inputs": [
+        {
+          "key": "model",
+          "renderTypeList": [
+            "settingLLMModel",
+            "reference"
+          ],
+          "label": "common:core.module.input.label.aiModel",
+          "valueType": "string",
+          "value": "gpt-4o",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "temperature",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "number",
+          "value": 0.8,
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "maxToken",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "number",
+          "value": 8000,
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "isResponseAnswerText",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "value": true,
+          "valueType": "boolean",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatQuoteRole",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "value": "system",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "quoteTemplate",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "quotePrompt",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "string",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatVision",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "boolean",
+          "value": false,
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "aiChatReasoning",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "",
+          "valueType": "boolean",
+          "value": false,
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "systemPrompt",
+          "renderTypeList": [
+            "textarea",
+            "reference"
+          ],
+          "max": 3000,
+          "valueType": "string",
+          "label": "common:core.ai.Prompt",
+          "description": "common:core.app.tip.systemPromptTip",
+          "placeholder": "common:core.app.tip.chatNodeSystemPromptTip",
+          "value": "# 角色定义\n你是小龙包总助理，负责汇总各专业助理的输出，生成完整、连贯、实用的一站式演唱会出行规划方案。\n\n## 核心任务\n接收4个专业助理的输出，整合成一份完整、易读的出行方案：\n\n### 1. 信息整合\n- 去除重复信息\n- 逻辑化组织内容\n- 统一格式和风格\n\n### 2. 实用建议\n- 基于所有信息给出综合建议\n- 突出重点和关键点\n- 提供时间轴和操作指南\n\n### 3. 预算汇总\n- 汇总各部分费用\n- 提供总预算参考\n- 给出省钱建议\n\n### 4. 温馨提示\n- 重要提醒事项\n- 常见问题解答\n- 应急预案\n\n## 输出格式\n使用精美的Markdown格式，包含：\n\n---\n\n# 🎤 演唱会一站式出行方案\n\n## ✨ 方案概览\n简短总结这次出行的核心信息（1-2句话）\n\n---\n\n## 📋 基本信息\n- 出发地：XXX\n- 目的地：XXX\n- 演出时间：XXX\n- 预算：XXX\n\n---\n\n## 🎵 活动信息\n[整合活动助理的内容]\n\n---\n\n## 🚗 交通方案\n[整合出行助理的内容]\n\n### 💰 交通预算\n- 大交通：XXX元\n- 市内交通：XXX元\n- 小计：XXX元\n\n---\n\n## 🏨 住宿推荐\n[整合旅游助理的内容]\n\n### 💰 住宿预算\n- 推荐酒店：XXX元/晚\n- 小计：XXX元\n\n---\n\n## 🍽️ 美食推荐\n[整合美食助理的内容]\n\n### 💰 美食预算\n- 餐前：XXX元\n- 宵夜：XXX元\n- 小计：XXX元\n\n---\n\n## 💰 总预算参考\n| 项目 | 费用 |\n|------|------|\n| 交通 | XXX元 |\n| 住宿 | XXX元 |\n| 美食 | XXX元 |\n| 门票 | XXX元 |\n| **合计** | **XXX元** |\n\n---\n\n## ⏰ 时间轴建议\n- **出发时间**：XXX\n- **到达时间**：XXX\n- **用餐时间**：XXX\n- **入场时间**：XXX\n\n---\n\n## 📝 操作清单\n### 出发前\n- [ ] XXX\n- [ ] XXX\n\n### 当天\n- [ ] XXX\n- [ ] XXX\n\n---\n\n## ⚠️ 重要提醒\n1. XXX\n2. XXX\n\n---\n\n## 💡 温馨提示\nXXX\n\n---\n\n**祝您观演愉快！🎉**\n\n## 限制\n- 必须使用Markdown格式\n- 内容完整、逻辑清晰\n- 语气友好专业\n- 信息准确可靠\n- 突出实用性和可操作性",
+          "debugLabel": "",
+          "toolDescription": "",
+          "maxLength": 100000,
+          "isRichText": true
+        },
+        {
+          "key": "history",
+          "renderTypeList": [
+            "numberInput",
+            "reference"
+          ],
+          "valueType": "chatHistory",
+          "label": "common:core.module.input.label.chat history",
+          "description": "workflow:max_dialog_rounds",
+          "required": true,
+          "min": 0,
+          "max": 50,
+          "value": 0,
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "quoteQA",
+          "renderTypeList": [
+            "settingDatasetQuotePrompt"
+          ],
+          "label": "",
+          "debugLabel": "知识库引用",
+          "description": "",
+          "valueType": "datasetQuote",
+          "toolDescription": ""
+        },
+        {
+          "key": "fileUrlList",
+          "renderTypeList": [
+            "reference",
+            "input"
+          ],
+          "label": "app:workflow.user_file_input",
+          "debugLabel": "文件链接",
+          "description": "app:workflow.user_file_input_desc",
+          "valueType": "arrayString",
+          "value": [],
+          "toolDescription": ""
+        },
+        {
+          "key": "userChatInput",
+          "renderTypeList": [
+            "reference",
+            "textarea"
+          ],
+          "valueType": "string",
+          "label": "workflow:user_question",
+          "toolDescription": "用户问题",
+          "required": true,
+          "value": "请基于以下各专业助理的输出，生成完整的一站式演唱会出行规划方案：\n\n{{$textAggregation.system_text$}}",
+          "debugLabel": "",
+          "selectedTypeIndex": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "history",
+          "key": "history",
+          "required": true,
+          "label": "common:core.module.output.label.New context",
+          "description": "将本次回复内容拼接上历史记录，作为新的上下文返回",
+          "valueType": "chatHistory",
+          "valueDesc": "{\n  obj: System | Human | AI;\n  value: string;\n}[]",
+          "type": "static"
+        },
+        {
+          "id": "answerText",
+          "key": "answerText",
+          "required": true,
+          "label": "common:core.module.output.label.Ai response content",
+          "description": "将在 stream 回复完毕后触发",
+          "valueType": "string",
+          "type": "static"
+        },
+        {
+          "id": "reasoningText",
+          "key": "reasoningText",
+          "required": false,
+          "label": "workflow:reasoning_text",
+          "valueType": "string",
+          "type": "static",
+          "invalid": true,
+          "description": ""
+        },
+        {
+          "id": "system_error_text",
+          "key": "system_error_text",
+          "type": "error",
+          "valueType": "string",
+          "label": "workflow:error_text",
+          "description": ""
+        }
+      ],
+      "isFolded": false,
+      "catchError": false
+    }
+  ],
+  "edges": [
+    {
+      "source": "workflowStart",
+      "target": "intentAnalysis",
+      "sourceHandle": "workflowStart-source-right",
+      "targetHandle": "intentAnalysis-target-left"
+    },
+    {
+      "source": "intentAnalysis",
+      "target": "activityAssistant",
+      "sourceHandle": "intentAnalysis-source-right",
+      "targetHandle": "activityAssistant-target-left"
+    },
+    {
+      "source": "intentAnalysis",
+      "target": "travelAssistant",
+      "sourceHandle": "intentAnalysis-source-right",
+      "targetHandle": "travelAssistant-target-left"
+    },
+    {
+      "source": "intentAnalysis",
+      "target": "tourismAssistant",
+      "sourceHandle": "intentAnalysis-source-right",
+      "targetHandle": "tourismAssistant-target-left"
+    },
+    {
+      "source": "intentAnalysis",
+      "target": "foodAssistant",
+      "sourceHandle": "intentAnalysis-source-right",
+      "targetHandle": "foodAssistant-target-left"
+    },
+    {
+      "source": "activityAssistant",
+      "target": "textAggregation",
+      "sourceHandle": "activityAssistant-source-right",
+      "targetHandle": "textAggregation-target-left"
+    },
+    {
+      "source": "travelAssistant",
+      "target": "textAggregation",
+      "sourceHandle": "travelAssistant-source-right",
+      "targetHandle": "textAggregation-target-left"
+    },
+    {
+      "source": "tourismAssistant",
+      "target": "textAggregation",
+      "sourceHandle": "tourismAssistant-source-right",
+      "targetHandle": "textAggregation-target-left"
+    },
+    {
+      "source": "foodAssistant",
+      "target": "textAggregation",
+      "sourceHandle": "foodAssistant-source-right",
+      "targetHandle": "textAggregation-target-left"
+    },
+    {
+      "source": "textAggregation",
+      "target": "coordinatorAssistant",
+      "sourceHandle": "textAggregation-source-right",
+      "targetHandle": "coordinatorAssistant-target-left"
+    }
+  ],
+  "chatConfig": {
+    "welcomeText": "🎤 欢迎使用演唱会一站式出行规划服务！\n\n我可以帮您规划从外地前往观看演唱会的完整行程，包括：\n\n✅ 活动信息核验\n✅ 交通方案规划\n✅ 住宿推荐\n✅ 美食推荐\n\n请告诉我：\n1. 您从哪个城市出发？\n2. 要去哪个城市看演唱会？\n3. 演出时间和歌手是谁？\n4. 大概的预算范围？\n\n例如：我想从武汉去深圳看周杰伦演唱会，3月15日，预算3000元\n\n[开始规划]",
+    "variables": [],
+    "questionGuide": {
+      "open": false
+    },
+    "ttsConfig": {
+      "type": "web"
+    },
+    "whisperConfig": {
+      "open": false,
+      "autoSend": false,
+      "autoTTSResponse": false
+    },
+    "scheduledTriggerConfig": {
+      "cronString": "",
+      "timezone": "Asia/Shanghai",
+      "defaultPrompt": ""
+    },
+    "chatInputGuide": {
+      "open": false,
+      "textList": [],
+      "customUrl": ""
+    },
+    "instruction": "",
+    "autoExecute": {
+      "open": false,
+      "defaultPrompt": ""
+    },
+    "_id": "concert_planning_workflow"
+  }
+}
