@@ -2,6 +2,8 @@
 
 A curated collection of reusable skills for Claude Code. Pick the skills you need and add them to your project to enhance Claude's capabilities.
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Claude Code Skill](https://img.shields.io/badge/Claude%20Code-Skill-blue)](https://docs.anthropic.com/en/docs/agents-and-tools/claude-code/skills)
 ## 🎯 What is This?
 
 This repository provides ready-to-use skills that extend Claude Code's functionality. Each skill is a self-contained module that teaches Claude how to perform specific tasks or follow particular workflows in your projects.
@@ -18,8 +20,9 @@ This repository provides ready-to-use skills that extend Claude Code's functiona
 | **[mcp-builder](./mcp-builder)**                   | Guide for creating high-quality MCP servers that enable LLMs to interact with external services through tools | - | `cp -r mcp-builder .claude/skills/` |
 | **[daily-ai-news](./daily-ai-news)**               | Aggregates and summarizes the latest AI news from multiple sources with concise briefs and direct links | - | `cp -r daily-ai-news .claude/skills/` |
 | **[fastgpt-workflow-generator](./fastgpt-workflow-generator)** | Generates production-ready FastGPT workflow JSON from natural language requirements with AI-powered template matching and three-layer validation | - | `cp -r fastgpt-workflow-generator .claude/skills/` |
+| **[planning-with-files](./planning-with-files)** | Manus-style workflow using persistent markdown files for planning, progress tracking, and knowledge storage with 3-file pattern | [🔗 GitHub](https://github.com/OthmanAdi/planning-with-files) | `cp -r planning-with-files .claude/skills/` |
 
-**Total:** 8 skills available
+**Total:** 9 skills available
 
 ---
 
@@ -256,6 +259,70 @@ cp -r fastgpt-workflow-generator .claude/skills/
 
 # Example 3: Validate workflow
 "验证这个workflow JSON是否正确"
+```
+
+---
+
+#### 🔧 planning-with-files
+**Version:** [English](./planning-with-files)
+
+A Manus-style workflow skill that transforms how you work with Claude by using persistent markdown files as "working memory on disk" for planning, progress tracking, and knowledge storage.
+
+**🔗 Reference:** Based on [OthmanAdi/planning-with-files](https://github.com/OthmanAdi/planning-with-files)
+
+**What's included:**
+- ✅ 3-File Pattern System (task_plan.md, notes.md, deliverable.md)
+- ✅ Task plan template with phases, decisions, and errors tracking
+- ✅ Notes template for research and findings
+- ✅ Progress tracking with checkboxes and status updates
+- ✅ Knowledge persistence outside attention window
+- ✅ Complete workflow loop patterns
+- ✅ Real-world examples and anti-patterns
+
+**Key Features:**
+- **Persistent Memory**: Store plans, research, and decisions in files instead of context window
+- **3-File Pattern**: Systematic approach with task_plan.md (progress), notes.md (research), and deliverable.md (output)
+- **Structured Tracking**: Phase-based planning with checkboxes, decisions log, and error tracking
+- **Loop-Based Workflow**: Read → Work → Update cycle keeps goals fresh in attention
+- **Context Management**: Prevents context stuffing by storing information in files
+- **Multi-Session Support**: Persist work across conversation sessions
+
+**The 3-File Pattern:**
+- **task_plan.md** - Track phases and progress (update after each phase)
+- **notes.md** - Store findings and research (during research)
+- **[deliverable].md** - Final output (at completion)
+
+**Core Workflow Loop:**
+```
+1. Create task_plan.md with goal and phases
+2. Research → save to notes.md → update task_plan.md
+3. Read notes.md → create deliverable → update task_plan.md
+4. Deliver final output
+```
+
+**When to Use:**
+- Starting complex multi-step projects
+- Research tasks requiring information gathering
+- Tasks requiring progress tracking across sessions
+- User mentions "planning", "organizing work", "tracking progress"
+- Need structured output with clear phases
+
+**Trigger Keywords:** `"complex task"`, `"multi-step project"`, `"planning"`, `"organize work"`, `"track progress"`, `"research task"`, `"structured output"`
+
+**Installation:**
+```bash
+cp -r planning-with-files .claude/skills/
+```
+
+**Quick Start:**
+```
+# Example: Plan a feature implementation
+"I need to implement a new authentication system"
+
+→ Claude creates:
+  - task_plan.md (phases: design, implementation, testing, deployment)
+  - notes.md (stores API research and design decisions)
+  - Updates plan after each phase completion
 ```
 
 ---
