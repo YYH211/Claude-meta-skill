@@ -21,8 +21,9 @@ This repository provides ready-to-use skills that extend Claude Code's functiona
 | **[daily-ai-news](./daily-ai-news)**               | Aggregates and summarizes the latest AI news from multiple sources with concise briefs and direct links | - | `cp -r daily-ai-news .claude/skills/` |
 | **[fastgpt-workflow-generator](./fastgpt-workflow-generator)** | Generates production-ready FastGPT workflow JSON from natural language requirements with AI-powered template matching and three-layer validation | - | `cp -r fastgpt-workflow-generator .claude/skills/` |
 | **[planning-with-files](./planning-with-files)** | Manus-style workflow using persistent markdown files for planning, progress tracking, and knowledge storage with 3-file pattern | [🔗 GitHub](https://github.com/OthmanAdi/planning-with-files) | `cp -r planning-with-files .claude/skills/` |
+| **[local-diff-review](./local-diff-review)**     | Pre-PR local code review skill based on git diff, applies the same three-dimension standards as pr-review (code quality, style guide, common issues checklist) | - | `cp -r local-diff-review .claude/skills/` |
 
-**Total:** 9 skills available
+**Total:** 10 skills available
 
 ---
 
@@ -323,6 +324,45 @@ cp -r planning-with-files .claude/skills/
   - task_plan.md (phases: design, implementation, testing, deployment)
   - notes.md (stores API research and design decisions)
   - Updates plan after each phase completion
+```
+
+---
+
+#### 🔧 local-diff-review
+**Version:** [Chinese](./local-diff-review)
+
+A pre-PR self-review skill that runs git diff locally and applies the same three-dimension review standards as a formal PR review — no custom weakening of criteria allowed.
+
+**What's included:**
+- ✅ Code quality standards (`code-quality-standards.md`)
+- ✅ Common issues checklist (`common-issues-checklist.md`)
+- ✅ 5 diff scope modes (unstaged, staged, HEAD, branch-vs-baseline, specific commit)
+- ✅ Three-level issue grading (🔴 Critical / 🟡 Suggested / 🟢 Optional)
+- ✅ Structured output: change overview → issue list → overall conclusion
+
+**Key Features:**
+- **Review First, Fix Later**: Outputs an issue list by default; only modifies code when explicitly asked
+- **Actionable Results**: Every issue includes file path, line number, risk explanation, and a concrete fix suggestion
+- **Regression Risk Summary**: Highlights i18n, type safety, edge cases, compatibility, and performance impact
+- **Consistent Standards**: Strictly reuses the same criteria as `pr-review`; no softened rules
+
+**Trigger Keywords:** `"review 我本地改动"`, `"local diff review"`, `"review 我当前改动"`, `"git diff review"`, `"暂存区 review"`, `"分支差异审查"`, `"提 PR 前 review"`
+
+**Installation:**
+```bash
+cp -r local-diff-review .claude/skills/
+```
+
+**Quick Start:**
+```
+# Example 1: Review all unstaged changes
+"请按 PR 标准 review 我本地当前改动。"
+
+# Example 2: Review only staged changes
+"请 review 我的 git diff --staged，只给问题清单。"
+
+# Example 3: Review branch diff against baseline
+"请按 FastGPT 规范审查我当前分支相对 upstream/v4.14.7-dev 的改动。"
 ```
 
 ---

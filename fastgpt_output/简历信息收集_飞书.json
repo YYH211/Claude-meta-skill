@@ -1,0 +1,920 @@
+{
+  "nodes": [
+    {
+      "nodeId": "userGuide",
+      "name": "common:core.module.template.system_config",
+      "intro": "common:core.module.template.system_config_info",
+      "avatar": "core/workflow/template/systemConfig",
+      "flowNodeType": "userGuide",
+      "position": {
+        "x": -600,
+        "y": -250
+      },
+      "version": "481",
+      "inputs": [
+        {
+          "key": "welcomeText",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "string",
+          "label": "core.app.Welcome Text",
+          "value": "### 📝 欢迎使用简历信息收集系统！\n\n请按照以下格式输入您的简历信息：\n\n**姓名**：[您的姓名]\n**电话**：[联系电话]\n**邮箱**：[电子邮箱]\n**教育背景**：[学校/专业/学位]\n**工作经历**：[工作经历描述]\n**技能特长**：[您的技能和特长]\n\n---\n\n示例：\n**姓名**：张三\n**电话**：13800138000\n**邮箱**：zhangsan@example.com\n**教育背景**：清华大学/计算机科学/本科\n**工作经历**：5年Java开发经验，曾在XX公司担任高级工程师\n**技能特长**：精通Java、Python，熟悉微服务架构"
+        },
+        {
+          "key": "variables",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "any",
+          "label": "core.app.Chat Variable",
+          "value": [
+            {
+              "key": "app_id",
+              "label": "飞书 App ID",
+              "type": "input",
+              "valueType": "string",
+              "description": "飞书应用的应用ID",
+              "required": false,
+              "max": 100,
+              "defaultValue": "cli_a76be8cb2cbfd00c"
+            },
+            {
+              "key": "app_secret",
+              "label": "飞书 App Secret",
+              "type": "input",
+              "valueType": "string",
+              "description": "飞书应用的应用密钥",
+              "required": false,
+              "max": 200,
+              "defaultValue": "your_app_secret_here"
+            },
+            {
+              "key": "app_token",
+              "label": "飞书多维表格 App Token",
+              "type": "input",
+              "valueType": "string",
+              "description": "飞书多维表格的app_token（从表格URL中提取）",
+              "required": false,
+              "max": 100,
+              "defaultValue": ""
+            },
+            {
+              "key": "table_id",
+              "label": "飞书数据表 Table ID",
+              "type": "input",
+              "valueType": "string",
+              "description": "飞书多维表格的数据表ID（从表格URL中提取）",
+              "required": false,
+              "max": 100,
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
+          "key": "questionGuide",
+          "valueType": "any",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "label": "core.app.Question Guide",
+          "value": {
+            "open": false
+          }
+        },
+        {
+          "key": "tts",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "any",
+          "label": "",
+          "value": {
+            "type": "web"
+          }
+        },
+        {
+          "key": "whisper",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "any",
+          "label": "",
+          "value": {
+            "open": false,
+            "autoSend": false,
+            "autoTTSResponse": false
+          }
+        },
+        {
+          "key": "scheduleTrigger",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "any",
+          "label": "",
+          "value": null
+        }
+      ],
+      "outputs": [],
+      "isFolded": false
+    },
+    {
+      "nodeId": "workflowStart",
+      "name": "common:core.module.template.work_start",
+      "intro": "",
+      "avatar": "core/workflow/template/workflowStart",
+      "flowNodeType": "workflowStart",
+      "position": {
+        "x": -600,
+        "y": -800
+      },
+      "version": "481",
+      "inputs": [
+        {
+          "key": "userChatInput",
+          "renderTypeList": [
+            "reference",
+            "textarea"
+          ],
+          "valueType": "string",
+          "label": "workflow:user_question",
+          "required": true,
+          "toolDescription": "用户输入",
+          "debugLabel": ""
+        }
+      ],
+      "outputs": [
+        {
+          "id": "userChatInput",
+          "key": "userChatInput",
+          "label": "common:core.module.input.label.user question",
+          "type": "static",
+          "valueType": "string",
+          "description": ""
+        }
+      ],
+      "isFolded": false
+    },
+    {
+      "nodeId": "extractResumeInfo",
+      "name": "提取简历信息",
+      "intro": "执行一段简单的脚本代码，通常用于进行复杂的数据处理。",
+      "avatar": "core/workflow/template/codeRun",
+      "flowNodeType": "code",
+      "showStatus": true,
+      "position": {
+        "x": -250,
+        "y": -800
+      },
+      "version": "481",
+      "inputs": [
+        {
+          "key": "system_text",
+          "renderTypeList": [
+            "reference",
+            "textarea"
+          ],
+          "valueType": "string",
+          "label": "workflow:code_input",
+          "value": [
+            [
+              "workflowStart",
+              "userChatInput"
+            ]
+          ],
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "system_code",
+          "renderTypeList": [
+            "textarea"
+          ],
+          "valueType": "string",
+          "label": "",
+          "value": "// 提取简历信息的函数\nfunction extractField(text, fieldName) {\n  const regex = new RegExp('\\\\*\\\\*' + fieldName + '\\\\*\\\\*\\\\s*[:：]?\\\\s*([^\\n]+)', 'i');\n  const match = text.match(regex);\n  return match ? match[1].trim() : '';\n}\n\nconst text = '{{系统输入}}';\n\nconst name = extractField(text, '姓名') || '';\nconst phone = extractField(text, '电话') || '';\nconst email = extractField(text, '邮箱') || '';\nconst education = extractField(text, '教育背景') || '';\nconst experience = extractField(text, '工作经历') || '';\nconst skills = extractField(text, '技能特长') || '';\n\nconst result = {\n  name,\n  phone,\n  email,\n  education,\n  experience,\n  skills,\n  fields: [name, phone, email, education, experience, skills]\n};\n\nresult;",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "system_outputType",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "string",
+          "label": "",
+          "value": "array",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "system_variableType",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "string",
+          "label": "",
+          "value": "editor",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        }
+      ],
+      "outputs": [
+        {
+          "id": "system_result",
+          "key": "system_result",
+          "label": "workflow:code_output",
+          "type": "dynamic",
+          "valueType": "any",
+          "description": "",
+          "required": true
+        }
+      ],
+      "isFolded": false
+    },
+    {
+      "nodeId": "getFeishuToken",
+      "name": "获取飞书应用通行证",
+      "intro": "可以发出一个 HTTP 请求，实现更为复杂的操作（联网搜索、数据库查询等）",
+      "avatar": "core/workflow/template/httpRequest",
+      "flowNodeType": "httpRequest468",
+      "showStatus": true,
+      "position": {
+        "x": 100,
+        "y": -800
+      },
+      "version": "481",
+      "inputs": [
+        {
+          "key": "system_httpReqUrl",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "string",
+          "label": "",
+          "description": "common:core.module.input.description.Http Request Url",
+          "placeholder": "https://api.ai.com/getInventory",
+          "required": false,
+          "value": "https://open.feishu.cn/open-apis/auth/v3/app_access_token/internal",
+          "valueDesc": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "system_httpJsonBody",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "any",
+          "value": "{\n  \"app_id\": \"{{userGuide.variables.app_id}}\",\n  \"app_secret\": \"{{userGuide.variables.app_secret}}\"\n}",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "system_httpMethod",
+          "renderTypeList": [
+            "custom"
+          ],
+          "valueType": "string",
+          "label": "",
+          "value": "POST",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": "",
+          "deprecated": false
+        },
+        {
+          "key": "system_httpTimeout",
+          "renderTypeList": [
+            "custom"
+          ],
+          "valueType": "number",
+          "label": "",
+          "value": 60,
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": "",
+          "deprecated": false
+        },
+        {
+          "key": "system_httpHeader",
+          "renderTypeList": [
+            "custom"
+          ],
+          "valueType": "any",
+          "value": [
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8",
+              "valueType": "string"
+            }
+          ],
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "system_httpParams",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "any",
+          "value": [],
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "system_httpFormBody",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "any",
+          "value": [],
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "system_httpContentType",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "string",
+          "value": "json",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "system_httpResponseFormat",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "any",
+          "value": {},
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        }
+      ],
+      "outputs": [
+        {
+          "id": "httpRawResponse",
+          "key": "httpRawResponse",
+          "required": true,
+          "label": "workflow:raw_response",
+          "description": "HTTP请求的原始响应。只能接受字符串或JSON类型响应数据。",
+          "valueType": "any",
+          "type": "static"
+        },
+        {
+          "id": "httpCode",
+          "key": "httpCode",
+          "label": "workflow:response_code",
+          "description": "HTTP状态码。",
+          "valueType": "number",
+          "type": "static"
+        }
+      ],
+      "isFolded": false
+    },
+    {
+      "nodeId": "formatFeishuData",
+      "name": "格式化为飞书API请求体",
+      "intro": "执行一段简单的脚本代码，通常用于进行复杂的数据处理。",
+      "avatar": "core/workflow/template/codeRun",
+      "flowNodeType": "code",
+      "showStatus": true,
+      "position": {
+        "x": 450,
+        "y": -800
+      },
+      "version": "481",
+      "inputs": [
+        {
+          "key": "system_text",
+          "renderTypeList": [
+            "reference",
+            "textarea"
+          ],
+          "valueType": "string",
+          "label": "workflow:code_input",
+          "value": "",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "system_code",
+          "renderTypeList": [
+            "textarea"
+          ],
+          "valueType": "string",
+          "label": "",
+          "value": "const resumeData = {{$extractResumeInfo.system_result$}};\nconst tokenResponse = {{$getFeishuToken.httpRawResponse$}};\n\n// 从token响应中提取access_token\nlet access_token = '';\ntry {\n  const parsed = JSON.parse(tokenResponse);\n  access_token = parsed.app_access_token || '';\n} catch (e) {\n  console.error('Failed to parse token response:', e);\n}\n\n// 构建飞书多维表格记录\nconst recordData = {\n  fields: {\n    \"姓名\": resumeData.name || '',\n    \"电话\": resumeData.phone || '',\n    \"邮箱\": resumeData.email || '',\n    \"教育背景\": resumeData.education || '',\n    \"工作经历\": resumeData.experience || '',\n    \"技能特长\": resumeData.skills || ''\n  }\n};\n\nconst result = {\n  access_token: access_token,\n  record_data: recordData,\n  json_string: JSON.stringify(recordData)\n};\n\nresult;",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "system_outputType",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "string",
+          "label": "",
+          "value": "array",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "system_variableType",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "string",
+          "label": "",
+          "value": "editor",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        }
+      ],
+      "outputs": [
+        {
+          "id": "system_result",
+          "key": "system_result",
+          "label": "workflow:code_output",
+          "type": "dynamic",
+          "valueType": "any",
+          "description": "",
+          "required": true
+        }
+      ],
+      "isFolded": false
+    },
+    {
+      "nodeId": "writeToFeishu",
+      "name": "写入飞书多维表格",
+      "intro": "可以发出一个 HTTP 请求，实现更为复杂的操作（联网搜索、数据库查询等）",
+      "avatar": "core/workflow/template/httpRequest",
+      "flowNodeType": "httpRequest468",
+      "showStatus": true,
+      "position": {
+        "x": 800,
+        "y": -800
+      },
+      "version": "481",
+      "inputs": [
+        {
+          "key": "system_httpReqUrl",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "string",
+          "label": "",
+          "description": "common:core.module.input.description.Http Request Url",
+          "placeholder": "https://api.ai.com/getInventory",
+          "required": false,
+          "value": "https://open.feishu.cn/open-apis/bitable/v1/apps/{{userGuide.variables.app_token}}/tables/{{userGuide.variables.table_id}}/records",
+          "valueDesc": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "system_httpJsonBody",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "any",
+          "value": "{{$formatFeishuData.system_result.json_string$}}",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "system_httpMethod",
+          "renderTypeList": [
+            "custom"
+          ],
+          "valueType": "string",
+          "label": "",
+          "value": "POST",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": "",
+          "deprecated": false
+        },
+        {
+          "key": "system_httpTimeout",
+          "renderTypeList": [
+            "custom"
+          ],
+          "valueType": "number",
+          "label": "",
+          "value": 60,
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": "",
+          "deprecated": false
+        },
+        {
+          "key": "system_httpHeader",
+          "renderTypeList": [
+            "custom"
+          ],
+          "valueType": "any",
+          "value": [
+            {
+              "key": "Authorization",
+              "value": "Bearer {{$formatFeishuData.system_result.access_token$}}",
+              "valueType": "string"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8",
+              "valueType": "string"
+            }
+          ],
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "system_httpParams",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "any",
+          "value": [
+            {
+              "key": "user_id_type",
+              "value": "open_id",
+              "valueType": "string"
+            }
+          ],
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "system_httpFormBody",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "any",
+          "value": [],
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "system_httpContentType",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "string",
+          "value": "json",
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        },
+        {
+          "key": "system_httpResponseFormat",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "any",
+          "value": {},
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        }
+      ],
+      "outputs": [
+        {
+          "id": "httpRawResponse",
+          "key": "httpRawResponse",
+          "required": true,
+          "label": "workflow:raw_response",
+          "description": "HTTP请求的原始响应。只能接受字符串或JSON类型响应数据。",
+          "valueType": "any",
+          "type": "static"
+        },
+        {
+          "id": "httpCode",
+          "key": "httpCode",
+          "label": "workflow:response_code",
+          "description": "HTTP状态码。",
+          "valueType": "number",
+          "type": "static"
+        }
+      ],
+      "isFolded": false
+    },
+    {
+      "nodeId": "checkSuccess",
+      "name": "检查写入结果",
+      "intro": "可以根据条件判断进行分支选择，实现 if-else 逻辑",
+      "avatar": "core/workflow/template/ifElse",
+      "flowNodeType": "ifElseNode",
+      "showStatus": true,
+      "position": {
+        "x": 1150,
+        "y": -800
+      },
+      "version": "481",
+      "inputs": [
+        {
+          "key": "condition",
+          "renderTypeList": [
+            "hidden"
+          ],
+          "valueType": "any",
+          "label": "",
+          "value": [
+            {
+              "condType": "and",
+              "conditions": [
+                {
+                  "key": "写入飞书多维表格",
+                  "valueType": "httpCode",
+                  "operator": "=",
+                  "value": "200"
+                }
+              ]
+            }
+          ],
+          "valueDesc": "",
+          "description": "",
+          "debugLabel": "",
+          "toolDescription": ""
+        }
+      ],
+      "outputs": [
+        {
+          "id": "IF",
+          "key": "IF",
+          "label": "workflow:if_true_label",
+          "type": "source",
+          "valueType": "boolean",
+          "description": ""
+        },
+        {
+          "id": "ELSE",
+          "key": "ELSE",
+          "label": "workflow:if_false_label",
+          "type": "source",
+          "valueType": "boolean",
+          "description": ""
+        }
+      ],
+      "isFolded": false
+    },
+    {
+      "nodeId": "successOutput",
+      "name": "成功提示",
+      "intro": "common:core.module.template.text_output_intro",
+      "avatar": "core/workflow/template/textOutput",
+      "flowNodeType": "textOutput",
+      "showStatus": true,
+      "position": {
+        "x": 1500,
+        "y": -950
+      },
+      "version": "481",
+      "inputs": [
+        {
+          "key": "system_text",
+          "valueType": "any",
+          "required": true,
+          "label": "common:core.module.input.label.Response content",
+          "description": "common:core.module.input.description.Response content",
+          "placeholder": "common:core.module.input.description.Response content",
+          "value": "✅ 简历信息已成功保存到飞书多维表格！\n\n**已保存的信息**：\n- 姓名：{{$extractResumeInfo.system_result.name$}}\n- 电话：{{$extractResumeInfo.system_result.phone$}}\n- 邮箱：{{$extractResumeInfo.system_result.email$}}\n\n感谢您的使用！",
+          "valueDesc": "",
+          "debugLabel": "",
+          "toolDescription": "",
+          "isRichText": false,
+          "maxLength": 100000
+        }
+      ],
+      "outputs": [
+        {
+          "id": "text",
+          "key": "text",
+          "label": "common:core.module.input.label.Response content",
+          "type": "static",
+          "valueType": "string",
+          "description": ""
+        }
+      ],
+      "isFolded": false
+    },
+    {
+      "nodeId": "errorOutput",
+      "name": "错误提示",
+      "intro": "common:core.module.template.text_output_intro",
+      "avatar": "core/workflow/template/textOutput",
+      "flowNodeType": "textOutput",
+      "showStatus": true,
+      "position": {
+        "x": 1500,
+        "y": -650
+      },
+      "version": "481",
+      "inputs": [
+        {
+          "key": "system_text",
+          "valueType": "any",
+          "required": true,
+          "label": "common:core.module.input.label.Response content",
+          "description": "common:core.module.input.description.Response content",
+          "placeholder": "common:core.module.input.description.Response content",
+          "value": "❌ 保存失败！请检查以下内容：\n\n1. 飞书应用配置是否正确（app_id 和 app_secret）\n2. 多维表格的 app_token 和 table_id 是否正确\n3. 网络连接是否正常\n\n**错误信息**：\n{{$writeToFeishu.httpRawResponse$}}",
+          "valueDesc": "",
+          "debugLabel": "",
+          "toolDescription": "",
+          "isRichText": false,
+          "maxLength": 100000
+        }
+      ],
+      "outputs": [
+        {
+          "id": "text",
+          "key": "text",
+          "label": "common:core.module.input.label.Response content",
+          "type": "static",
+          "valueType": "string",
+          "description": ""
+        }
+      ],
+      "isFolded": false
+    }
+  ],
+  "edges": [
+    {
+      "source": "workflowStart",
+      "target": "extractResumeInfo",
+      "sourceHandle": "workflowStart-source-IF",
+      "targetHandle": "extractResumeInfo-target-left"
+    },
+    {
+      "source": "extractResumeInfo",
+      "target": "getFeishuToken",
+      "sourceHandle": "extractResumeInfo-source-right",
+      "targetHandle": "getFeishuToken-target-left"
+    },
+    {
+      "source": "getFeishuToken",
+      "target": "formatFeishuData",
+      "sourceHandle": "getFeishuToken-source-right",
+      "targetHandle": "formatFeishuData-target-left"
+    },
+    {
+      "source": "formatFeishuData",
+      "target": "writeToFeishu",
+      "sourceHandle": "formatFeishuData-source-right",
+      "targetHandle": "writeToFeishu-target-left"
+    },
+    {
+      "source": "writeToFeishu",
+      "target": "checkSuccess",
+      "sourceHandle": "writeToFeishu-source-right",
+      "targetHandle": "checkSuccess-target-left"
+    },
+    {
+      "source": "checkSuccess",
+      "target": "successOutput",
+      "sourceHandle": "checkSuccess-IF",
+      "targetHandle": "successOutput-target-left"
+    },
+    {
+      "source": "checkSuccess",
+      "target": "errorOutput",
+      "sourceHandle": "checkSuccess-ELSE",
+      "targetHandle": "errorOutput-target-left"
+    }
+  ],
+  "chatConfig": {
+    "welcomeText": "### 📝 欢迎使用简历信息收集系统！\n\n请按照以下格式输入您的简历信息：\n\n**姓名**：[您的姓名]\n**电话**：[联系电话]\n**邮箱**：[电子邮箱]\n**教育背景**：[学校/专业/学位]\n**工作经历**：[工作经历描述]\n**技能特长**：[您的技能和特长]\n\n---\n\n示例：\n**姓名**：张三\n**电话**：13800138000\n**邮箱**：zhangsan@example.com\n**教育背景**：清华大学/计算机科学/本科\n**工作经历**：5年Java开发经验，曾在XX公司担任高级工程师\n**技能特长**：精通Java、Python，熟悉微服务架构",
+    "variables": [
+      {
+        "id": "var_app_id",
+        "key": "app_id",
+        "label": "飞书 App ID",
+        "type": "input",
+        "valueType": "string",
+        "description": "飞书应用的应用ID（从飞书开放平台获取）",
+        "required": false,
+        "max": 100,
+        "defaultValue": "cli_a76be8cb2cbfd00c",
+        "enums": [
+          {
+            "value": "",
+            "label": ""
+          }
+        ],
+        "icon": "core/workflow/inputType/input"
+      },
+      {
+        "id": "var_app_secret",
+        "key": "app_secret",
+        "label": "飞书 App Secret",
+        "type": "input",
+        "valueType": "string",
+        "description": "飞书应用的应用密钥（从飞书开放平台获取）",
+        "required": false,
+        "max": 200,
+        "defaultValue": "your_app_secret_here",
+        "enums": [
+          {
+            "value": "",
+            "label": ""
+          }
+        ],
+        "icon": "core/workflow/inputType/input"
+      },
+      {
+        "id": "var_app_token",
+        "key": "app_token",
+        "label": "多维表格 App Token",
+        "type": "input",
+        "valueType": "string",
+        "description": "飞书多维表格的app_token（从表格URL中提取，例如：https://xxx.feishu.cn/base/xxxxxx?table=xxxxx，app_token就是xxxxx）",
+        "required": false,
+        "max": 100,
+        "defaultValue": "",
+        "enums": [
+          {
+            "value": "",
+            "label": ""
+          }
+        ],
+        "icon": "core/workflow/inputType/input"
+      },
+      {
+        "id": "var_table_id",
+        "key": "table_id",
+        "label": "数据表 Table ID",
+        "type": "input",
+        "valueType": "string",
+        "description": "飞书多维表格的数据表ID（从表格URL中提取，例如：https://xxx.feishu.cn/base/xxxxx?table=xxxxx，table_id就是xxxxx）",
+        "required": false,
+        "max": 100,
+        "defaultValue": "",
+        "enums": [
+          {
+            "value": "",
+            "label": ""
+          }
+        ],
+        "icon": "core/workflow/inputType/input"
+      }
+    ],
+    "questionGuide": {
+      "open": false
+    },
+    "tts": {
+      "type": "web"
+    },
+    "whisper": {
+      "open": false,
+      "autoSend": false,
+      "autoTTSResponse": false
+    },
+    "scheduleTrigger": null
+  }
+}
