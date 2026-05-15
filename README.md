@@ -22,8 +22,9 @@ This repository provides ready-to-use skills that extend Claude Code's functiona
 | **[fastgpt-workflow-generator](./fastgpt-workflow-generator)** | Generates production-ready FastGPT workflow JSON from natural language requirements with AI-powered template matching and three-layer validation | - | `cp -r fastgpt-workflow-generator .claude/skills/` |
 | **[planning-with-files](./planning-with-files)** | Manus-style workflow using persistent markdown files for planning, progress tracking, and knowledge storage with 3-file pattern | [🔗 GitHub](https://github.com/OthmanAdi/planning-with-files) | `cp -r planning-with-files .claude/skills/` |
 | **[local-diff-review](./local-diff-review)**     | Pre-PR local code review skill based on git diff, applies the same three-dimension standards as pr-review (code quality, style guide, common issues checklist) | - | `cp -r local-diff-review .claude/skills/` |
+| **[software-copyright-writer](./software-copyright-writer)** | Prepares legitimate software copyright registration materials from real repositories, product pages, UI screenshots, source evidence, and module scopes | - | `cp -r software-copyright-writer .claude/skills/` |
 
-**Total:** 10 skills available
+**Total:** 11 skills available
 
 ---
 
@@ -363,6 +364,47 @@ cp -r local-diff-review .claude/skills/
 
 # Example 3: Review branch diff against baseline
 "请按 FastGPT 规范审查我当前分支相对 upstream/v4.14.7-dev 的改动。"
+```
+
+---
+
+#### 🔧 software-copyright-writer
+**Version:** [Chinese](./software-copyright-writer)
+
+A material-preparation skill for legitimate software copyright registration. It analyzes real repositories, product pages, running UI evidence, module scopes, and source ranges to propose reasonable registration topics, generate long-form Chinese application content, assemble source-code excerpts, capture web evidence, and export `.docx` deliverables.
+
+**Compliance Boundary:**
+- Only use it for real software projects with authentic source code and actual running interfaces
+- Do not use it to fabricate software, screenshots, ownership, domain filings, trademarks, or features
+- If evidence is missing or the requested topic count is unrealistic, the skill must report gaps and risks instead of inventing material
+
+**What's included:**
+- ✅ Topic splitting rules for coarse/fine software copyright applications
+- ✅ Intake checklist for owner name, Logo, copyright notice, ICP/domain evidence, screenshots, and source-code constraints
+- ✅ Standard and extended Chinese content templates targeting 30-page style application materials
+- ✅ Source-code assembly script using the front/back 1500-line rule
+- ✅ Playwright-based web evidence screenshot script with login-state support
+- ✅ Markdown-to-DOCX export script for content and source documents
+
+**Requirements for helper scripts:**
+- Python 3 with `python-docx` for `.docx` export (`python3 -m pip install -r scripts/requirements.txt`)
+- Node.js, Playwright, and Chrome/Chromium for screenshot evidence capture (`npm install --prefix scripts`)
+- Optional environment variables: `SOFTWARE_COPYRIGHT_WRITER_PYTHON`, `SOFTWARE_COPYRIGHT_WRITER_NODE`, `SOFTWARE_COPYRIGHT_WRITER_NODE_MODULES`, `SOFTWARE_COPYRIGHT_WRITER_CHROME_PATH`
+
+**Trigger Keywords:** `"软著"`, `"软件著作权"`, `"生成软著材料"`, `"软著正文"`, `"源码原文"`, `"软件著作权登记"`, `"copyright registration material"`
+
+**Installation:**
+```bash
+cp -r software-copyright-writer .claude/skills/
+```
+
+**Quick Start:**
+```
+# Example 1: Evaluate whether a repository can support multiple registration topics
+"请根据这个仓库和官网，判断能拆几份软著，并给出主题边界和截图清单。"
+
+# Example 2: Generate full materials after evidence is ready
+"按已确认的主题生成软著正文、源码原文，并导出 docx。"
 ```
 
 ---

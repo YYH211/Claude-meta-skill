@@ -1,0 +1,4 @@
+interface:
+  display_name: "软著编写"
+  short_description: "按仓库与官网证据拆分软著主题并生成正文截图和导出文档"
+  default_prompt: "Use $software-copyright-writer 分析这个仓库和官网材料，拆分可申报主题并生成软著正文与源码信息。"

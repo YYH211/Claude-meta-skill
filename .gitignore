@@ -1,2 +1,9 @@
 .claude
 ./fastgpt_output
+.DS_Store
+__pycache__/
+*.pyc
+out/
+browser-profile/
+auth-state.json
+*.docx
